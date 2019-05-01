@@ -12,7 +12,9 @@ use XdgBaseDir\Xdg;
  */
 function home_data_path($path = '')
 {
-    return (new Xdg())->getHomeDataDir().($path ? DIRECTORY_SEPARATOR.$path : $path);
+    return (new Xdg())->getHomeDataDir().
+        DIRECTORY_SEPARATOR.config('app.name').
+        ($path ? DIRECTORY_SEPARATOR.$path : $path);
 }
 
 /**
@@ -23,5 +25,7 @@ function home_data_path($path = '')
  */
 function home_config_path($path = '')
 {
-    return (new Xdg())->getHomeConfigDir().($path ? DIRECTORY_SEPARATOR.$path : $path);
+    return (new Xdg())->getHomeConfigDir().
+        DIRECTORY_SEPARATOR.config('app.name').
+        ($path ? DIRECTORY_SEPARATOR.$path : $path);
 }

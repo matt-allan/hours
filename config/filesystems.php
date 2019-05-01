@@ -45,12 +45,12 @@ return [
 
         'data' => [
             'driver' => 'local',
-            'root' => home_data_path(config('app.name')),
+            'root' => home_data_path(),
         ],
 
         'config' => [
             'driver' => 'local',
-            'root' => home_config_path(config('app.name')),
+            'root' => home_config_path(),
         ],
 
     ],
