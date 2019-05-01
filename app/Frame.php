@@ -51,8 +51,13 @@ class Frame extends Model
         return $this->save();
     }
 
-    public function diff(): string
+    /**
+     * @param int|array $syntax
+     *
+     * @return string
+     */
+    public function diff($syntax = null): string
     {
-        return $this->started_at->diffForHumans($this->stopped_at, Carbon::DIFF_RELATIVE_TO_NOW);
+        return $this->started_at->diffForHumans($this->stopped_at, $syntax);
     }
 }

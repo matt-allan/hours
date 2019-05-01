@@ -25,7 +25,7 @@ class StartCommand extends Command
     {
         if ($active = Frame::active()) {
             if (! $this->confirm(
-                "Time is already being tracked for {$active->project->name} (started {$active->diff()}).  ".
+                "Time is already being tracked for {$active->project->name} (started {$active->diff(Carbon::DIFF_RELATIVE_TO_NOW)}).  ".
                     'Do you want to stop the active frame?'
             )) {
                 return;
