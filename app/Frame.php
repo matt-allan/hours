@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App;
 
-use Illuminate\Support\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int $id
- * @property \Illuminate\Support\Carbon $started_at
- * @property \Illuminate\Support\Carbon|null $stopped_at
+ * @property \Carbon\CarbonImmutable $started_at
+ * @property \Carbon\CarbonImmutable|null $stopped_at
  * @property int $project_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
  * @property string|null $deleted_at
  * @property-read \App\Project $project
  */
@@ -44,9 +44,9 @@ class Frame extends Model
             ->first();
     }
 
-    public function stop(Carbon $stoppedAt = null): bool
+    public function stop(CarbonImmutable $stoppedAt = null): bool
     {
-        $this->stopped_at = $stoppedAt ?? Carbon::now();
+        $this->stopped_at = $stoppedAt ?? CarbonImmutable::now();
 
         return $this->save();
     }

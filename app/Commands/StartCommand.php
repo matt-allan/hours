@@ -6,7 +6,7 @@ namespace App\Commands;
 
 use App\Frame;
 use App\Project;
-use Illuminate\Support\Carbon;
+use Carbon\CarbonImmutable;
 use LaravelZero\Framework\Commands\Command;
 
 class StartCommand extends Command
@@ -25,7 +25,7 @@ class StartCommand extends Command
     {
         if ($active = Frame::active()) {
             if (! $this->confirm(
-                "Time is already being tracked for {$active->project->name} (started {$active->diff(Carbon::DIFF_RELATIVE_TO_NOW)}).  ".
+                "Time is already being tracked for {$active->project->name} (started {$active->diff(CarbonImmutable::DIFF_RELATIVE_TO_NOW)}).  ".
                     'Do you want to stop the active frame?'
             )) {
                 return;
@@ -38,7 +38,7 @@ class StartCommand extends Command
         ]);
 
         $frame = $project->frames()->create([
-            'started_at' => Carbon::now(),
+            'started_at' => CarbonImmutable::now(),
         ]);
 
         // TODO: get the actual *users* timezone for output purposes

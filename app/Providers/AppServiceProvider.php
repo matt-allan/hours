@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Bootstrap\InitializeDatabase;
+use Carbon\CarbonImmutable;
+use Illuminate\Support\DateFactory;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Migrations\Migrator;
 use Illuminate\Filesystem\FilesystemManager;
@@ -40,5 +42,7 @@ class AppServiceProvider extends ServiceProvider
                 ->make(InitializeDatabase::class)
                 ->bootstrap();
         });
+
+        DateFactory::use(CarbonImmutable::class);
     }
 }

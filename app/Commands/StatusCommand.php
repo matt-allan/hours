@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Commands;
 
 use App\Frame;
-use Illuminate\Support\Carbon;
+use Carbon\CarbonImmutable;
 use LaravelZero\Framework\Commands\Command;
 
 class StatusCommand extends Command
@@ -30,6 +30,8 @@ class StatusCommand extends Command
             return;
         }
 
-        $this->info("Time tracking for {$frame->project->name} started {$frame->diff(Carbon::DIFF_RELATIVE_TO_NOW)}.");
+        $this->info(
+            "Time tracking for {$frame->project->name} started {$frame->diff(CarbonImmutable::DIFF_RELATIVE_TO_NOW)}."
+        );
     }
 }
