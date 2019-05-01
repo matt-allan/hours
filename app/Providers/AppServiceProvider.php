@@ -3,9 +3,9 @@
 namespace App\Providers;
 
 use App\Bootstrap\InitializeDatabase;
+use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Migrations\Migrator;
 use Illuminate\Filesystem\FilesystemManager;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Console\Application as Artisan;
 
 class AppServiceProvider extends ServiceProvider
