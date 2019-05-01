@@ -2,20 +2,14 @@
 
 namespace App\Providers;
 
+use App\Bootstrap\InitializeDatabase;
+use Illuminate\Database\Migrations\Migrator;
+use Illuminate\Filesystem\FilesystemManager;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Console\Application as Artisan;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        //
-    }
-
     /**
      * Register any application services.
      *
@@ -23,6 +17,26 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(InitializeDatabase::class, function () {
+            return new InitializeDatabase(
+                $this->app->make(FilesystemManager::class)->disk('data'),
+                $this->app->make(Migrator::class),
+                basename(config('database.connections.sqlite.database'))
+            );
+        });
+    }
+
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        Artisan::starting(function () {
+            $this->app
+                ->make(InitializeDatabase::class)
+                ->bootstrap();
+        });
     }
 }
