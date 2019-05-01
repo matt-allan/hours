@@ -34,7 +34,7 @@ return [
     'connections' => [
         'sqlite' => [
             'driver' => 'sqlite',
-            'database' => home_data_path('database.sqlite'),
+            'database' => env('DB_DATABASE', home_data_path('database.sqlite')),
             'prefix' => '',
             'foreign_key_constraints' => true,
         ],
