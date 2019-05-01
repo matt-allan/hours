@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
-use Illuminate\Support\Carbon;
 use Tests\TestCase;
+use Illuminate\Support\Carbon;
 
 class StatusCommandTest extends TestCase
 {
