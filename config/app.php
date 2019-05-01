@@ -54,6 +54,8 @@ return [
 
     'providers' => [
         App\Providers\AppServiceProvider::class,
+        \Illuminate\Database\DatabaseServiceProvider::class,
+        MattAllan\LaravelCodeStyle\ServiceProvider::class,
     ],
 
 ];
