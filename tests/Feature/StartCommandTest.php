@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
+use App\Config;
 use Tests\TestCase;
 use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -17,7 +18,7 @@ class StartCommandTest extends TestCase
         CarbonImmutable::setTestNow($now = CarbonImmutable::now());
 
         $this->artisan('start blog')
-            ->expectsOutput('Starting blog at '.(string) $now)
+            ->expectsOutput('Starting blog at '.$now->presentTime())
             ->assertExitCode(0);
     }
 
@@ -36,7 +37,7 @@ class StartCommandTest extends TestCase
                 'yes'
             )
             ->expectsOutput('Time tracking for blog stopped (started 5 seconds ago).')
-            ->expectsOutput('Starting blog at '.(string) $now->addSeconds(5))
+            ->expectsOutput('Starting blog at '.$now->addSeconds(5)->presentTime())
             ->assertExitCode(0);
     }
 }
