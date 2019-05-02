@@ -36,8 +36,8 @@ class Config implements Arrayable, Jsonable
 
     public function __construct(?string $dateFormat = 'F j, Y', ?string $timeFormat = 'g:i a', ?string $timezone = null)
     {
-        $this->dateFormat = $dateFormat;
-        $this->timeFormat = $timeFormat;
+        $this->dateFormat = $dateFormat ?? 'F j, Y';
+        $this->timeFormat = $timeFormat ?? 'g:i a';
         $this->timezone = $timezone ?? $this->guessTimezone();
     }
 
