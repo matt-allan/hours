@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Commands;
 
+use App\Config;
 use App\Project;
 use Carbon\CarbonInterval;
 use Carbon\CarbonImmutable;
+use Carbon\CarbonTimeZone;
 use LaravelZero\Framework\Commands\Command;
 
 class AddCommand extends Command
@@ -38,7 +40,7 @@ option accepts intervals such as '3h 12m' (meaning 3 hours, 12 minutes in this e
 If neither the --to or --interval options are specified the frame will end at the current time.
 DESCRIPTION;
 
-    public function handle(): void
+    public function handle(Config $config): void
     {
         if (! $this->option('from')) {
             $this->error('Please specify a start time with the --from|-f option.');
@@ -46,11 +48,10 @@ DESCRIPTION;
             return;
         }
 
-        // TODO: use user timezone
-        $from = new CarbonImmutable($this->option('from'));
+        $from = (new CarbonImmutable($this->option('from'), new CarbonTimeZone($config->timezone)));
 
         if ($this->option('to')) {
-            $to = new CarbonImmutable($this->option('to'));
+            $to = (new CarbonImmutable($this->option('to'), new CarbonTimeZone($config->timezone)));
         }
 
         if ($this->option('interval')) {
@@ -62,8 +63,8 @@ DESCRIPTION;
         ]);
 
         $frame = $project->frames()->create([
-            'started_at' => $from,
-            'stopped_at' => $to ?? CarbonImmutable::now(),
+            'started_at' => $from->setTimezone('UTC'),
+            'stopped_at' => ($to ?? CarbonImmutable::now())->setTimezone('UTC'),
         ]);
 
         $this->info(
