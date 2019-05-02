@@ -7,8 +7,8 @@ namespace App\Commands;
 use App\Config;
 use App\Project;
 use Carbon\CarbonInterval;
-use Carbon\CarbonImmutable;
 use Carbon\CarbonTimeZone;
+use Carbon\CarbonImmutable;
 use LaravelZero\Framework\Commands\Command;
 
 class AddCommand extends Command

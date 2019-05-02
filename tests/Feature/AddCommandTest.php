@@ -31,7 +31,7 @@ class AddCommandTest extends TestCase
         );
 
         $this->artisan('add blog --from \'2 hours ago\'')
-            ->expectsOutput("Added frame for blog from May 1, 2019 3:34 am to May 1, 2019 5:34 am (2 hours).")
+            ->expectsOutput('Added frame for blog from May 1, 2019 3:34 am to May 1, 2019 5:34 am (2 hours).')
             ->assertExitCode(0);
     }
 

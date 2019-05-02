@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Carbon\PresentMixin;
 use App\Config;
 use Carbon\CarbonImmutable;
+use App\Carbon\PresentMixin;
 use Illuminate\Support\DateFactory;
 use App\Bootstrap\InitializeDatabase;
 use Illuminate\Support\ServiceProvider;
