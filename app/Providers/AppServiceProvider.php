@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Bootstrap\InitializeDatabase;
+use App\Config;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\DateFactory;
+use App\Bootstrap\InitializeDatabase;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Migrations\Migrator;
 use Illuminate\Filesystem\FilesystemManager;
@@ -21,12 +22,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(InitializeDatabase::class, function () {
+        $this->app->singleton(InitializeDatabase::class, function () {
             return new InitializeDatabase(
                 $this->app->make(FilesystemManager::class)->disk('data'),
                 $this->app->make(Migrator::class),
                 basename(config('database.connections.sqlite.database'))
             );
+        });
+
+        $this->app->singleton(Config::class, function () {
+            return Config::get();
         });
     }
 
