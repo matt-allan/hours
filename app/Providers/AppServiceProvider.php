@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Carbon\PresentMixin;
 use App\Config;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\DateFactory;
@@ -49,5 +50,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         DateFactory::use(CarbonImmutable::class);
+
+        CarbonImmutable::mixin($this->app->make(PresentMixin::class));
     }
 }

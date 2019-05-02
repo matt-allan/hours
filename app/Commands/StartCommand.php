@@ -41,7 +41,6 @@ class StartCommand extends Command
             'started_at' => CarbonImmutable::now(),
         ]);
 
-        // TODO: get the actual *users* timezone for output purposes
-        $this->info("Starting {$project->name} at {$frame->started_at}");
+        $this->info("Starting {$project->name} at {$frame->started_at->presentTime()}");
     }
 }

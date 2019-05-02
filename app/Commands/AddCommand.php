@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Commands;
 
 use App\Project;
-use Carbon\CarbonImmutable;
 use Carbon\CarbonInterval;
+use Carbon\CarbonImmutable;
 use LaravelZero\Framework\Commands\Command;
 
 class AddCommand extends Command
@@ -38,11 +38,11 @@ option accepts intervals such as '3h 12m' (meaning 3 hours, 12 minutes in this e
 If neither the --to or --interval options are specified the frame will end at the current time.
 DESCRIPTION;
 
-
     public function handle(): void
     {
-        if (!$this->option('from')) {
+        if (! $this->option('from')) {
             $this->error('Please specify a start time with the --from|-f option.');
+
             return;
         }
 
@@ -66,6 +66,11 @@ DESCRIPTION;
             'stopped_at' => $to ?? CarbonImmutable::now(),
         ]);
 
-        $this->info("Added frame for {$project->name} from {$frame->started_at} to {$frame->stopped_at} ({$frame->diff(CarbonImmutable::DIFF_ABSOLUTE)}).");
+        $this->info(
+            "Added frame for {$project->name} from ".
+            "{$frame->started_at->presentDateTime()} ".
+            "to {$frame->stopped_at->presentDateTime()} ".
+            "({$frame->diff(CarbonImmutable::DIFF_ABSOLUTE)})."
+        );
     }
 }
