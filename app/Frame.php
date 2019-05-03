@@ -5,22 +5,24 @@ declare(strict_types=1);
 namespace App;
 
 use Carbon\CarbonImmutable;
+use Carbon\CarbonInterface;
 use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * @property int $id
- * @property \Carbon\CarbonImmutable $started_at
- * @property \Carbon\CarbonImmutable|null $stopped_at
- * @property int $project_id
- * @property-read \Carbon\CarbonInterval $elapsed
- * @property \Carbon\CarbonImmutable|null $created_at
- * @property \Carbon\CarbonImmutable|null $updated_at
- * @property string|null $deleted_at
- * @property-read \App\Project $project
- * @method static \Illuminate\Database\Eloquent\Builder active()
+ * @property int                  $id
+ * @property CarbonImmutable      $started_at
+ * @property CarbonImmutable|null $stopped_at
+ * @property int                  $project_id
+ * @property-read CarbonInterval  $elapsed
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
+ * @property string|null          $deleted_at
+ * @property-read \App\Project    $project
+ * @method static Builder active()
+ * @method static Builder between(CarbonInterface $start, CarbonInterface $end)
  */
 class Frame extends Model
 {
@@ -47,7 +49,16 @@ class Frame extends Model
             ->orderByDesc('started_at');
     }
 
-    public function stop(CarbonImmutable $stoppedAt = null): bool
+    public function scopeBetween(Builder $query, CarbonInterface $start, CarbonInterface $end): Builder
+    {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
+        return $query
+            ->whereDate('started_at', '>=', $start)
+            ->whereDate('stopped_at', '<=', $end)
+            ->whereNotNull('stopped_at');
+    }
+
+    public function stop(CarbonInterface $stoppedAt = null): bool
     {
         $this->stopped_at = $stoppedAt ?? CarbonImmutable::now();
 
