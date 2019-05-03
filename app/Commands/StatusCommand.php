@@ -31,7 +31,7 @@ class StatusCommand extends Command
         }
 
         $this->info(
-            "Time tracking for {$frame->project->name} started {$frame->diff(CarbonImmutable::DIFF_RELATIVE_TO_NOW)}."
+            "Time tracking for {$frame->project->name} started {$frame->started_at->diffForHumans($frame->stopped_at, CarbonImmutable::DIFF_RELATIVE_TO_NOW)}."
         );
     }
 }

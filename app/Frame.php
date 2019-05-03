@@ -50,14 +50,4 @@ class Frame extends Model
 
         return $this->save();
     }
-
-    /**
-     * @param int|array $syntax
-     *
-     * @return string
-     */
-    public function diff($syntax = null): string
-    {
-        return $this->started_at->diffForHumans($this->stopped_at, $syntax);
-    }
 }
