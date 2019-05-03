@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Commands;
 
 use App\Config;
+use App\Frame;
 use App\Project;
 use Carbon\CarbonInterval;
 use Carbon\CarbonTimeZone;
@@ -62,6 +63,7 @@ DESCRIPTION;
             'name' => $this->argument('project'),
         ]);
 
+        /** @var Frame $frame */
         $frame = $project->frames()->create([
             'started_at' => $from->setTimezone('UTC'),
             'stopped_at' => ($to ?? CarbonImmutable::now())->setTimezone('UTC'),
@@ -71,7 +73,7 @@ DESCRIPTION;
             "Added frame for {$project->name} from ".
             "{$frame->started_at->presentDateTime()} ".
             "to {$frame->stopped_at->presentDateTime()} ".
-            "({$frame->diff(CarbonImmutable::DIFF_ABSOLUTE)})."
+            "({$frame->elapsed->forHumans()})."
         );
     }
 }

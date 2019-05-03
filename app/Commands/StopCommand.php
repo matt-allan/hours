@@ -32,6 +32,6 @@ class StopCommand extends Command
 
         $frame->stop();
 
-        $this->info("Time tracking for {$frame->project->name} stopped (started {$frame->started_at->diffForHumans($frame->stopped_at, CarbonImmutable::DIFF_RELATIVE_TO_NOW)}).");
+        $this->info("Time tracking for {$frame->project->name} stopped (started {$frame->elapsed->forHumans(CarbonImmutable::DIFF_RELATIVE_TO_NOW)}).");
     }
 }

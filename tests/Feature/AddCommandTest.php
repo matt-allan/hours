@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use App\Config;
+use Illuminate\Support\Facades\Artisan;
+use Symfony\Component\Console\Output\ConsoleOutput;
 use Tests\TestCase;
 use Carbon\CarbonImmutable;
 
@@ -38,7 +40,7 @@ class AddCommandTest extends TestCase
     public function testAddWithInterval()
     {
         $this->artisan('add blog --from \'2019-05-01 05:34:46\' --interval \'2h 12m 6s\'')
-            ->expectsOutput('Added frame for blog from May 1, 2019 5:34 am to May 1, 2019 7:46 am (2 hours).')
+            ->expectsOutput('Added frame for blog from May 1, 2019 5:34 am to May 1, 2019 7:46 am (2 hours 12 minutes 6 seconds).')
             ->assertExitCode(0);
     }
 }
