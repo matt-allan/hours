@@ -29,6 +29,7 @@ class CarbonIntervalPresentMixin
 
         return function () use ($config) {
             return $this
+                ->cascade()
                 ->format($config->intervalFormat);
         };
     }
