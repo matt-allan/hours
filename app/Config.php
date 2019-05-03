@@ -28,16 +28,24 @@ class Config implements Arrayable, Jsonable
     public $timeFormat;
 
     /**
+     * The interval format to use.
+     *
+     * @var string
+     */
+    public $intervalFormat;
+
+    /**
      * Either an offset or a recognized timezone identifier.
      *
      * @var string
      */
     public $timezone;
 
-    public function __construct(?string $dateFormat = 'F j, Y', ?string $timeFormat = 'g:i a', ?string $timezone = null)
+    public function __construct(?string $dateFormat = 'F j, Y', ?string $timeFormat = 'g:i a', ?string $intervalFormat = '%h:%I', ?string $timezone = null)
     {
         $this->dateFormat = $dateFormat ?? 'F j, Y';
         $this->timeFormat = $timeFormat ?? 'g:i a';
+        $this->intervalFormat = $intervalFormat ?? '%h:%I';
         $this->timezone = $timezone ?? $this->guessTimezone();
     }
 
@@ -68,6 +76,7 @@ class Config implements Arrayable, Jsonable
         return new self(
             Arr::get($items, 'date_format'),
             Arr::get($items, 'time_format'),
+            Arr::get($items, 'interval_format'),
             Arr::get($items, 'timezone')
         );
     }
@@ -77,6 +86,7 @@ class Config implements Arrayable, Jsonable
         return [
            'date_format' => $this->dateFormat,
            'time_format' => $this->timeFormat,
+            'interval_format' => $this->intervalFormat,
            'timezone' => $this->timezone,
         ];
     }

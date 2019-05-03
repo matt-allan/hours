@@ -10,7 +10,7 @@ use Carbon\CarbonImmutable;
 /**
  * @mixin CarbonImmutable
  */
-class PresentMixin
+class CarbonPresentMixin
 {
     /**
      * @var Config

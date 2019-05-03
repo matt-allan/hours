@@ -14,7 +14,7 @@ class AddCommandTest extends TestCase
     {
         parent::setUp();
 
-        $this->app->instance(Config::class, new Config('F j, Y', 'g:i a', 'America/New_York'));
+        $this->app->instance(Config::class, new Config('F j, Y', 'g:i a', '%h:%I', 'America/New_York'));
     }
 
     public function testAdd()

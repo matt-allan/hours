@@ -14,11 +14,13 @@ class ConfigTest extends TestCase
         $config = new Config(
             $dateFormat = 'Y-M-d',
             $timeFormat = 'H:i:s',
+            $intervalFormat = '%h:%I',
             $timezone = '+04:30'
         );
 
         $this->assertEquals($dateFormat, $config->dateFormat);
         $this->assertEquals($timeFormat, $config->timeFormat);
+        $this->assertEquals($intervalFormat, $config->intervalFormat);
         $this->assertEquals($timezone, $config->timezone);
     }
 
@@ -49,6 +51,7 @@ class ConfigTest extends TestCase
         $config = new Config(
             'Y-M-d',
             'H:i:s',
+            '%h:%I',
             '+04:30'
         );
 
