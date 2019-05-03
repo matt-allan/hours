@@ -27,7 +27,7 @@ class CarbonPresentMixin
     {
         $config = $this->config;
 
-        return function () use ($config) {
+        return function () use ($config): string {
             return $this
                 ->setTimezone($config->timezone)
                 ->format($config->dateFormat);
@@ -38,7 +38,7 @@ class CarbonPresentMixin
     {
         $config = $this->config;
 
-        return function () use ($config) {
+        return function () use ($config): string {
             return $this
                 ->setTimezone($config->timezone)
                 ->format($config->timeFormat);
@@ -49,7 +49,7 @@ class CarbonPresentMixin
     {
         $config = $this->config;
 
-        return function () use ($config) {
+        return function () use ($config): string {
             return $this
                 ->setTimezone($config->timezone)
                 ->format($config->dateFormat.' '.$config->timeFormat);
