@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use App\Config;
-use Illuminate\Support\Facades\Artisan;
-use Symfony\Component\Console\Output\ConsoleOutput;
 use Tests\TestCase;
 use Carbon\CarbonImmutable;
 
