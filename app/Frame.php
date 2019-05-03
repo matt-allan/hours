@@ -6,6 +6,7 @@ namespace App;
 
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterval;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -19,6 +20,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property string|null $deleted_at
  * @property-read \App\Project $project
+ * @method static \Illuminate\Database\Eloquent\Builder active()
  */
 class Frame extends Model
 {
@@ -38,12 +40,11 @@ class Frame extends Model
         return $this->belongsTo(Project::class);
     }
 
-    public static function active(): ?self
+    public function scopeActive(Builder $query): Builder
     {
-        return static::query()
+        return $query
             ->whereNull('stopped_at')
-            ->orderByDesc('started_at')
-            ->first();
+            ->orderByDesc('started_at');
     }
 
     public function stop(CarbonImmutable $stoppedAt = null): bool

@@ -22,7 +22,7 @@ class StatusCommand extends Command
 
     public function handle(): void
     {
-        $frame = Frame::active();
+        $frame = Frame::active()->first();
 
         if (! $frame) {
             $this->info('No active projects.');

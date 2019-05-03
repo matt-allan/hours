@@ -22,7 +22,7 @@ class StopCommand extends Command
 
     public function handle(): void
     {
-        $frame = Frame::active();
+        $frame = Frame::active()->first();
 
         if (! $frame) {
             $this->error('Time tracking is not currently running.');

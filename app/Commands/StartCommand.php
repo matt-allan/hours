@@ -23,7 +23,7 @@ class StartCommand extends Command
 
     public function handle(): void
     {
-        if ($active = Frame::active()) {
+        if ($active = Frame::active()->first()) {
             if (! $this->confirm(
                 "Time is already being tracked for {$active->project->name} (started {$active->elapsed->forHumans(CarbonImmutable::DIFF_RELATIVE_TO_NOW)}).  ".
                     'Do you want to stop the active frame?'
