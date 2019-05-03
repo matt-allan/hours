@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
+use Illuminate\Support\Facades\Date;
 use Tests\TestCase;
-use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class StartCommandTest extends TestCase
@@ -14,7 +14,7 @@ class StartCommandTest extends TestCase
 
     public function testStart()
     {
-        CarbonImmutable::setTestNow($now = CarbonImmutable::now());
+        Date::setTestNow($now = Date::now());
 
         $this->artisan('start blog')
             ->expectsOutput('Starting blog at '.$now->presentTime())
@@ -23,11 +23,11 @@ class StartCommandTest extends TestCase
 
     public function testStartWhenAlreadyRunning()
     {
-        CarbonImmutable::setTestNow($now = CarbonImmutable::now());
+        Date::setTestNow($now = Date::now());
 
         $this->artisan('start blog');
 
-        CarbonImmutable::setTestNow($now->addSeconds(5));
+        Date::setTestNow($now->addSeconds(5));
 
         $this->artisan('start blog')
             ->expectsQuestion(

@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
+use Illuminate\Support\Facades\Date;
 use Tests\TestCase;
-use Carbon\CarbonImmutable;
 
 class StopCommandTest extends TestCase
 {
     public function testStop()
     {
-        CarbonImmutable::setTestNow($now = CarbonImmutable::now());
+        Date::setTestNow($now = Date::now());
 
         $this->artisan('start blog');
 
-        CarbonImmutable::setTestNow($now->addMinutes(5));
+        Date::setTestNow($now->addMinutes(5));
 
         $this->artisan('stop')
             ->expectsOutput('Time tracking for blog stopped (started 5 minutes ago).')

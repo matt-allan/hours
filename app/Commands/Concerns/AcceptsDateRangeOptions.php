@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Commands\Concerns;
 
 use App\Config;
-use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use Carbon\CarbonInterval;
+use Illuminate\Support\Facades\Date;
 
 trait AcceptsDateRangeOptions
 {
@@ -15,15 +15,13 @@ trait AcceptsDateRangeOptions
 
     protected function getFromOption(): CarbonInterface
     {
-        return (new CarbonImmutable($this->option('from'), $this->config()->timezone))
-            ->utc();
+        return Date::parse($this->option('from'), $this->config()->timezone)->utc();
     }
 
     protected function getToOption(): CarbonInterface
     {
         if ($this->option('to')) {
-            return (new CarbonImmutable($this->option('to'), $this->config()->timezone))
-                ->utc();
+            return Date::parse($this->option('to'), $this->config()->timezone)->utc();
         }
 
         if ($this->option('interval')) {
@@ -32,7 +30,7 @@ trait AcceptsDateRangeOptions
                 ->utc();
         }
 
-        return CarbonImmutable::now();
+        return Date::now();
     }
 
     private function config(): Config

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use App\Config;
+use Illuminate\Support\Facades\Date;
 use Tests\TestCase;
-use Carbon\CarbonImmutable;
 
 class AddCommandTest extends TestCase
 {
@@ -26,8 +26,8 @@ class AddCommandTest extends TestCase
 
     public function testAddWithFromDiff()
     {
-        CarbonImmutable::setTestNow(
-            (new CarbonImmutable('2019-05-01 05:34:46', 'America/New_York'))->setTimezone('UTC')
+        Date::setTestNow(
+            Date::parse('2019-05-01 05:34:46', 'America/New_York')->setTimezone('UTC')
         );
 
         $this->artisan('add blog --from \'2 hours ago\'')

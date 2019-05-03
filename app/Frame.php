@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace App;
 
-use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Date;
 
 /**
  * @property int                  $id
- * @property CarbonImmutable      $started_at
- * @property CarbonImmutable|null $stopped_at
+ * @property CarbonInterface      $started_at
+ * @property CarbonInterface|null $stopped_at
  * @property int                  $project_id
  * @property-read CarbonInterval  $elapsed
- * @property CarbonImmutable|null $created_at
- * @property CarbonImmutable|null $updated_at
+ * @property CarbonInterface|null $created_at
+ * @property CarbonInterface|null $updated_at
  * @property string|null          $deleted_at
  * @property-read \App\Project    $project
  * @method static Builder active()
@@ -60,7 +60,7 @@ class Frame extends Model
 
     public function stop(CarbonInterface $stoppedAt = null): bool
     {
-        $this->stopped_at = $stoppedAt ?? CarbonImmutable::now();
+        $this->stopped_at = $stoppedAt ?? Date::now();
 
         return $this->save();
     }
