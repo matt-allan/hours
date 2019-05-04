@@ -7,12 +7,9 @@ namespace Tests\Feature;
 use App\Frame;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Date;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class StartCommandTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function testStart()
     {
         Date::setTestNow($now = Date::now());
@@ -56,5 +53,14 @@ class StartCommandTest extends TestCase
             ['writing', 'editing'],
             $frame->tags->map->name->toArray()
         );
+    }
+
+    public function testStartWithAtOption()
+    {
+        Date::setTestNow($now = Date::now());
+
+        $this->artisan('start blog --at \'05:34:46\'')
+            ->expectsOutput('Starting frame for blog at 5:34 am')
+            ->assertExitCode(0);
     }
 }

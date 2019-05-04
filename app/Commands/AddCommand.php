@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Commands;
 
 use App\Frame;
-use Carbon\CarbonInterface;
 use Carbon\CarbonInterval;
+use Carbon\CarbonInterface;
 use LaravelZero\Framework\Commands\Command;
 
 class AddCommand extends Command
@@ -42,7 +42,7 @@ DESCRIPTION;
 
     public function handle(): void
     {
-        if (!$this->option('from')) {
+        if (! $this->option('from')) {
             $this->error('Please specify a start time with the --from|-f option.');
 
             return;
@@ -56,10 +56,10 @@ DESCRIPTION;
             ->addNotes($this->option('notes'));
 
         $this->info(
-            "Added frame for {$frame->project->name} " .
-            ($frame->tags->isNotEmpty() ? "({$frame->tags->implode('name', ', ')}) " : '') .
-            "from {$frame->started_at->presentDateTime()} " .
-            "to {$frame->stopped_at->presentDateTime()} " .
+            "Added frame for {$frame->project->name} ".
+            ($frame->tags->isNotEmpty() ? "({$frame->tags->implode('name', ', ')}) " : '').
+            "from {$frame->started_at->presentDateTime()} ".
+            "to {$frame->stopped_at->presentDateTime()} ".
             "({$frame->elapsed->forHumans()})."
         );
     }

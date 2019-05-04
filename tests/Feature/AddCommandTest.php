@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
-use App\Config;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Date;
 
@@ -14,7 +13,7 @@ class AddCommandTest extends TestCase
     {
         parent::setUp();
 
-        $this->app->instance(Config::class, new Config('F j, Y', 'g:i a', '%h:%I', 'America/New_York'));
+        $this->withTestConfig();
     }
 
     public function testAdd()

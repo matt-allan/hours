@@ -36,7 +36,7 @@ class StartCommand extends Command
             $this->call('stop');
         }
 
-        $frame = Frame::start($this->argument('project'))
+        $frame = Frame::start($this->argument('project'), $this->dateOption('at'))
             ->addTags($this->option('tag'))
             ->addNotes($this->option('notes'));
 

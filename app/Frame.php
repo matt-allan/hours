@@ -6,12 +6,12 @@ namespace App;
 
 use Carbon\CarbonInterval;
 use Carbon\CarbonInterface;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -30,6 +30,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static Builder active()
  * @method static Builder between(CarbonInterface $start, CarbonInterface $end)
  * @method static Builder forProject($project)
+ * @method static Builder latestClosed()
  */
 class Frame extends Model
 {
@@ -132,6 +133,20 @@ class Frame extends Model
     }
 
     /**
+     * Scope a query to only closed frames and sort by stopped_at.
+     *
+     * @param Builder $query
+     *
+     * @return Builder
+     */
+    public function scopeLatestClosed(Builder $query): Builder
+    {
+        return $query
+            ->whereNotNull('stopped_at')
+            ->orderByDesc('stopped_at');
+    }
+
+    /**
      * Start a new frame for the given project.
      *
      * @param Project|string       $project
@@ -164,6 +179,29 @@ class Frame extends Model
         $this->stopped_at = $stoppedAt ?? Date::now();
 
         return $this->save();
+    }
+
+    /**
+     * Restart the current frame.  Because a closed frame cannot be re-opened
+     * a new frame will be created with the attributes of the current frame.
+     *
+     * @param CarbonInterface|null $startedAt
+     *
+     * @return Frame
+     */
+    public function restart(?CarbonInterface $startedAt = null): self
+    {
+        $except = [
+            'started_at',
+            'stopped_at',
+            'deleted_at',
+        ];
+
+        return tap($this->replicate($except), function (self $frame) use ($startedAt) {
+            $frame->started_at = $startedAt ?? Date::now();
+            $frame->save();
+            $frame->tags()->saveMany($this->tags);
+        });
     }
 
     /**

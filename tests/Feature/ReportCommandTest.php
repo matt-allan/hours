@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use App\Frame;
-use App\Config;
 use App\Project;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Date;
@@ -16,7 +15,7 @@ class ReportCommandTest extends TestCase
     {
         parent::setUp();
 
-        $this->app->instance(Config::class, new Config('F j, Y', 'g:i a', '%h:%I', 'America/New_York'));
+        $this->withTestConfig();
     }
 
     public function testReport()
