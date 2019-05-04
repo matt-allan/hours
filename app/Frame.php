@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App;
 
-use Carbon\CarbonInterface;
 use Carbon\CarbonInterval;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Carbon\CarbonInterface;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int                  $id
@@ -105,9 +105,9 @@ class Frame extends Model
      *
      * @return Frame
      */
-    public static function start($project, ?CarbonInterface $startedAt = null): Frame
+    public static function start($project, ?CarbonInterface $startedAt = null): self
     {
-        if (!$project instanceof Project) {
+        if (! $project instanceof Project) {
             $project = Project::firstOrCreate([
                 'name' => $project,
             ]);
@@ -141,9 +141,9 @@ class Frame extends Model
      *
      * @return Frame
      */
-    public static function add($project, CarbonInterface $startedAt, CarbonInterface $stoppedAt = null): Frame
+    public static function add($project, CarbonInterface $startedAt, CarbonInterface $stoppedAt = null): self
     {
-        return tap(static::start($project, $startedAt), function (Frame $frame) use ($stoppedAt) {
+        return tap(static::start($project, $startedAt), function (self $frame) use ($stoppedAt) {
             $frame->stop($stoppedAt);
         });
     }

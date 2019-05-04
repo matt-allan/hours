@@ -44,9 +44,9 @@ class Report
         CarbonInterface $to,
         array $projects = []
     ) {
-        $this->frames   = $frames;
-        $this->from     = $from;
-        $this->to       = $to;
+        $this->frames = $frames;
+        $this->from = $from;
+        $this->to = $to;
         $this->projects = $projects;
     }
 
