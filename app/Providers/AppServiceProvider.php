@@ -21,7 +21,6 @@ use App\Carbon\CarbonIntervalPresentMixin;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Migrations\Migrator;
 use Illuminate\Filesystem\FilesystemManager;
-use Illuminate\Console\Application as Artisan;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -52,12 +51,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Artisan::starting(function () {
-            $this->app
-                ->make(InitializeDatabase::class)
-                ->bootstrap();
-        });
-
         DateFactory::use(CarbonImmutable::class);
 
         CarbonImmutable::mixin($this->app->make(CarbonPresentMixin::class));

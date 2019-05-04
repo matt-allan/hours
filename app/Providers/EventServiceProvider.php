@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Bootstrap\InitializeDatabase;
 use App\Events\ConfigureTimezone;
+use Illuminate\Console\Events\ArtisanStarting;
 use Illuminate\Console\Events\CommandStarting;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -17,6 +18,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
+        ArtisanStarting::class => [
+            InitializeDatabase::class,
+        ],
         CommandStarting::class => [
             ConfigureTimezone::class,
         ],

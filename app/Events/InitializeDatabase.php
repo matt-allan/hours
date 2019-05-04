@@ -31,7 +31,7 @@ class InitializeDatabase
         $this->databasePath = $databasePath;
     }
 
-    public function bootstrap(): void
+    public function handle(): void
     {
         if (! $this->filesystem->exists($this->databasePath)) {
             $this->filesystem->put($this->databasePath, '');
