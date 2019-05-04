@@ -6,6 +6,7 @@ namespace App;
 
 use Carbon\CarbonInterval;
 use Carbon\CarbonInterface;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Date;
@@ -32,6 +33,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  */
 class Frame extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'started_at',
         'stopped_at',
