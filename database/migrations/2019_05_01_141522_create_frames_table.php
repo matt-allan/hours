@@ -19,6 +19,7 @@ class CreateFramesTable extends Migration
             $table->bigIncrements('id');
             $table->timestamp('started_at');
             $table->timestamp('stopped_at')->nullable();
+            $table->text('notes')->nullable();
             $table->unsignedBigInteger('project_id');
             $table->timestamps();
             $table->softDeletes();

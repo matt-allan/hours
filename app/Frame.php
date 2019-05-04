@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property CarbonInterface            $started_at
  * @property CarbonInterface|null       $stopped_at
  * @property int                        $project_id
+ * @property string                     $notes
  * @property-read CarbonInterval        $elapsed
  * @property CarbonInterface|null       $created_at
  * @property CarbonInterface|null       $updated_at
@@ -35,6 +36,7 @@ class Frame extends Model
         'started_at',
         'stopped_at',
         'project_id',
+        'notes',
     ];
 
     protected $dates = [
@@ -193,6 +195,15 @@ class Frame extends Model
             ->each(function (Tag $tag) {
                 $this->tags()->save($tag);
             });
+
+        return $this;
+    }
+
+    public function addNotes(?string $notes): self
+    {
+        $this->notes = $notes;
+
+        $this->save();
 
         return $this;
     }

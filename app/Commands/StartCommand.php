@@ -16,7 +16,8 @@ class StartCommand extends Command
     protected $signature = 'start
         {project : The name of the project to start tracking time for}
         {--a|at= : The time to start the frame at (Defaults to the current time)}
-        {--t|tag=* : The tags to add to the frame}';
+        {--t|tag=* : The tags to add to the frame}
+        {--notes= : The notes to add to the frame}';
 
     /**
      * @var string
@@ -36,7 +37,8 @@ class StartCommand extends Command
         }
 
         $frame = Frame::start($this->argument('project'))
-            ->addTags($this->option('tag'));
+            ->addTags($this->option('tag'))
+            ->addNotes($this->option('notes'));
 
         $this->info(
             "Starting frame for {$frame->project->name} ".
