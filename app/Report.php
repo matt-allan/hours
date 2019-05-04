@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\Report\RendererFactory;
-use Carbon\CarbonInterface;
 use Carbon\CarbonInterval;
+use Carbon\CarbonInterface;
+use App\Report\RendererFactory;
 use Illuminate\Support\Collection;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -101,6 +101,11 @@ class Report
                ->map(function (Collection $frame) {
                    return $frame->except('Project');
                });
+        })->unless($this->multipleTags(), function (Collection $frames) {
+            return $frames
+        ->map(function (Collection $frame) {
+            return $frame->except('Tags');
+        });
         });
     }
 
@@ -127,7 +132,6 @@ class Report
     {
         return count($this->projects) !== 1;
     }
-
 
     private function multipleTags(): bool
     {

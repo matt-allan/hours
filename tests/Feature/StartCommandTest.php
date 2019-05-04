@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use App\Frame;
-use App\Tag;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Foundation\Testing\RefreshDatabase;
