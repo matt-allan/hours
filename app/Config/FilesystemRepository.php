@@ -51,6 +51,7 @@ class FilesystemRepository implements Repository, Editable
         system(
             $this->editor().' '.home_config_path(self::PATH).(PHP_OS_FAMILY === 'win' ? '' : ' > `tty`')
         );
+        $this->load(true);
     }
 
     private function editor(): string
@@ -81,9 +82,9 @@ class FilesystemRepository implements Repository, Editable
         $this->save();
     }
 
-    private function load(): void
+    private function load(bool $force = false): void
     {
-        if ($this->loaded) {
+        if ($this->loaded && ! $force) {
             return;
         }
 
