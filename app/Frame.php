@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App;
 
-use Carbon\CarbonInterval;
 use Carbon\CarbonInterface;
-use Illuminate\Support\Facades\Date;
-use Illuminate\Database\Eloquent\Model;
+use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Date;
 
 /**
  * @property int                  $id
@@ -58,11 +58,44 @@ class Frame extends Model
             ->whereNotNull('stopped_at');
     }
 
+    /**
+     * @param Project|string       $project
+     * @param CarbonInterface|null $startedAt
+     *
+     * @return Frame
+     */
+    public static function start($project, ?CarbonInterface $startedAt = null): Frame
+    {
+        if (!$project instanceof Project) {
+            $project = Project::firstOrCreate([
+                'name' => $project,
+            ]);
+        }
+
+        return $project->frames()->create([
+            'started_at' => $startedAt ?? Date::now(),
+        ]);
+    }
+
     public function stop(CarbonInterface $stoppedAt = null): bool
     {
         $this->stopped_at = $stoppedAt ?? Date::now();
 
         return $this->save();
+    }
+
+    /**
+     * @param Project|string       $project
+     * @param CarbonInterface      $startedAt
+     * @param CarbonInterface|null $stoppedAt
+     *
+     * @return Frame
+     */
+    public static function add($project, CarbonInterface $startedAt, CarbonInterface $stoppedAt = null): Frame
+    {
+        return tap(static::start($project, $startedAt), function (Frame $frame) use ($stoppedAt) {
+            $frame->stop($stoppedAt);
+        });
     }
 
     public function getElapsedAttribute(): CarbonInterval

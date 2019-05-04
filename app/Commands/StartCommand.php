@@ -34,14 +34,8 @@ class StartCommand extends Command
             $this->call('stop');
         }
 
-        $project = Project::firstOrCreate([
-            'name' => $this->argument('project'),
-        ]);
+        $frame = Frame::start($this->argument('project'));
 
-        $frame = $project->frames()->create([
-            'started_at' => Date::now(),
-        ]);
-
-        $this->info("Starting {$project->name} at {$frame->started_at->presentTime()}");
+        $this->info("Starting {$frame->project->name} at {$frame->started_at->presentTime()}");
     }
 }

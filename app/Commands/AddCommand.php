@@ -49,21 +49,14 @@ DESCRIPTION;
             return;
         }
 
-        $from = $this->getFromOption();
-        $to = $this->getToOption() ?? Date::now();
-
-        $project = Project::firstOrCreate([
-            'name' => $this->argument('project'),
-        ]);
-
-        /** @var Frame $frame */
-        $frame = $project->frames()->create([
-            'started_at' => $from,
-            'stopped_at' => $to,
-        ]);
+        $frame = Frame::add(
+            $this->argument('project'),
+            $this->getFromOption(),
+            $this->getToOption()
+        );
 
         $this->info(
-            "Added frame for {$project->name} from ".
+            "Added frame for {$frame->project->name} from ".
             "{$frame->started_at->presentDateTime()} ".
             "to {$frame->stopped_at->presentDateTime()} ".
             "({$frame->elapsed->forHumans()})."
