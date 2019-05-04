@@ -15,12 +15,9 @@ use App\Carbon\CarbonPresentMixin;
 use Illuminate\Support\Collection;
 use Illuminate\Support\DateFactory;
 use Illuminate\Support\Facades\Date;
-use App\Bootstrap\InitializeDatabase;
 use Illuminate\Support\ServiceProvider;
 use App\Carbon\CarbonIntervalPresentMixin;
 use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Database\Migrations\Migrator;
-use Illuminate\Filesystem\FilesystemManager;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,14 +28,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(InitializeDatabase::class, function () {
-            return new InitializeDatabase(
-                $this->app->make(FilesystemManager::class)->disk('data'),
-                $this->app->make(Migrator::class),
-                basename(config('database.connections.sqlite.database'))
-            );
-        });
-
         $this->app->singleton(Config\Repository::class, Config\FilesystemRepository::class);
 
         $this->app->singleton(RendererFactory::class, RendererManager::class);

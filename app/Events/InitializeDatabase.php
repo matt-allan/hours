@@ -6,35 +6,26 @@ namespace App\Bootstrap;
 
 use Illuminate\Database\Migrations\Migrator;
 use Illuminate\Contracts\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Storage;
 
 class InitializeDatabase
 {
-    /**
-     * @var Filesystem
-     */
-    private $filesystem;
-
     /**
      * @var Migrator
      */
     private $migrator;
 
-    /**
-     * @var string
-     */
-    private $databasePath;
-
-    public function __construct(Filesystem $filesystem, Migrator $migrator, string $databasePath)
+    public function __construct(Migrator $migrator)
     {
-        $this->filesystem = $filesystem;
         $this->migrator = $migrator;
-        $this->databasePath = $databasePath;
     }
 
     public function handle(): void
     {
-        if (! $this->filesystem->exists($this->databasePath)) {
-            $this->filesystem->put($this->databasePath, '');
+        $databasePath = basename(config('database.connections.sqlite.database'));
+
+        if (! Storage::disk('data')->exists($databasePath)) {
+            Storage::disk('data')->put($databasePath, '');
         }
 
         if (! $this->migrator->repositoryExists()) {
