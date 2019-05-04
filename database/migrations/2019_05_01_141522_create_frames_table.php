@@ -22,7 +22,6 @@ class CreateFramesTable extends Migration
             $table->text('notes')->nullable();
             $table->unsignedBigInteger('project_id');
             $table->timestamps();
-            $table->softDeletes();
 
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
         });

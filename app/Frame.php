@@ -11,7 +11,6 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -24,7 +23,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property-read CarbonInterval        $elapsed
  * @property CarbonInterface|null       $created_at
  * @property CarbonInterface|null       $updated_at
- * @property string|null                $deleted_at
  * @property-read \App\Project          $project
  * @property-read \App\Tag[]|Collection $tags
  * @method static Builder active()
@@ -34,8 +32,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  */
 class Frame extends Model
 {
-    use SoftDeletes;
-
     protected $fillable = [
         'started_at',
         'stopped_at',
@@ -194,7 +190,6 @@ class Frame extends Model
         $except = [
             'started_at',
             'stopped_at',
-            'deleted_at',
         ];
 
         return tap($this->replicate($except), function (self $frame) use ($startedAt) {
