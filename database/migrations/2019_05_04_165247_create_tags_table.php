@@ -1,12 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFramesTable extends Migration
+class CreateTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,15 +13,11 @@ class CreateFramesTable extends Migration
      */
     public function up()
     {
-        Schema::create('frames', function (Blueprint $table) {
+        Schema::create('tags', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamp('started_at');
-            $table->timestamp('stopped_at')->nullable();
-            $table->unsignedBigInteger('project_id');
+            $table->string('name')->unique();
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
         });
     }
 
@@ -34,6 +28,6 @@ class CreateFramesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('frames');
+        Schema::dropIfExists('tags');
     }
 }

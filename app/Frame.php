@@ -4,24 +4,27 @@ declare(strict_types=1);
 
 namespace App;
 
-use Carbon\CarbonInterval;
 use Carbon\CarbonInterface;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Date;
-use Illuminate\Database\Eloquent\Model;
+use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Date;
 
 /**
- * @property int                  $id
- * @property CarbonInterface      $started_at
- * @property CarbonInterface|null $stopped_at
- * @property int                  $project_id
- * @property-read CarbonInterval  $elapsed
- * @property CarbonInterface|null $created_at
- * @property CarbonInterface|null $updated_at
- * @property string|null          $deleted_at
- * @property-read \App\Project    $project
+ * @property int                        $id
+ * @property CarbonInterface            $started_at
+ * @property CarbonInterface|null       $stopped_at
+ * @property int                        $project_id
+ * @property-read CarbonInterval        $elapsed
+ * @property CarbonInterface|null       $created_at
+ * @property CarbonInterface|null       $updated_at
+ * @property string|null                $deleted_at
+ * @property-read \App\Project          $project
+ * @property-read \App\Tag[]|Collection $tags
  * @method static Builder active()
  * @method static Builder between(CarbonInterface $start, CarbonInterface $end)
  * @method static Builder forProject($project)
@@ -42,6 +45,11 @@ class Frame extends Model
     public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);
+    }
+
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class);
     }
 
     /**
@@ -146,6 +154,26 @@ class Frame extends Model
         return tap(static::start($project, $startedAt), function (self $frame) use ($stoppedAt) {
             $frame->stop($stoppedAt);
         });
+    }
+
+    /**
+     * Add the given tags to the frame.
+     *
+     * @param Tag|string|Tag[]|string[] $tags
+     *
+     * @return Frame
+     */
+    public function addTags($tags): self
+    {
+        collect(Arr::wrap($tags))
+            ->map(function ($tag) {
+                return Tag::firstOrCreate(['name' => $tag instanceof Tag ? $tag->name : $tag]);
+            })
+            ->each(function (Tag $tag) {
+                $this->tags()->save($tag);
+            });
+
+        return $this;
     }
 
     /**
