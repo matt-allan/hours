@@ -18,7 +18,8 @@ class AddCommand extends Command
         {project : The name of the project to add a frame to}
         {--f|from= : The start time of the frame}
         {--t|to= : the end time of the frame}
-        {--i|interval= : An interval for the length of the frame}';
+        {--i|interval= : An interval for the length of the frame}
+        {--tag=* : The tags to add to the frame}';
 
     /**
      * @var string
@@ -50,11 +51,12 @@ DESCRIPTION;
             $this->argument('project'),
             $this->dateOption('from'),
             $this->option('interval') ? $this->getInterval() : $this->dateOption('to')
-        );
+        )->addTags($this->option('tag'));
 
         $this->info(
-            "Added frame for {$frame->project->name} from ".
-            "{$frame->started_at->presentDateTime()} ".
+            "Added frame for {$frame->project->name} ".
+            ($frame->tags->isNotEmpty() ? "({$frame->tags->implode('name', ', ')}) " : '').
+            "from {$frame->started_at->presentDateTime()} ".
             "to {$frame->stopped_at->presentDateTime()} ".
             "({$frame->elapsed->forHumans()})."
         );

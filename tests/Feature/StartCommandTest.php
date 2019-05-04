@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
+use App\Frame;
+use App\Tag;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -17,7 +19,7 @@ class StartCommandTest extends TestCase
         Date::setTestNow($now = Date::now());
 
         $this->artisan('start blog')
-            ->expectsOutput('Starting blog at '.$now->presentTime())
+            ->expectsOutput('Starting frame for blog at '.$now->presentTime())
             ->assertExitCode(0);
     }
 
@@ -36,7 +38,24 @@ class StartCommandTest extends TestCase
                 'yes'
             )
             ->expectsOutput('Time tracking for blog stopped (started 5 seconds ago).')
-            ->expectsOutput('Starting blog at '.$now->addSeconds(5)->presentTime())
+            ->expectsOutput('Starting frame for blog at '.$now->addSeconds(5)->presentTime())
             ->assertExitCode(0);
+    }
+
+    public function testStartWithTags()
+    {
+        Date::setTestNow($now = Date::now());
+
+        $this->artisan('start blog --tag writing --tag editing')
+            ->expectsOutput('Starting frame for blog (writing, editing) at '.$now->presentTime())
+            ->assertExitCode(0);
+
+        /** @var Frame $frame */
+        $frame = Frame::forProject('blog')->first();
+
+        $this->assertSame(
+            ['writing', 'editing'],
+            $frame->tags->map->name->toArray()
+        );
     }
 }

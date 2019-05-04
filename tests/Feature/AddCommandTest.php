@@ -41,4 +41,11 @@ class AddCommandTest extends TestCase
             ->expectsOutput('Added frame for blog from May 1, 2019 5:34 am to May 1, 2019 7:46 am (2 hours 12 minutes 6 seconds).')
             ->assertExitCode(0);
     }
+
+    public function testAddWithTags()
+    {
+        $this->artisan('add blog --from \'2019-05-01 05:34:46\' --to \'2019-05-01 06:34:46\' --tag writing --tag editing')
+            ->expectsOutput('Added frame for blog (writing, editing) from May 1, 2019 5:34 am to May 1, 2019 6:34 am (1 hour).')
+            ->assertExitCode(0);
+    }
 }

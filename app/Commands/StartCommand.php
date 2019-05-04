@@ -15,7 +15,8 @@ class StartCommand extends Command
      */
     protected $signature = 'start
         {project : The name of the project to start tracking time for}
-        {--a|at= : The time to start the frame at (Defaults to the current time)}';
+        {--a|at= : The time to start the frame at (Defaults to the current time)}
+        {--t|tag=* : The tags to add to the frame}';
 
     /**
      * @var string
@@ -34,8 +35,13 @@ class StartCommand extends Command
             $this->call('stop');
         }
 
-        $frame = Frame::start($this->argument('project'));
+        $frame = Frame::start($this->argument('project'))
+            ->addTags($this->option('tag'));
 
-        $this->info("Starting {$frame->project->name} at {$frame->started_at->presentTime()}");
+        $this->info(
+            "Starting frame for {$frame->project->name} ".
+            ($frame->tags->isNotEmpty() ? "({$frame->tags->implode('name', ', ')}) " : '').
+            "at {$frame->started_at->presentTime()}"
+        );
     }
 }
