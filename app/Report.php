@@ -20,12 +20,12 @@ class Report
     /**
      * @var CarbonInterface
      */
-    private $start;
+    private $from;
 
     /**
      * @var CarbonInterface
      */
-    private $end;
+    private $to;
 
     /**
      * @var string[]
@@ -34,19 +34,19 @@ class Report
 
     /**
      * @param Collection|Frame[] $frames
-     * @param CarbonInterface    $start
-     * @param CarbonInterface    $end
+     * @param CarbonInterface    $from
+     * @param CarbonInterface    $to
      * @param string[]           $projects
      */
     public function __construct(
         Collection $frames,
-        CarbonInterface $start,
-        CarbonInterface $end,
+        CarbonInterface $from,
+        CarbonInterface $to,
         array $projects = []
     ) {
-        $this->frames = $frames;
-        $this->start = $start;
-        $this->end = $end;
+        $this->frames   = $frames;
+        $this->from     = $from;
+        $this->to       = $to;
         $this->projects = $projects;
     }
 
@@ -58,17 +58,17 @@ class Report
     /**
      * @return CarbonInterface
      */
-    public function start(): CarbonInterface
+    public function from(): CarbonInterface
     {
-        return $this->start;
+        return $this->from;
     }
 
     /**
      * @return CarbonInterface
      */
-    public function end(): CarbonInterface
+    public function to(): CarbonInterface
     {
-        return $this->end;
+        return $this->to;
     }
 
     public function headers(): Collection

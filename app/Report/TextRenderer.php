@@ -12,7 +12,7 @@ class TextRenderer implements Renderer
 {
     public function render(OutputInterface $output, Report $report): void
     {
-        $output->writeln("<info>{$report->start()->presentDate()} to {$report->end()->presentDate()}</info>");
+        $output->writeln("<info>{$report->from()->presentDate()} to {$report->to()->presentDate()}</info>");
 
         (new Table($output))
             ->setHeaders($report->headers()->toArray())

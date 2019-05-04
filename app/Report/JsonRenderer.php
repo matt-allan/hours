@@ -15,8 +15,8 @@ class JsonRenderer implements Renderer
         $output->writeln(
             collect([
                 'date_range' => [
-                    'from' => $report->start()->presentDateTime(),
-                    'to' => $report->end()->presentDateTime(),
+                    'from' => $report->from()->presentDateTime(),
+                    'to' => $report->to()->presentDateTime(),
                 ],
                 'total' => $report->total()->presentInterval(),
                 'frames' => $this->frames($report),
