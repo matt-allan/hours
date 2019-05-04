@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App;
 
 use Carbon\CarbonInterface;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Database\Eloquent\Builder;
 
 class ReportBuilder
 {
@@ -85,4 +85,3 @@ class ReportBuilder
         return app(Config::class);
     }
 }
-

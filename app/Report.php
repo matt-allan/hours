@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\Report\RendererFactory;
-use Carbon\CarbonInterface;
 use Carbon\CarbonInterval;
+use Carbon\CarbonInterface;
+use App\Report\RendererFactory;
 use Illuminate\Support\Collection;
 use Symfony\Component\Console\Output\OutputInterface;
 

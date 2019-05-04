@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Report;
 
-use App\Config;
 use App\Frame;
-use App\Project;
+use App\Config;
 use App\Report;
+use App\Project;
+use Tests\TestCase;
 use Illuminate\Support\Facades\Date;
 use Symfony\Component\Console\Output\BufferedOutput;
-use Tests\TestCase;
 
 class JsonRendererTest extends TestCase
 {
@@ -46,25 +46,25 @@ class JsonRendererTest extends TestCase
             ->render($output, 'json');
 
         $expected = [
-            "date_range" => [
-                "from" => "May 2, 2019 8:00 pm",
-                "to" => "May 4, 2019 8:00 pm",
+            'date_range' => [
+                'from' => 'May 2, 2019 8:00 pm',
+                'to' => 'May 4, 2019 8:00 pm',
             ],
-            "total" => "2:00",
-            "frames" => [
+            'total' => '2:00',
+            'frames' => [
                 [
-                    "Project" => "blog",
-                    "Date" => "May 4, 2019",
-                    "Start" => "12:00 pm",
-                    "End" => "12:30 pm",
-                    "Elapsed" => "0:30",
+                    'Project' => 'blog',
+                    'Date' => 'May 4, 2019',
+                    'Start' => '12:00 pm',
+                    'End' => '12:30 pm',
+                    'Elapsed' => '0:30',
                 ],
                 [
-                    "Project" => "blog",
-                    "Date" => "May 5, 2019",
-                    "Start" => "12:00 pm",
-                    "End" => "1:30 pm",
-                    "Elapsed" => "1:30",
+                    'Project' => 'blog',
+                    'Date' => 'May 5, 2019',
+                    'Start' => '12:00 pm',
+                    'End' => '1:30 pm',
+                    'Elapsed' => '1:30',
                 ],
             ],
         ];

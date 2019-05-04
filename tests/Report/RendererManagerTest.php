@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Tests\Report;
 
 use App\Report;
+use Tests\TestCase;
+use App\Report\Renderer;
 use App\Report\CsvRenderer;
 use App\Report\JsonRenderer;
-use App\Report\Renderer;
-use App\Report\RendererManager;
 use App\Report\TextRenderer;
+use App\Report\RendererManager;
 use Symfony\Component\Console\Output\OutputInterface;
-use Tests\TestCase;
 
 class RendererManagerTest extends TestCase
 {
@@ -29,7 +29,9 @@ class RendererManagerTest extends TestCase
         $manager = new RendererManager($this->app);
 
         $nullRenderer = new class() implements Renderer {
-            public function render(OutputInterface $output, Report $report) {}
+            public function render(OutputInterface $output, Report $report)
+            {
+            }
         };
 
         $manager->extend('null', function () use ($nullRenderer) {

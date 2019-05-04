@@ -79,7 +79,6 @@ class ReportCommandTest extends TestCase
             'stopped_at' => date::parse('2019-05-04 12:30 pm', 'america/new_york')->utc(),
         ]);
 
-
         // 30 elapsed
         factory(Frame::class)->create([
             'project_id' => $project->id,

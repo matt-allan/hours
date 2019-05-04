@@ -31,8 +31,8 @@ class RendererManager implements RendererFactory
 
         $driverMethod = 'create'.ucfirst($format).'Driver';
 
-        if (!method_exists($this, $driverMethod)) {
-            throw new \InvalidArgumentException('Unknown format ' . $format);
+        if (! method_exists($this, $driverMethod)) {
+            throw new \InvalidArgumentException('Unknown format '.$format);
         }
 
         return $this->{$driverMethod}();
