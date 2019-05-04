@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace App\Commands;
 
 use App\Report;
+use Carbon\CarbonInterval;
+use Carbon\CarbonInterface;
 use LaravelZero\Framework\Commands\Command;
-use App\Commands\Concerns\AcceptsDateRangeOptions;
 
 class ReportCommand extends Command
 {
-    use AcceptsDateRangeOptions;
-
     /**
      * @var string
      */
@@ -30,10 +29,17 @@ class ReportCommand extends Command
     public function handle(): void
     {
         Report::build()
-            ->from($this->getFromOption())
-            ->to($this->getToOption())
+            ->from($this->dateOption('from'))
+            ->to($this->option('interval') ? $this->getInterval() : $this->dateOption('to'))
             ->projects($this->option('project'))
             ->create()
             ->render($this->output, $this->option('format'));
+    }
+
+    private function getInterval(): CarbonInterface
+    {
+        return $this->dateOption('from')
+            ->add(CarbonInterval::fromString($this->option('interval')))
+            ->utc();
     }
 }

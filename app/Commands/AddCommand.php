@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace App\Commands;
 
 use App\Frame;
+use Carbon\CarbonInterval;
+use Carbon\CarbonInterface;
 use LaravelZero\Framework\Commands\Command;
-use App\Commands\Concerns\AcceptsDateRangeOptions;
 
 class AddCommand extends Command
 {
-    use AcceptsDateRangeOptions;
-
     /**
      * @var string
      */
@@ -49,8 +48,8 @@ DESCRIPTION;
 
         $frame = Frame::add(
             $this->argument('project'),
-            $this->getFromOption(),
-            $this->getToOption()
+            $this->dateOption('from'),
+            $this->option('interval') ? $this->getInterval() : $this->dateOption('to')
         );
 
         $this->info(
@@ -59,5 +58,12 @@ DESCRIPTION;
             "to {$frame->stopped_at->presentDateTime()} ".
             "({$frame->elapsed->forHumans()})."
         );
+    }
+
+    private function getInterval(): CarbonInterface
+    {
+        return $this->dateOption('from')
+            ->add(CarbonInterval::fromString($this->option('interval')))
+            ->utc();
     }
 }

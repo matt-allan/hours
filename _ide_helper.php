@@ -23,6 +23,12 @@ namespace Carbon {
     }
 }
 
+namespace Illuminate\Console {
+    class Command {
+        public function dateOption(string $key): ?\Carbon\CarbonInterface{}
+    }
+}
+
 namespace Illuminate\Support {
     class Collection {
         public function toCsv(): string{}

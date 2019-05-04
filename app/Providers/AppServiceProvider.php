@@ -7,11 +7,14 @@ namespace App\Providers;
 use App\Config;
 use Carbon\CarbonInterval;
 use Carbon\CarbonImmutable;
+use Carbon\CarbonInterface;
 use App\Report\RendererFactory;
 use App\Report\RendererManager;
+use Illuminate\Console\Command;
 use App\Carbon\CarbonPresentMixin;
 use Illuminate\Support\Collection;
 use Illuminate\Support\DateFactory;
+use Illuminate\Support\Facades\Date;
 use App\Bootstrap\InitializeDatabase;
 use Illuminate\Support\ServiceProvider;
 use App\Carbon\CarbonIntervalPresentMixin;
@@ -74,6 +77,15 @@ class AppServiceProvider extends ServiceProvider
 
                 return $contents;
             });
+        });
+
+        Command::macro('dateOption', function (string $key): ?CarbonInterface {
+            /** @var Command $this */
+            if (! $this->option($key)) {
+                return null;
+            }
+
+            return Date::parse($this->option($key), app(Config::class)->timezone)->utc();
         });
     }
 }

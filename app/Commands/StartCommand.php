@@ -13,7 +13,9 @@ class StartCommand extends Command
     /**
      * @var string
      */
-    protected $signature = 'start {project}';
+    protected $signature = 'start
+        {project : The name of the project to start tracking time for}
+        {--a|at= : The time to start the frame at (Defaults to the current time)}';
 
     /**
      * @var string
