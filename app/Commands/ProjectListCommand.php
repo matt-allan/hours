@@ -23,8 +23,11 @@ class ProjectListCommand extends Command
 
     public function handle()
     {
-        $this->output->writeln(
-            Project::all()->map->name
+        $this->table(
+            ['name'],
+            Project::all()->map(function (Project $project) {
+                return [$project->name];
+            })
         );
     }
 }

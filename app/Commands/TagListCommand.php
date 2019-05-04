@@ -23,8 +23,11 @@ class TagListCommand extends Command
 
     public function handle()
     {
-        $this->output->writeln(
-            Tag::all()->map->name
+        $this->table(
+            ['name'],
+            Tag::all()->map(function (Tag $tag) {
+                return [$tag->name];
+            })
         );
     }
 }
