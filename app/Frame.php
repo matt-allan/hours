@@ -9,6 +9,7 @@ use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Date;
 
 /**
@@ -23,6 +24,7 @@ use Illuminate\Support\Facades\Date;
  * @property-read \App\Project    $project
  * @method static Builder active()
  * @method static Builder between(CarbonInterface $start, CarbonInterface $end)
+ * @method static Builder forProject($project)
  */
 class Frame extends Model
 {
@@ -42,6 +44,13 @@ class Frame extends Model
         return $this->belongsTo(Project::class);
     }
 
+    /**
+     * Scope a query to only include active frames.
+     *
+     * @param Builder $query
+     *
+     * @return Builder
+     */
     public function scopeActive(Builder $query): Builder
     {
         return $query
@@ -49,6 +58,15 @@ class Frame extends Model
             ->orderByDesc('started_at');
     }
 
+    /**
+     * Scope a query to only include frames captured between the given dates.
+     *
+     * @param Builder         $query
+     * @param CarbonInterface $start
+     * @param CarbonInterface $end
+     *
+     * @return Builder
+     */
     public function scopeBetween(Builder $query, CarbonInterface $start, CarbonInterface $end): Builder
     {
         /* @noinspection PhpIncompatibleReturnTypeInspection */
@@ -59,6 +77,29 @@ class Frame extends Model
     }
 
     /**
+     * Scope a query to only include frames for the given project(s).
+     *
+     * @param Builder                           $query
+     * @param Project|string|Project[]|string[] $project
+     *
+     * @return Builder
+     */
+    public function scopeForProject(Builder $query, $project): Builder
+    {
+        $project = array_map(function ($project) {
+            return $project instanceof Project ? $project->name : $project;
+        }, Arr::wrap($project));
+
+        /* @noinspection PhpIncompatibleReturnTypeInspection */
+        return $query
+            ->whereHas('project', function (Builder $query) use ($project): Builder {
+                return $query->whereIn('name', $project);
+            });
+    }
+
+    /**
+     * Start a new frame for the given project.
+     *
      * @param Project|string       $project
      * @param CarbonInterface|null $startedAt
      *
@@ -77,6 +118,13 @@ class Frame extends Model
         ]);
     }
 
+    /**
+     * Stop the frame.
+     *
+     * @param CarbonInterface|null $stoppedAt
+     *
+     * @return bool
+     */
     public function stop(CarbonInterface $stoppedAt = null): bool
     {
         $this->stopped_at = $stoppedAt ?? Date::now();
@@ -85,6 +133,8 @@ class Frame extends Model
     }
 
     /**
+     * Add a frame that was not tracked live.
+     *
      * @param Project|string       $project
      * @param CarbonInterface      $startedAt
      * @param CarbonInterface|null $stoppedAt
@@ -98,6 +148,12 @@ class Frame extends Model
         });
     }
 
+    /**
+     * Returns the elapsed time between the start and stop of the frame.
+     * If the frame is active the elapsed time between the start and now is returned.
+     *
+     * @return CarbonInterval
+     */
     public function getElapsedAttribute(): CarbonInterval
     {
         return $this->started_at->diffAsCarbonInterval($this->stopped_at);

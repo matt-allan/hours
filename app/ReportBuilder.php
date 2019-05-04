@@ -72,10 +72,7 @@ class ReportBuilder
     {
         return Frame::between($this->from, $this->to)
             ->when($this->projects, function (Builder $query, array $projects): Builder {
-                return $query
-                    ->whereHas('project', function (Builder $query) use ($projects): Builder {
-                        return $query->whereIn('name', $projects);
-                    });
+                return $query->forProject($projects);
             })
             ->get();
     }
