@@ -27,12 +27,14 @@ class JsonRendererTest extends TestCase
 
         factory(Frame::class)->create([
             'project_id' => $project->id,
+            'notes' => 'Starting work on the new theme',
             'started_at' => Date::parse('2019-05-04 12:00 PM', 'America/New_York')->utc(),
             'stopped_at' => Date::parse('2019-05-04 12:30 PM', 'America/New_York')->utc(),
         ]);
 
         factory(Frame::class)->create([
             'project_id' => $project->id,
+            'notes' => 'Adding the mailing list signup component',
             'started_at' => Date::parse('2019-05-05 12:00 PM', 'America/New_York')->utc(),
             'stopped_at' => Date::parse('2019-05-05 1:30 PM', 'America/New_York')->utc(),
         ]);
@@ -55,6 +57,7 @@ class JsonRendererTest extends TestCase
                 [
                     'Project' => 'blog',
                     'Tags' => '',
+                    'Notes' => 'Starting work on the new theme',
                     'Date' => 'May 4, 2019',
                     'Start' => '12:00 pm',
                     'End' => '12:30 pm',
@@ -63,6 +66,7 @@ class JsonRendererTest extends TestCase
                 [
                     'Project' => 'blog',
                     'Tags' => '',
+                    'Notes' => 'Adding the mailing list signup component',
                     'Date' => 'May 5, 2019',
                     'Start' => '12:00 pm',
                     'End' => '1:30 pm',

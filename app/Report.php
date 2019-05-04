@@ -8,6 +8,7 @@ use Carbon\CarbonInterval;
 use Carbon\CarbonInterface;
 use App\Report\RendererFactory;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class Report
@@ -91,6 +92,7 @@ class Report
                 ->combine([
                    $frame->project->name,
                    $frame->tags->implode('name', ', '),
+                   Str::limit($frame->notes),
                    $frame->started_at->presentDate(),
                    $frame->started_at->presentTime(),
                    $frame->stopped_at->presentTime(),
@@ -125,7 +127,7 @@ class Report
 
     private function defaultHeaders(): array
     {
-        return ['Project', 'Tags', 'Date', 'Start', 'End', 'Elapsed'];
+        return ['Project', 'Tags', 'Notes', 'Date', 'Start', 'End', 'Elapsed'];
     }
 
     private function multipleProjects(): bool

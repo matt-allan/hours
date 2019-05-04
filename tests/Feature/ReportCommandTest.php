@@ -55,10 +55,6 @@ class ReportCommandTest extends TestCase
             ->artisan("report --from '2019-05-04' --to '2019-05-30'")
             ->assertExitCode(0)
             ->expectsOutput('May 4, 2019 to May 30, 2019')
-            ->expectsOutput('| Project | Tags | Date        | Start    | End      | Elapsed |')
-            ->expectsOutput('| blog    |      | May 4, 2019 | 12:00 pm | 12:30 pm | 0:30    |')
-            ->expectsOutput('| blog    |      | May 5, 2019 | 12:00 pm | 1:30 pm  | 1:30    |')
-            ->expectsOutput('| blog    |      | May 5, 2019 | 2:00 pm  | 3:30 pm  | 1:30    |')
             ->expectsOutput('Total hours: 3:30');
     }
 
@@ -90,8 +86,6 @@ class ReportCommandTest extends TestCase
             ->artisan("report --project blog --from '2019-05-04' --to '2019-05-30'")
             ->assertExitCode(0)
             ->expectsOutput('May 4, 2019 to May 30, 2019')
-            ->expectsOutput('| Tags | Date        | Start    | End      | Elapsed |')
-            ->expectsOutput('|      | May 4, 2019 | 12:00 pm | 12:30 pm | 0:30    |')
             ->expectsOutput('Total hours: 0:30');
     }
 
@@ -124,8 +118,6 @@ class ReportCommandTest extends TestCase
             ->artisan("report --project blog --tag writing --from '2019-05-04' --to '2019-05-30'")
             ->assertExitCode(0)
             ->expectsOutput('May 4, 2019 to May 30, 2019')
-            ->expectsOutput('| Date        | Start    | End      | Elapsed |')
-            ->expectsOutput('| May 4, 2019 | 12:00 pm | 12:30 pm | 0:30    |')
             ->expectsOutput('Total hours: 0:30');
     }
 
