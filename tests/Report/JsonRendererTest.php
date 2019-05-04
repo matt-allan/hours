@@ -54,6 +54,7 @@ class JsonRendererTest extends TestCase
             'frames' => [
                 [
                     'Project' => 'blog',
+                    'Tags' => '',
                     'Date' => 'May 4, 2019',
                     'Start' => '12:00 pm',
                     'End' => '12:30 pm',
@@ -61,6 +62,7 @@ class JsonRendererTest extends TestCase
                 ],
                 [
                     'Project' => 'blog',
+                    'Tags' => '',
                     'Date' => 'May 5, 2019',
                     'Start' => '12:00 pm',
                     'End' => '1:30 pm',

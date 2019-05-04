@@ -90,6 +90,7 @@ class Report
             return collect($this->defaultHeaders())
                 ->combine([
                    $frame->project->name,
+                   $frame->tags->implode('name', ', '),
                    $frame->started_at->presentDate(),
                    $frame->started_at->presentTime(),
                    $frame->stopped_at->presentTime(),
@@ -119,7 +120,7 @@ class Report
 
     private function defaultHeaders(): array
     {
-        return ['Project', 'Date', 'Start', 'End', 'Elapsed'];
+        return ['Project', 'Tags', 'Date', 'Start', 'End', 'Elapsed'];
     }
 
     private function multipleProjects(): bool

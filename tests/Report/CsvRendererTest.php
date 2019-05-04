@@ -46,9 +46,9 @@ class CsvRendererTest extends TestCase
             ->render($output, 'csv');
 
         $expected = <<<'CSV'
-Project,Date,Start,End,Elapsed
-blog,"May 4, 2019","12:00 pm","12:30 pm",0:30
-blog,"May 5, 2019","12:00 pm","1:30 pm",1:30
+Project,Tags,Date,Start,End,Elapsed
+blog,,"May 4, 2019","12:00 pm","12:30 pm",0:30
+blog,,"May 5, 2019","12:00 pm","1:30 pm",1:30
 
 CSV;
 
