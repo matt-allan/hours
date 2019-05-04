@@ -25,9 +25,9 @@ class AddCommand extends Command
     /**
      * @var string
      */
-    protected $description = <<<'DESCRIPTION'
-Add a frame that happened in the past to the given project.
+    protected $description = 'Add a frame that happened in the past to the given project.';
 
+    protected $help = <<<'HELP'
 The start time of the frame must be specified with the --from option.  The start time may be any textual datetime
 format such as '2019-05-01 22:34:46' or a human readable difference such as '2 hours ago'.
 
@@ -38,7 +38,14 @@ If you would rather specify an interval than a specific end time you can use the
 option accepts intervals such as '3h 12m' (meaning 3 hours, 12 minutes in this example).
 
 If neither the --to or --interval options are specified the frame will end at the current time.
-DESCRIPTION;
+HELP;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->setHelp($this->help);
+    }
 
     public function handle(): void
     {
