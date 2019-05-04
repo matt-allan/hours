@@ -56,6 +56,7 @@ return [
 
     'providers' => [
         App\Providers\AppServiceProvider::class,
+        App\Providers\EventServiceProvider::class,
         \Illuminate\Database\DatabaseServiceProvider::class,
         MattAllan\LaravelCodeStyle\ServiceProvider::class,
         Intonate\TinkerZero\TinkerZeroServiceProvider::class,
