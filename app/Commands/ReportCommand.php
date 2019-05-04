@@ -12,9 +12,7 @@ use App\Commands\Concerns\AcceptsDateRangeOptions;
 
 class ReportCommand extends Command
 {
-    use AcceptsDateRangeOptions {
-        getFromOption as getParentFromOption;
-    }
+    use AcceptsDateRangeOptions;
 
     /**
      * @var string
@@ -23,7 +21,8 @@ class ReportCommand extends Command
     {--project=* : The projects to include in the report}
     {--f|from= : The start time of the report}
     {--t|to= : the end time of the report}
-    {--i|interval= : An interval for the length of the report}';
+    {--i|interval= : An interval for the length of the report}
+    {--format=text : The output format for the report.  Available options: text, csv, json}';
 
     /**
      * @var string
@@ -35,11 +34,8 @@ class ReportCommand extends Command
         $from = $this->getFromOption() ?? $this->defaultFromOption();
         $to = $this->getToOption() ?? Date::now();
 
-        $report = Report::create($from, $to, $this->option('project'));
-
-        $this->info("{$from->presentDate()} to {$to->presentDate()}");
-        $this->table($report->headers(), $report->data());
-        $this->info("Total hours: {$report->total()->presentInterval()}");
+        Report::create($from, $to, $this->option('project'))
+            ->render($this->output, $this->option('format'));
     }
 
     private function defaultFromOption(): CarbonInterface

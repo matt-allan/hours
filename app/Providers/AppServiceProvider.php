@@ -5,9 +5,13 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Config;
+use App\Report\RendererFactory;
+use App\Report\RendererManager;
 use Carbon\CarbonInterval;
 use Carbon\CarbonImmutable;
 use App\Carbon\CarbonPresentMixin;
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Collection;
 use Illuminate\Support\DateFactory;
 use App\Bootstrap\InitializeDatabase;
 use Illuminate\Support\ServiceProvider;
@@ -36,6 +40,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(Config::class, function () {
             return Config::get();
         });
+
+        $this->app->singleton(RendererFactory::class, RendererManager::class);
     }
 
     /**
@@ -56,5 +62,17 @@ class AppServiceProvider extends ServiceProvider
         CarbonImmutable::mixin($this->app->make(CarbonPresentMixin::class));
 
         CarbonInterval::mixin($this->app->make(CarbonIntervalPresentMixin::class));
+
+        Collection::macro('toCsv', function () {
+            /** @var Collection $this */
+            return $this->map(function ($value) {
+                $fh = fopen('php://temp', 'r+');
+                fputcsv($fh, $value instanceof Arrayable ? $value->toArray() : (array) $value);
+                rewind($fh);
+                $contents = stream_get_contents($fh);
+                fclose($fh);
+                return $contents;
+            });
+        });
     }
 }
