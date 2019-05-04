@@ -35,11 +35,11 @@ class ConfigTest extends TestCase
         $this->assertEquals($config, $deserialized);
     }
 
-    public function testGetCreatesConfigIfNecessary()
+    public function testCreateCreatesConfigIfNecessary()
     {
         Storage::fake('config');
 
-        Config::get();
+        Config::create();
 
         Storage::disk('config')->assertExists('config.json');
     }
@@ -59,7 +59,7 @@ class ConfigTest extends TestCase
 
         Storage::disk('config')->assertExists('config.json');
 
-        $stored = Config::get();
+        $stored = Config::create();
 
         $this->assertEquals($config, $stored);
     }

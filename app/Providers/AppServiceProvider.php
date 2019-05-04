@@ -41,7 +41,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->app->singleton(Config::class, function () {
-            return Config::get();
+            return Config::create();
         });
 
         $this->app->singleton(RendererFactory::class, RendererManager::class);

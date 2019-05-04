@@ -49,7 +49,7 @@ class Config implements Arrayable, Jsonable
         $this->timezone = $timezone ?? $this->guessTimezone();
     }
 
-    public static function get(): self
+    public static function create(): self
     {
         if (! Storage::disk('config')->exists(self::PATH)) {
             return tap(new self(), function (self $config) {
@@ -73,6 +73,11 @@ class Config implements Arrayable, Jsonable
             throw new \RuntimeException('Invalid JSON: '.json_last_error_msg());
         }
 
+        return static::fromArray($items);
+    }
+
+    public static function fromArray(array $items): self
+    {
         return new self(
             Arr::get($items, 'date_format'),
             Arr::get($items, 'time_format'),

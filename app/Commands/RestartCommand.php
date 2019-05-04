@@ -24,6 +24,7 @@ class RestartCommand extends Command
     {
         if (Frame::active()->first()) {
             $this->error('Time tracking is already running.');
+
             return;
         }
 
