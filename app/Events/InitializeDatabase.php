@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Bootstrap;
 
-use Illuminate\Database\Migrations\Migrator;
-use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Migrations\Migrator;
 
+/**
+ * Creates the database if it doesn't exist and migrates it when the app starts.
+ */
 class InitializeDatabase
 {
     /**

@@ -10,6 +10,9 @@ use Illuminate\Console\Events\CommandStarting;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+/**
+ * Prompts the user to configure a timezone if it isn't set.
+ */
 class ConfigureTimezone
 {
     public function handle(CommandStarting $event): void
@@ -31,14 +34,14 @@ class ConfigureTimezone
     private function guessTimezone(): ?string
     {
         if (PHP_OS_FAMILY === 'win') {
-            // TODO: something like `systeminfo | findstr ”Time Zone”`
+            // TODO: something like `systeminfo | findstr ”Time Zone”`?  Maybe we can use tzutil?
             return null;
         }
 
         $offset = (int) exec('date +%z');
         $abbr = exec('date +%Z');
 
-        if (!$offset || !$abbr) {
+        if (! $offset || ! $abbr) {
             return null;
         }
 
