@@ -13,12 +13,16 @@ trait AcceptsDateRangeOptions
 {
     abstract public function option($key = null);
 
-    protected function getFromOption(): CarbonInterface
+    protected function getFromOption(): ?CarbonInterface
     {
-        return Date::parse($this->option('from'), $this->config()->timezone)->utc();
+        if ($this->option('from')) {
+            return Date::parse($this->option('from'), $this->config()->timezone)->utc();
+        }
+
+        return null;
     }
 
-    protected function getToOption(): CarbonInterface
+    protected function getToOption(): ?CarbonInterface
     {
         if ($this->option('to')) {
             return Date::parse($this->option('to'), $this->config()->timezone)->utc();
@@ -30,7 +34,7 @@ trait AcceptsDateRangeOptions
                 ->utc();
         }
 
-        return Date::now();
+        return null;
     }
 
     private function config(): Config

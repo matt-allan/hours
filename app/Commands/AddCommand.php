@@ -7,6 +7,7 @@ namespace App\Commands;
 use App\Commands\Concerns\AcceptsDateRangeOptions;
 use App\Frame;
 use App\Project;
+use Illuminate\Support\Facades\Date;
 use LaravelZero\Framework\Commands\Command;
 
 class AddCommand extends Command
@@ -49,7 +50,7 @@ DESCRIPTION;
         }
 
         $from = $this->getFromOption();
-        $to = $this->getToOption();
+        $to = $this->getToOption() ?? Date::now();
 
         $project = Project::firstOrCreate([
             'name' => $this->argument('project'),
