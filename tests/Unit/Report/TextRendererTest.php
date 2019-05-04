@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\Report;
+namespace Tests\Unit\Report;
 
 use App\Frame;
-use App\Report;
 use App\Project;
-use Tests\TestCase;
+use App\Report;
 use Illuminate\Support\Facades\Date;
 use Symfony\Component\Console\Output\BufferedOutput;
+use Tests\TestCase;
 
 class TextRendererTest extends TestCase
 {

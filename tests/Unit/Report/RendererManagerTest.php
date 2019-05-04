@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Tests\Report;
+namespace Tests\Unit\Report;
 
 use App\Report;
-use Tests\TestCase;
-use App\Report\Renderer;
 use App\Report\CsvRenderer;
 use App\Report\JsonRenderer;
-use App\Report\TextRenderer;
+use App\Report\Renderer;
 use App\Report\RendererManager;
+use App\Report\TextRenderer;
 use Symfony\Component\Console\Output\OutputInterface;
+use Tests\TestCase;
 
 class RendererManagerTest extends TestCase
 {

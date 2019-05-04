@@ -17,7 +17,9 @@ class ConfigureTimezone
 {
     public function handle(CommandStarting $event): void
     {
-        if (Config::get('timezone') || ! in_array($event->command, ['start', 'add', 'report'])) {
+        if (Config::get('timezone') ||
+            ! in_array($event->command, ['start', 'add', 'report']) ||
+            ! $event->input->isInteractive()) {
             return;
         }
 

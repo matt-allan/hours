@@ -7,9 +7,12 @@ namespace Tests\Feature;
 use App\Config;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Storage;
+use Tests\WithoutConfig;
 
 class ConfigCommandTest extends TestCase
 {
+    use WithoutConfig;
+
     public function testConfig()
     {
         Storage::fake('config');

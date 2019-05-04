@@ -24,7 +24,7 @@ abstract class TestCase extends BaseTestCase
 
     protected function withoutConfig()
     {
-        $this->withConfig([]);
+        $this->withConfig(['timezone' => 'UTC']);
 
         return $this;
     }
