@@ -12,14 +12,13 @@ class ConfigCommandTest extends TestCase
 {
     public function testConfig()
     {
-        $this->withTestConfig();
-
         Storage::fake('config');
 
         $this
             ->artisan('config time_format \'g:i\'')
-            ->assertExitCode(0)->expectsOutput('Updated timeFormat to g:i');
+            ->assertExitCode(0)
+            ->expectsOutput('Updated time_format to g:i');
 
-        $this->assertEquals('g:i', $this->app->make(Config::class)->timeFormat);
+        $this->assertEquals('g:i', $this->app->make(Config\Repository::class)->get('time_format'));
     }
 }

@@ -11,9 +11,27 @@ abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
 
-    public function withTestConfig(?Config $config = null): self
+    public function setUpTraits()
     {
-        $this->app->instance(Config::class, $config ?? new Config('F j, Y', 'g:i a', '%h:%I', 'America/New_York'));
+        parent::setUpTraits();
+
+        $uses = array_flip(class_uses_recursive(static::class));
+
+        if (isset($uses[WithoutConfig::class])) {
+            $this->disableConfigForAllTests();
+        }
+    }
+
+    protected function withoutConfig()
+    {
+        $this->withConfig([]);
+
+        return $this;
+    }
+
+    protected function withConfig(array $config)
+    {
+        $this->app->instance(Config\Repository::class, new Config\MemoryRepository($config));
 
         return $this;
     }

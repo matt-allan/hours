@@ -6,10 +6,13 @@ namespace Tests\Feature;
 
 use App\Frame;
 use Tests\TestCase;
+use Tests\WithoutConfig;
 use Illuminate\Support\Facades\Date;
 
 class StartCommandTest extends TestCase
 {
+    use WithoutConfig;
+
     public function testStart()
     {
         Date::setTestNow($now = Date::now());

@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use Tests\WithoutConfig;
 use Illuminate\Support\Facades\Date;
 
 class CancelCommandTest extends TestCase
 {
+    use WithoutConfig;
+
     public function testCancel()
     {
         Date::setTestNow($now = Date::now());

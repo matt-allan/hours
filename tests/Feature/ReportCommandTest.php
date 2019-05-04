@@ -7,16 +7,12 @@ namespace Tests\Feature;
 use App\Frame;
 use App\Project;
 use Tests\TestCase;
+use Tests\WithoutConfig;
 use Illuminate\Support\Facades\Date;
 
 class ReportCommandTest extends TestCase
 {
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $this->withTestConfig();
-    }
+    use WithoutConfig;
 
     public function testReport()
     {

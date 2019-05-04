@@ -40,9 +40,7 @@ class AppServiceProvider extends ServiceProvider
             );
         });
 
-        $this->app->singleton(Config::class, function () {
-            return Config::create();
-        });
+        $this->app->singleton(Config\Repository::class, Config\FilesystemRepository::class);
 
         $this->app->singleton(RendererFactory::class, RendererManager::class);
     }
@@ -85,7 +83,10 @@ class AppServiceProvider extends ServiceProvider
                 return null;
             }
 
-            return Date::parse($this->option($key), app(Config::class)->timezone)->utc();
+            return Date::parse(
+                $this->option($key),
+                app(Config\Repository::class)->get('timezone')
+            )->utc();
         });
     }
 }

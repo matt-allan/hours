@@ -6,10 +6,13 @@ namespace Tests\Feature;
 
 use App\Frame;
 use Tests\TestCase;
+use Tests\WithoutConfig;
 use Illuminate\Support\Facades\Date;
 
 class RestartCommandTest extends TestCase
 {
+    use WithoutConfig;
+
     public function testRestart()
     {
         Date::setTestNow($now = Date::now());

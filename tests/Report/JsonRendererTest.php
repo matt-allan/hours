@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Report;
 
 use App\Frame;
-use App\Config;
 use App\Report;
 use App\Project;
 use Tests\TestCase;
@@ -14,15 +13,10 @@ use Symfony\Component\Console\Output\BufferedOutput;
 
 class JsonRendererTest extends TestCase
 {
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $this->app->instance(Config::class, new Config('F j, Y', 'g:i a', '%h:%I', 'America/New_York'));
-    }
-
     public function testRender()
     {
+        $this->withConfig(['timezone' => 'America/New_York']);
+
         $project = factory(Project::class)->create(['name' => 'blog']);
 
         factory(Frame::class)->create([

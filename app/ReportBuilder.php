@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Facades\Config;
 use Carbon\CarbonInterface;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -34,8 +35,8 @@ class ReportBuilder
 
     public function __construct()
     {
-        $this->from = Date::now($this->config()->timezone)->firstOfMonth()->utc();
-        $this->to = Date::now($this->config()->timezone)->utc();
+        $this->from = Date::now(Config::get('timezone'))->firstOfMonth()->utc();
+        $this->to = Date::now(Config::get('timezone'))->utc();
     }
 
     public function from(?CarbonInterface $from): self
@@ -91,10 +92,5 @@ class ReportBuilder
                 return $query->forTag($tags);
             })
             ->get();
-    }
-
-    private function config(): Config
-    {
-        return app(Config::class);
     }
 }

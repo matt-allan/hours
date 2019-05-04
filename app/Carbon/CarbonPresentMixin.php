@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Carbon;
 
-use App\Config;
+use App\Facades\Config;
 use Carbon\CarbonImmutable;
 
 /**
@@ -12,47 +12,30 @@ use Carbon\CarbonImmutable;
  */
 class CarbonPresentMixin
 {
-    /**
-     * @var Config
-     */
-    private $config;
-
-    public function __construct(Config $config = null)
-    {
-        // Can't use proper DI, see https://github.com/briannesbitt/Carbon/issues/1706
-        $this->config = $config ?? app(Config::class);
-    }
-
     public function presentDate(): \Closure
     {
-        $config = $this->config;
-
-        return function () use ($config): string {
+        return function (): string {
             return $this
-                ->setTimezone($config->timezone)
-                ->format($config->dateFormat);
+                ->setTimezone(Config::get('timezone', 'UTC'))
+                ->format(Config::get('date_format', 'F j, Y'));
         };
     }
 
     public function presentTime(): \Closure
     {
-        $config = $this->config;
-
-        return function () use ($config): string {
+        return function (): string {
             return $this
-                ->setTimezone($config->timezone)
-                ->format($config->timeFormat);
+                ->setTimezone(Config::get('timezone', 'UTC'))
+                ->format(Config::get('time_format', 'g:i a'));
         };
     }
 
     public function presentDateTime(): \Closure
     {
-        $config = $this->config;
-
-        return function () use ($config): string {
+        return function (): string {
             return $this
-                ->setTimezone($config->timezone)
-                ->format($config->dateFormat.' '.$config->timeFormat);
+                ->setTimezone(Config::get('timezone', 'UTC'))
+                ->format(Config::get('date_format', 'F j, Y').' '.Config::get('time_format', 'g:i a'));
         };
     }
 }
