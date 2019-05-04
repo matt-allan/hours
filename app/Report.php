@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App;
 
-use Carbon\CarbonInterval;
 use Carbon\CarbonInterface;
-use Illuminate\Support\Collection;
+use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 
 class Report
 {
@@ -17,11 +17,18 @@ class Report
     private $frames;
 
     /**
-     * @param Collection|Frame[] $frames
+     * @var string[]
      */
-    public function __construct(Collection $frames)
+    private $projects;
+
+    /**
+     * @param Collection|Frame[] $frames
+     * @param string[]           $projects
+     */
+    public function __construct(Collection $frames, array $projects = [])
     {
         $this->frames = $frames;
+        $this->projects = $projects;
     }
 
     public static function create(CarbonInterface $start, CarbonInterface $end, array $projects = []): self
@@ -35,7 +42,7 @@ class Report
             })
             ->get();
 
-        return new self($frames);
+        return new self($frames, $projects);
     }
 
     public function headers(): Collection
@@ -75,7 +82,6 @@ class Report
 
     private function multipleProjects(): bool
     {
-        // TODO: this should only happen if the user filtered by projects explicitly
-        return $this->frames->groupBy('project.name')->count() > 1;
+        return count($this->projects) !== 1;
     }
 }

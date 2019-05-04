@@ -21,7 +21,7 @@ class ReportCommandTest extends TestCase
 
     public function testReport()
     {
-        $project = factory(Project::class)->create();
+        $project = factory(Project::class)->create(['name' => 'blog']);
 
         // not within the date range
         factory(Frame::class)->create([
@@ -52,12 +52,13 @@ class ReportCommandTest extends TestCase
         ]);
 
         $this
-            ->artisan("report --project {$project->name} --from '2019-05-04' --to '2019-05-30'")
+            ->artisan("report --from '2019-05-04' --to '2019-05-30'")
             ->assertExitCode(0)
             ->expectsOutput('May 4, 2019 to May 30, 2019')
-            ->expectsOutput('| May 4, 2019 | 12:00 pm | 12:30 pm | 0:30    |')
-            ->expectsOutput('| May 5, 2019 | 12:00 pm | 1:30 pm  | 1:30    |')
-            ->expectsOutput('| May 5, 2019 | 2:00 pm  | 3:30 pm  | 1:30    |')
+            ->expectsOutput('| Project | Date        | Start    | End      | Elapsed |')
+            ->expectsOutput('| blog    | May 4, 2019 | 12:00 pm | 12:30 pm | 0:30    |')
+            ->expectsOutput('| blog    | May 5, 2019 | 12:00 pm | 1:30 pm  | 1:30    |')
+            ->expectsOutput('| blog    | May 5, 2019 | 2:00 pm  | 3:30 pm  | 1:30    |')
             ->expectsOutput('Total hours: 3:30');
     }
 }
