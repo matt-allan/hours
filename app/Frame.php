@@ -105,6 +105,28 @@ class Frame extends Model
             });
     }
 
+
+    /**
+     * Scope a query to only include frames for the given tag(s).
+     *
+     * @param Builder                   $query
+     * @param Tag|string|Tag[]|string[] $tag
+     *
+     * @return Builder
+     */
+    public function scopeForTag(Builder $query, $tag): Builder
+    {
+        $tag = array_map(function ($tag) {
+            return $tag instanceof Tag ? $tag->name : $tag;
+        }, Arr::wrap($tag));
+
+        /* @noinspection PhpIncompatibleReturnTypeInspection */
+        return $query
+            ->whereHas('tags', function (Builder $query) use ($tag): Builder {
+                return $query->whereIn('name', $tag);
+            });
+    }
+
     /**
      * Start a new frame for the given project.
      *

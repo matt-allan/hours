@@ -19,7 +19,8 @@ class ReportCommand extends Command
     {--f|from= : The start time of the report}
     {--t|to= : the end time of the report}
     {--i|interval= : An interval for the length of the report}
-    {--format=text : The output format for the report.  Available options: text, csv, json}';
+    {--format=text : The output format for the report.  Available options: text, csv, json}
+    {--tag=* : The tags to include on the report}';
 
     /**
      * @var string
@@ -32,6 +33,7 @@ class ReportCommand extends Command
             ->from($this->dateOption('from'))
             ->to($this->option('interval') ? $this->getInterval() : $this->dateOption('to'))
             ->projects($this->option('project'))
+            ->tags($this->option('tag'))
             ->create()
             ->render($this->output, $this->option('format'));
     }

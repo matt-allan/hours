@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App;
 
-use Carbon\CarbonInterval;
-use Carbon\CarbonInterface;
 use App\Report\RendererFactory;
+use Carbon\CarbonInterface;
+use Carbon\CarbonInterval;
 use Illuminate\Support\Collection;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -33,21 +33,29 @@ class Report
     private $projects;
 
     /**
+     * @var string[]
+     */
+    private $tags;
+
+    /**
      * @param Collection|Frame[] $frames
      * @param CarbonInterface    $from
      * @param CarbonInterface    $to
      * @param string[]           $projects
+     * @param string[]           $tags
      */
     public function __construct(
         Collection $frames,
         CarbonInterface $from,
         CarbonInterface $to,
-        array $projects = []
+        array $projects = [],
+        array $tags = []
     ) {
         $this->frames = $frames;
         $this->from = $from;
         $this->to = $to;
         $this->projects = $projects;
+        $this->tags = $tags;
     }
 
     public static function build(): ReportBuilder
@@ -73,6 +81,7 @@ class Report
 
     public function headers(): Collection
     {
+        // TODO: include tags dynamically
         return collect(['Project', 'Date', 'Start', 'End', 'Elapsed'])
             ->unless($this->multipleProjects(), function (Collection $headers) {
                 return $headers->slice(1);
@@ -114,5 +123,11 @@ class Report
     private function multipleProjects(): bool
     {
         return count($this->projects) !== 1;
+    }
+
+
+    private function multipleTags(): bool
+    {
+        return count($this->tags) !== 1;
     }
 }

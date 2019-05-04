@@ -27,6 +27,11 @@ class ReportBuilder
      */
     private $projects = [];
 
+    /**
+     * @var string[]
+     */
+    private $tags = [];
+
     public function __construct()
     {
         $this->from = Date::now($this->config()->timezone)->firstOfMonth()->utc();
@@ -58,13 +63,21 @@ class ReportBuilder
         return $this;
     }
 
+    public function tags($tags)
+    {
+        $this->tags = Arr::wrap($tags);
+
+        return $this;
+    }
+
     public function create(): Report
     {
         return new Report(
             $this->getFrames(),
             $this->from,
             $this->to,
-            $this->projects
+            $this->projects,
+            $this->tags
         );
     }
 
@@ -73,6 +86,9 @@ class ReportBuilder
         return Frame::between($this->from, $this->to)
             ->when($this->projects, function (Builder $query, array $projects): Builder {
                 return $query->forProject($projects);
+            })
+            ->when($this->tags, function (Builder $query, array $tags): Builder {
+                return $query->forTag($tags);
             })
             ->get();
     }
