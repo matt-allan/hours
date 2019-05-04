@@ -31,15 +31,11 @@ class ReportCommand extends Command
 
     public function handle(): void
     {
-        $from = $this->getFromOption() ?? $this->defaultFromOption();
-        $to = $this->getToOption() ?? Date::now();
-
-        Report::create($from, $to, $this->option('project'))
+        Report::build()
+            ->from($this->getFromOption())
+            ->to($this->getToOption())
+            ->projects($this->option('project'))
+            ->create()
             ->render($this->output, $this->option('format'));
-    }
-
-    private function defaultFromOption(): CarbonInterface
-    {
-        return Date::now($this->config()->timezone)->firstOfMonth()->utc();
     }
 }

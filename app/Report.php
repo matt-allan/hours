@@ -4,14 +4,10 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\Report\Renderer;
-use App\Report\FormatterFactory;
 use App\Report\RendererFactory;
 use Carbon\CarbonInterface;
 use Carbon\CarbonInterval;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
-use LaravelZero\Framework\Commands\Command;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class Report
@@ -54,18 +50,9 @@ class Report
         $this->projects = $projects;
     }
 
-    public static function create(CarbonInterface $start, CarbonInterface $end, array $projects = []): self
+    public static function build(): ReportBuilder
     {
-        $frames = Frame::between($start, $end)
-            ->when($projects, function (Builder $query, array $projects): Builder {
-                return $query
-                    ->whereHas('project', function (Builder $query) use ($projects): Builder {
-                        return $query->whereIn('name', $projects);
-                    });
-            })
-            ->get();
-
-        return new self($frames, $start, $end, $projects);
+        return new ReportBuilder();
     }
 
     /**

@@ -39,7 +39,10 @@ class CsvRendererTest extends TestCase
 
         $output = new BufferedOutput();
 
-        Report::create(Date::create(2019, 05, 03), Date::create(2019, 05, 05))
+        Report::build()
+            ->from(Date::create(2019, 05, 03))
+            ->to(Date::create(2019, 05, 05))
+            ->create()
             ->render($output, 'csv');
 
         $expected = <<<'CSV'
