@@ -22,6 +22,11 @@ class RestartCommand extends Command
 
     public function handle(): void
     {
+        if (Frame::active()->first()) {
+            $this->error('Time tracking is already running.');
+            return;
+        }
+
         /** @var Frame $frame */
         $frame = Frame::latestClosed()->first();
 

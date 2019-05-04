@@ -27,4 +27,13 @@ class RestartCommandTest extends TestCase
         $this->assertFalse($frame->is($restarted));
         $this->assertTrue($frame->project->is($restarted->project));
     }
+
+    public function testRestartWhenTimeTrackingIsAlreadyRunning()
+    {
+        $this->artisan('start blog');
+
+        $this
+            ->artisan('restart')
+            ->expectsOutput('Time tracking is already running.');
+    }
 }
