@@ -81,27 +81,24 @@ class Report
 
     public function headers(): Collection
     {
-        // TODO: include tags dynamically
-        return collect(['Project', 'Date', 'Start', 'End', 'Elapsed'])
-            ->unless($this->multipleProjects(), function (Collection $headers) {
-                return $headers->slice(1);
-            });
+        return $this->data()->isNotEmpty() ? $this->data()->first()->keys() : collect($this->defaultHeaders());
     }
 
     public function data(): Collection
     {
         return $this->frames->map(function (Frame $frame) {
-            return collect([
-               $frame->project->name,
-               $frame->started_at->presentDate(),
-               $frame->started_at->presentTime(),
-               $frame->stopped_at->presentTime(),
-               $frame->elapsed->presentInterval(),
-           ]);
+            return collect($this->defaultHeaders())
+                ->combine([
+                   $frame->project->name,
+                   $frame->started_at->presentDate(),
+                   $frame->started_at->presentTime(),
+                   $frame->stopped_at->presentTime(),
+                   $frame->elapsed->presentInterval(),
+               ]);
         })->unless($this->multipleProjects(), function (Collection $frames) {
             return $frames
                ->map(function (Collection $frame) {
-                   return $frame->slice(1);
+                   return $frame->except('Project');
                });
         });
     }
@@ -118,6 +115,11 @@ class Report
     public function render(OutputInterface $output, string $format): void
     {
         app(RendererFactory::class)->make($format)->render($output, $this);
+    }
+
+    private function defaultHeaders(): array
+    {
+        return ['Project', 'Date', 'Start', 'End', 'Elapsed'];
     }
 
     private function multipleProjects(): bool
