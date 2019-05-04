@@ -1,10 +1,12 @@
 <?php
 
-use App\Project;
-use Illuminate\Database\Eloquent\Factory;
-use Faker\Generator as Faker;
+declare(strict_types=1);
 
-/** @var Factory $factory */
+use App\Project;
+use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factory;
+
+/* @var Factory $factory */
 
 $factory->define(Project::class, function (Faker $faker) {
     return [

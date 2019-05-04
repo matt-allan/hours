@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use App\Config;
-use Illuminate\Support\Facades\Date;
 use Tests\TestCase;
+use Illuminate\Support\Facades\Date;
 
 class AddCommandTest extends TestCase
 {

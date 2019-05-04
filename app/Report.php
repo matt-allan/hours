@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App;
 
-use Carbon\CarbonInterface;
 use Carbon\CarbonInterval;
-use Illuminate\Database\Eloquent\Builder;
+use Carbon\CarbonInterface;
 use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Builder;
 
 class Report
 {
@@ -48,20 +48,20 @@ class Report
 
     public function data(): Collection
     {
-       return $this->frames->map(function (Frame $frame) {
-           return collect([
+        return $this->frames->map(function (Frame $frame) {
+            return collect([
                $frame->project->name,
                $frame->started_at->presentDate(),
                $frame->started_at->presentTime(),
                $frame->stopped_at->presentTime(),
                $frame->elapsed->presentInterval(),
            ]);
-       })->unless($this->multipleProjects(), function (Collection $frames) {
-           return $frames
+        })->unless($this->multipleProjects(), function (Collection $frames) {
+            return $frames
                ->map(function (Collection $frame) {
                    return $frame->slice(1);
                });
-       });
+        });
     }
 
     public function total(): CarbonInterval

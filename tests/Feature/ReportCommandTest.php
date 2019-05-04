@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
-use App\Config;
 use App\Frame;
+use App\Config;
 use App\Project;
-use Illuminate\Support\Facades\Date;
 use Tests\TestCase;
+use Illuminate\Support\Facades\Date;
 
 class ReportCommandTest extends TestCase
 {

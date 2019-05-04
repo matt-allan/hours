@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Carbon\CarbonIntervalPresentMixin;
 use App\Config;
+use Carbon\CarbonInterval;
 use Carbon\CarbonImmutable;
 use App\Carbon\CarbonPresentMixin;
-use Carbon\CarbonInterval;
 use Illuminate\Support\DateFactory;
 use App\Bootstrap\InitializeDatabase;
 use Illuminate\Support\ServiceProvider;
+use App\Carbon\CarbonIntervalPresentMixin;
 use Illuminate\Database\Migrations\Migrator;
 use Illuminate\Filesystem\FilesystemManager;
 use Illuminate\Console\Application as Artisan;

@@ -86,7 +86,7 @@ class Config implements Arrayable, Jsonable
         return [
            'date_format' => $this->dateFormat,
            'time_format' => $this->timeFormat,
-            'interval_format' => $this->intervalFormat,
+           'interval_format' => $this->intervalFormat,
            'timezone' => $this->timezone,
         ];
     }

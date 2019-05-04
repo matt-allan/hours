@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App;
 
-use Carbon\CarbonInterface;
 use Carbon\CarbonInterval;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Carbon\CarbonInterface;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int                  $id
@@ -51,7 +51,7 @@ class Frame extends Model
 
     public function scopeBetween(Builder $query, CarbonInterface $start, CarbonInterface $end): Builder
     {
-        /** @noinspection PhpIncompatibleReturnTypeInspection */
+        /* @noinspection PhpIncompatibleReturnTypeInspection */
         return $query
             ->whereDate('started_at', '>=', $start)
             ->whereDate('stopped_at', '<=', $end)

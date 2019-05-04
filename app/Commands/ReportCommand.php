@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Commands;
 
-use App\Commands\Concerns\AcceptsDateRangeOptions;
 use App\Report;
 use Carbon\CarbonInterface;
 use Illuminate\Support\Facades\Date;
 use LaravelZero\Framework\Commands\Command;
+use App\Commands\Concerns\AcceptsDateRangeOptions;
 
 class ReportCommand extends Command
 {

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Commands\Concerns;
 
 use App\Config;
-use Carbon\CarbonInterface;
 use Carbon\CarbonInterval;
+use Carbon\CarbonInterface;
 use Illuminate\Support\Facades\Date;
 
 trait AcceptsDateRangeOptions

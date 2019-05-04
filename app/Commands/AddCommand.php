@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Commands;
 
-use App\Commands\Concerns\AcceptsDateRangeOptions;
 use App\Frame;
 use App\Project;
 use Illuminate\Support\Facades\Date;
 use LaravelZero\Framework\Commands\Command;
+use App\Commands\Concerns\AcceptsDateRangeOptions;
 
 class AddCommand extends Command
 {
@@ -69,5 +69,4 @@ DESCRIPTION;
             "({$frame->elapsed->forHumans()})."
         );
     }
-
 }

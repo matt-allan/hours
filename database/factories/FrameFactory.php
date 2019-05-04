@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Frame;
 use App\Project;
-use Illuminate\Database\Eloquent\Factory;
 use Faker\Generator as Faker;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Database\Eloquent\Factory;
 
-/** @var Factory $factory */
+/* @var Factory $factory */
 
 $factory->define(Frame::class, function (Faker $faker) {
     return [
@@ -14,6 +16,6 @@ $factory->define(Frame::class, function (Faker $faker) {
         'stopped_at' => Date::instance($faker->dateTimeThisMonth()),
         'project_id' => function () {
             return factory(Project::class)->create()->id;
-        }
+        },
     ];
 });
