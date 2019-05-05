@@ -1,6 +1,8 @@
 /vendor
 /.idea
+/builds
 /.vscode
 /.vagrant
 /database/database.sqlite
 .php_cs.cache
+hours.phar
