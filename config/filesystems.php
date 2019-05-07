@@ -47,12 +47,12 @@ return [
 
         'data' => [
             'driver' => 'local',
-            'root' => home_data_path(),
+            'root' => config('app.production') ? home_data_path() : database_path(),
         ],
 
         'config' => [
             'driver' => 'local',
-            'root' => home_config_path(),
+            'root' => config('app.production') ? home_config_path() : storage_path(),
         ],
 
     ],
