@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Bootstrap;
 
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use Illuminate\Database\Migrations\Migrator;
 
 /**
@@ -24,10 +24,10 @@ class InitializeDatabase
 
     public function handle(): void
     {
-        $databasePath = basename(config('database.connections.sqlite.database'));
+        $databasePath = (string) config('database.connections.sqlite.database');
 
-        if ($databasePath !== ':memory:' && ! Storage::disk('data')->exists($databasePath)) {
-            Storage::disk('data')->put($databasePath, '');
+        if ($databasePath !== ':memory:' && ! File::exists($databasePath)) {
+            File::put($databasePath, '');
         }
 
         if (! $this->migrator->repositoryExists()) {

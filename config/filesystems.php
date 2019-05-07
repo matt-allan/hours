@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => 'data',
+    'default' => 'local',
 
     /*
     |--------------------------------------------------------------------------
@@ -44,9 +44,9 @@ return [
     */
 
     'disks' => [
-        'data' => [
+        'local' => [
             'driver' => 'local',
-            'root' => config('app.production') ? home_data_path() : database_path(),
+            'root' => storage_path('app'),
         ],
     ],
 
