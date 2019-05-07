@@ -55,7 +55,8 @@
             "@php application app:rename"
         ],
         "check-style": "php-cs-fixer fix --dry-run --diff",
-        "fix-style": "php-cs-fixer fix"
+        "fix-style": "php-cs-fixer fix",
+        "test": "phpunit"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
