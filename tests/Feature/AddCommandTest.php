@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Tests\WithoutConfig;
+use App\Facades\Config;
 use Illuminate\Support\Facades\Date;
 
 class AddCommandTest extends TestCase
 {
-    use WithoutConfig;
+    public function setUp(): void
+    {
+        parent::setUp();
+    }
 
     public function testAdd()
     {
@@ -26,8 +29,9 @@ class AddCommandTest extends TestCase
             Date::parse('2019-05-01 05:34:46', 'America/New_York')->setTimezone('UTC')
         );
 
+        Config::set('timezone', 'America/New_York');
+
         $this
-            ->withConfig(['timezone' => 'America/New_York'])
             ->artisan('add blog --from \'2 hours ago\'')
             ->expectsOutput('Added frame for blog from May 1, 2019 3:34 am to May 1, 2019 5:34 am (2 hours).')
             ->assertExitCode(0);

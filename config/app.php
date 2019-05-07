@@ -56,9 +56,10 @@ return [
 
     'providers' => [
         App\Providers\AppServiceProvider::class,
+        App\Providers\ConfigServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        App\Providers\ReportServiceProvider::class,
         \Illuminate\Database\DatabaseServiceProvider::class,
         Intonate\TinkerZero\TinkerZeroServiceProvider::class,
     ],
-
 ];

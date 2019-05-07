@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Config;
+use App\Facades\Config;
 use Carbon\CarbonInterval;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
-use App\Report\RendererFactory;
-use App\Report\RendererManager;
 use Illuminate\Console\Command;
 use App\Carbon\CarbonPresentMixin;
 use Illuminate\Support\Collection;
@@ -28,13 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(Config\Repository::class, Config\FilesystemRepository::class);
-
-        $this->app->singleton(RendererManager::class, function () {
-            return new RendererManager($this->app);
-        });
-
-        $this->app->singleton(RendererFactory::class, RendererManager::class);
+        //
     }
 
     /**
@@ -71,7 +63,7 @@ class AppServiceProvider extends ServiceProvider
 
             return Date::parse(
                 $this->option($key),
-                app(Config\Repository::class)->get('timezone')
+                Config::get('timezone')
             )->utc();
         });
     }

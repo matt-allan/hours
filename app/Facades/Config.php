@@ -4,17 +4,22 @@ declare(strict_types=1);
 
 namespace App\Facades;
 
+use App\Config\Repository;
+use App\Config\ConfigManager;
 use Illuminate\Support\Facades\Facade;
-use App\Config\Repository as ConfigRepository;
 
 /**
+ * @method static Repository driver(string $driver = null)
+ *
  * @method static mixed get(string $key, mixed $default = null)
- * @method static ConfigRepository set(string $key, mixed $value)
+ * @method static Repository set(string $key, mixed $value)
+ *
+ * @see ConfigManager
  */
 class Config extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return ConfigRepository::class;
+        return ConfigManager::class;
     }
 }

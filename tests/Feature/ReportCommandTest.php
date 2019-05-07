@@ -7,12 +7,17 @@ namespace Tests\Feature;
 use App\Frame;
 use App\Project;
 use Tests\TestCase;
-use Tests\WithoutConfig;
+use App\Facades\Config;
 use Illuminate\Support\Facades\Date;
 
 class ReportCommandTest extends TestCase
 {
-    use WithoutConfig;
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        Config::set('timezone', 'America/New_York');
+    }
 
     public function testReport()
     {

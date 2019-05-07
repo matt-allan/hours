@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Config;
 
 use Tests\TestCase;
-use App\Config\FilesystemRepository;
+use App\Config\FileRepository;
 use Illuminate\Support\Facades\Storage;
 
 class FilesystemRepositoryTest extends TestCase
@@ -14,13 +14,13 @@ class FilesystemRepositoryTest extends TestCase
     {
         Storage::fake('config');
 
-        $config = new FilesystemRepository();
+        $config = new FileRepository();
         $config->set('foo', 'bar');
         $config->__destruct();
 
         Storage::disk('config')->assertExists('config.json');
 
-        $config = new FilesystemRepository();
+        $config = new FileRepository();
         $this->assertEquals('bar', $config->get('foo'));
     }
 }

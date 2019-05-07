@@ -7,7 +7,6 @@ namespace App\Providers;
 use App\Events\ConfigureTimezone;
 use App\Bootstrap\InitializeDatabase;
 use Illuminate\Console\Events\ArtisanStarting;
-use Illuminate\Console\Events\CommandStarting;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -21,9 +20,10 @@ class EventServiceProvider extends ServiceProvider
         ArtisanStarting::class => [
             InitializeDatabase::class,
         ],
-        CommandStarting::class => [
-            ConfigureTimezone::class,
-        ],
+    ];
+
+    protected $subscribe = [
+        ConfigureTimezone::class,
     ];
 
     /**
@@ -34,7 +34,5 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
-
-        //
     }
 }

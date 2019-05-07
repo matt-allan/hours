@@ -8,6 +8,7 @@ use App\Frame;
 use App\Report;
 use App\Project;
 use Tests\TestCase;
+use App\Facades\Config;
 use Illuminate\Support\Facades\Date;
 use Symfony\Component\Console\Output\BufferedOutput;
 
@@ -15,7 +16,7 @@ class TextRendererTest extends TestCase
 {
     public function testRender()
     {
-        $this->withConfig(['timezone' => 'America/New_York']);
+        Config::set('timezone', 'America/New_York');
 
         $project = factory(Project::class)->create(['name' => 'blog']);
 

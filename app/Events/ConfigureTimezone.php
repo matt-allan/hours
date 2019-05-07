@@ -6,24 +6,40 @@ namespace App\Events;
 
 use App\Facades\Config;
 use Carbon\CarbonTimeZone;
+use Illuminate\Console\OutputStyle;
+use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Console\Events\ArtisanStarting;
 use Illuminate\Console\Events\CommandStarting;
 use Symfony\Component\Console\Question\Question;
-use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * Prompts the user to configure a timezone if it isn't set.
  */
 class ConfigureTimezone
 {
-    public function handle(CommandStarting $event): void
+    /**
+     * @var string
+     */
+    private $environment;
+
+    public function subscribe(Dispatcher $events)
     {
-        if (Config::get('timezone') ||
-            ! in_array($event->command, ['start', 'add', 'report']) ||
-            ! $event->input->isInteractive()) {
+        $events->listen(ArtisanStarting::class, static::class.'@handleArtisanStarting');
+        $events->listen(CommandStarting::class, static::class.'@handleCommandStarting');
+    }
+
+    public function handleArtisanStarting(ArtisanStarting $event): void
+    {
+        $this->environment = $event->artisan->getLaravel()->environment();
+    }
+
+    public function handleCommandStarting($event): void
+    {
+        if ($this->environment !== 'production' || Config::get('timezone')) {
             return;
         }
 
-        $output = new SymfonyStyle($event->input, $event->output);
+        $output = new OutputStyle($event->input, $event->output);
 
         $timezone = $output->askQuestion(
             (new Question('What is your current timezone?', $this->guessTimezone()))

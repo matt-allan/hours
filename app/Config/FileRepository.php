@@ -7,7 +7,7 @@ namespace App\Config;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 
-class FilesystemRepository implements Repository, Editable
+class FileRepository implements Repository, Editable
 {
     private const PATH = 'config.json';
 
