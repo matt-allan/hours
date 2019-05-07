@@ -26,7 +26,7 @@ class InitializeDatabase
     {
         $databasePath = basename(config('database.connections.sqlite.database'));
 
-        if (! Storage::disk('data')->exists($databasePath)) {
+        if ($databasePath !== ':memory:' && ! Storage::disk('data')->exists($databasePath)) {
             Storage::disk('data')->put($databasePath, '');
         }
 
