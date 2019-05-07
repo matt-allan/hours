@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Carbon;
 
-use App\Facades\Config;
+use App\Facades\Settings;
 use Carbon\CarbonInterval;
 
 /**
@@ -17,7 +17,7 @@ class CarbonIntervalPresentMixin
         return function (): string {
             return $this
                 ->cascade()
-                ->format(Config::get('interval_format', '%h:%I'));
+                ->format(Settings::get('interval_format', '%h:%I'));
         };
     }
 }

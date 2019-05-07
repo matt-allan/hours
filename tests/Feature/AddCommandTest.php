@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Facades\Config;
+use App\Facades\Settings;
 use Illuminate\Support\Facades\Date;
 
 class AddCommandTest extends TestCase
@@ -29,7 +29,7 @@ class AddCommandTest extends TestCase
             Date::parse('2019-05-01 05:34:46', 'America/New_York')->setTimezone('UTC')
         );
 
-        Config::set('timezone', 'America/New_York');
+        Settings::set('timezone', 'America/New_York');
 
         $this
             ->artisan('add blog --from \'2 hours ago\'')

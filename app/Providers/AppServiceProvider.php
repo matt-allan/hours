@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Facades\Config;
+use App\Facades\Settings;
 use Carbon\CarbonInterval;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
@@ -63,7 +63,7 @@ class AppServiceProvider extends ServiceProvider
 
             return Date::parse(
                 $this->option($key),
-                Config::get('timezone')
+                Settings::get('timezone')
             )->utc();
         });
     }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Carbon;
 
-use App\Facades\Config;
+use App\Facades\Settings;
 use Carbon\CarbonImmutable;
 
 /**
@@ -16,8 +16,8 @@ class CarbonPresentMixin
     {
         return function (): string {
             return $this
-                ->setTimezone(Config::get('timezone', 'UTC'))
-                ->format(Config::get('date_format', 'F j, Y'));
+                ->setTimezone(Settings::get('timezone', 'UTC'))
+                ->format(Settings::get('date_format', 'F j, Y'));
         };
     }
 
@@ -25,8 +25,8 @@ class CarbonPresentMixin
     {
         return function (): string {
             return $this
-                ->setTimezone(Config::get('timezone', 'UTC'))
-                ->format(Config::get('time_format', 'g:i a'));
+                ->setTimezone(Settings::get('timezone', 'UTC'))
+                ->format(Settings::get('time_format', 'g:i a'));
         };
     }
 
@@ -34,8 +34,8 @@ class CarbonPresentMixin
     {
         return function (): string {
             return $this
-                ->setTimezone(Config::get('timezone', 'UTC'))
-                ->format(Config::get('date_format', 'F j, Y').' '.Config::get('time_format', 'g:i a'));
+                ->setTimezone(Settings::get('timezone', 'UTC'))
+                ->format(Settings::get('date_format', 'F j, Y').' '.Settings::get('time_format', 'g:i a'));
         };
     }
 }

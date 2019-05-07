@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Events;
 
-use App\Facades\Config;
+use App\Facades\Settings;
 use Carbon\CarbonTimeZone;
 use Illuminate\Console\OutputStyle;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -35,7 +35,7 @@ class ConfigureTimezone
 
     public function handleCommandStarting($event): void
     {
-        if ($this->environment !== 'production' || Config::get('timezone')) {
+        if ($this->environment !== 'production' || Settings::get('timezone')) {
             return;
         }
 
@@ -46,7 +46,7 @@ class ConfigureTimezone
                 ->setAutocompleterValues(CarbonTimeZone::listIdentifiers())
         );
 
-        Config::set('timezone', $timezone);
+        Settings::set('timezone', $timezone);
     }
 
     private function guessTimezone(): ?string

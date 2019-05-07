@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\Facades\Config;
+use App\Facades\Settings;
 use Carbon\CarbonInterface;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -35,8 +35,8 @@ class ReportBuilder
 
     public function __construct()
     {
-        $this->from = Date::now(Config::get('timezone'))->firstOfMonth()->utc();
-        $this->to = Date::now(Config::get('timezone'))->utc();
+        $this->from = Date::now(Settings::get('timezone'))->firstOfMonth()->utc();
+        $this->to = Date::now(Settings::get('timezone'))->utc();
     }
 
     public function from(?CarbonInterface $from): self

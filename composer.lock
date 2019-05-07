@@ -297,7 +297,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Illuminate\\Config\\": ""
+                    "Illuminate\\Settings\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -310,7 +310,7 @@
                     "email": "taylor@laravel.com"
                 }
             ],
-            "description": "The Illuminate Config package.",
+            "description": "The Illuminate Settings package.",
             "homepage": "https://laravel.com",
             "time": "2019-02-14T12:51:50+00:00"
         },

@@ -44,17 +44,10 @@ return [
     */
 
     'disks' => [
-
         'data' => [
             'driver' => 'local',
             'root' => config('app.production') ? home_data_path() : database_path(),
         ],
-
-        'config' => [
-            'driver' => 'local',
-            'root' => config('app.production') ? home_config_path() : storage_path(),
-        ],
-
     ],
 
 ];

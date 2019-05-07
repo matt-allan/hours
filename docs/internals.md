@@ -4,14 +4,6 @@
 
 Hours is written in PHP with the [Laravel Zero framework](https://laravel-zero.com).  The application uses many of the features of the full [Laravel framework](https://laravel.com), including the console, Eloquent ORM, filesystem, and service container.  You should review the documentation for both projects before diving in.
 
-## Configuration
-
-There are two kinds of configuration - configuration needed by the application and configuration needed by the user.  The application's configuration is stored in the `config` directory.  The user's configuration is stored in the `stroage` directory during development.  The production build stores config in the `Hours` subdirectory of the user's `$XDG_CONFIG_HOME` [^1], i.e. `~/.config/Hours`.
-
-The config file is a simple JSON file named `config.json`.  Only configuration keys that were explicitly set are stored;  otherwise a default is used.
-
-When running PHPUnit tests the configuration driver is replaced with a memory driver that does not use the filesystem.  This allows us to run tests without worrying about accidentally overwriting development data or forgetting to clean up after ourselves.
-
 ### Timezone
 
 The timezone is the only configuration that cannot be reliably set to a default.  Most users will set the PHP timezone to UTC.  Because of this we cannot determine the appropriate timezone automatically.
