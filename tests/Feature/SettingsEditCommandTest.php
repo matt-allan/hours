@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
-use App\Settings\Repository;
 use Tests\TestCase;
+use App\Settings\Repository;
 
 class SettingsEditCommandTest extends TestCase
 {
