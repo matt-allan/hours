@@ -4,59 +4,27 @@ declare(strict_types=1);
 
 namespace App\Report;
 
-use Psr\Container\ContainerInterface;
+use Illuminate\Support\Manager;
 
-class RendererManager implements RendererFactory
+class RendererManager extends Manager implements RendererFactory
 {
-    /**
-     * @var ContainerInterface
-     */
-    private $app;
-
-    /**
-     * @var \Closure[]
-     */
-    private $customCreators = [];
-
-    public function __construct(ContainerInterface $app)
+    public function getDefaultDriver(): string
     {
-        $this->app = $app;
+        return 'text';
     }
 
-    public function make(string $format): Renderer
+    public function createCsvDriver(): CsvRenderer
     {
-        if (array_key_exists($format, $this->customCreators)) {
-            return $this->customCreators[$format]($this->app);
-        }
-
-        $driverMethod = 'create'.ucfirst($format).'Driver';
-
-        if (! method_exists($this, $driverMethod)) {
-            throw new \InvalidArgumentException('Unknown format '.$format);
-        }
-
-        return $this->{$driverMethod}();
+        return new CsvRenderer();
     }
 
-    public function extend(string $format, \Closure $callback): self
+    public function createJsonDriver(): JsonRenderer
     {
-        $this->customCreators[$format] = $callback->bindTo($this, $this);
-
-        return $this;
+        return new JsonRenderer();
     }
 
-    private function createCsvDriver(): CsvRenderer
+    public function createTextDriver(): TextRenderer
     {
-        return $this->app->get(CsvRenderer::class);
-    }
-
-    private function createJsonDriver(): JsonRenderer
-    {
-        return $this->app->get(JsonRenderer::class);
-    }
-
-    private function createTextDriver()
-    {
-        return $this->app->get(TextRenderer::class);
+        return new TextRenderer();
     }
 }

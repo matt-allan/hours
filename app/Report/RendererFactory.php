@@ -6,5 +6,10 @@ namespace App\Report;
 
 interface RendererFactory
 {
-    public function make(string $format): Renderer;
+    /**
+     * @param string|null $driver
+     *
+     * @return Renderer
+     */
+    public function driver($driver = null);
 }

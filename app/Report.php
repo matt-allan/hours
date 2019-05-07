@@ -122,7 +122,7 @@ class Report
 
     public function render(OutputInterface $output, string $format): void
     {
-        app(RendererFactory::class)->make($format)->render($output, $this);
+        app(RendererFactory::class)->driver($format)->render($output, $this);
     }
 
     private function defaultHeaders(): array

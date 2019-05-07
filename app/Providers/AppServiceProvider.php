@@ -30,6 +30,10 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(Config\Repository::class, Config\FilesystemRepository::class);
 
+        $this->app->singleton(RendererManager::class, function () {
+            return new RendererManager($this->app);
+        });
+
         $this->app->singleton(RendererFactory::class, RendererManager::class);
     }
 

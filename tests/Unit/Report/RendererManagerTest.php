@@ -19,9 +19,9 @@ class RendererManagerTest extends TestCase
     {
         $manager = new RendererManager($this->app);
 
-        $this->assertInstanceOf(CsvRenderer::class, $manager->make('csv'));
-        $this->assertInstanceOf(JsonRenderer::class, $manager->make('json'));
-        $this->assertInstanceOf(TextRenderer::class, $manager->make('text'));
+        $this->assertInstanceOf(CsvRenderer::class, $manager->driver('csv'));
+        $this->assertInstanceOf(JsonRenderer::class, $manager->driver('json'));
+        $this->assertInstanceOf(TextRenderer::class, $manager->driver('text'));
     }
 
     public function testExtend()
@@ -38,6 +38,6 @@ class RendererManagerTest extends TestCase
             return $nullRenderer;
         });
 
-        $this->assertSame($nullRenderer, $manager->make('null'));
+        $this->assertSame($nullRenderer, $manager->driver('null'));
     }
 }
