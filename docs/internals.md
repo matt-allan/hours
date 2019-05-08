@@ -8,7 +8,7 @@ Hours is written in PHP with the [Laravel Zero framework](https://laravel-zero.c
 
 The timezone is the only configuration that cannot be reliably set to a default.  Most users will set the PHP timezone to UTC.  Because of this we cannot determine the appropriate timezone automatically.
 
-An event subscriber checks if the timezone is set at boot.  If the timezone is not set the user will be prompted to select their timezone.  This listener does it's best to guess the current timezone using a shell command, but we confirm that the choice is correct before continuing.  This functionality is disabled outside of development.
+An event subscriber checks if the timezone is set at boot.  If the timezone is not set the user will be prompted to select their timezone.  This listener does it's best to guess the current timezone using a shell command, but we confirm that the choice is correct before continuing.  This functionality is disabled during development because it's annoying and can cause tests to hang forever waiting for input.
 
 ## Database
 
@@ -33,9 +33,10 @@ During tests an in memory database is used instead.
 
 All dates and times are handled using the [Carbon library](https://carbon.nesbot.com).  We use the `CarbonImmutable` class instead of the `Carbon` class as immutability helps prevent common bugs in the application code.
 
-All times are stored in the database in UTC and converted to the user's current timezone for display.  When dates are accepted as input they are converted from the user's current timezone to UTC.
+All times are stored in the database in UTC and converted to the user's current timezone for display.  When dates are accepted as input they are converted from the user's current timezone to UTC [^2].
 
 We register a few macros & mixins to make working with dates easier.  You can view these macros & mixins in the `AppServiceProvider`.
 
 [^1]: The `XDG_CONFIG_HOME` environment variable is defined by the [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html).  On most Mac and Linux computers this defaults to `~/.config`.
 
+[^2]: Eventually it would probably be best to store the timezone that was active at the time the frame was created.  This would allow a user to record a frame from 9-5 in PST, then view a report in EST and see 9-5 (the time they actually recorded the frame in PST) instead of 1-9 (the time it would have been in EST).
