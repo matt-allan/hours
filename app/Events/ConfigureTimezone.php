@@ -24,8 +24,13 @@ class ConfigureTimezone
 
     public function subscribe(Dispatcher $events)
     {
-        $events->listen(ArtisanStarting::class, static::class.'@handleArtisanStarting');
-        $events->listen(CommandStarting::class, static::class.'@handleCommandStarting');
+        $events->listen(ArtisanStarting::class, function (ArtisanStarting $event) {
+            $this->handleArtisanStarting($event);
+        });
+
+        $events->listen(CommandStarting::class, function (CommandStarting $event) {
+            $this->handleCommandStarting($event);
+        });
     }
 
     public function handleArtisanStarting(ArtisanStarting $event): void
