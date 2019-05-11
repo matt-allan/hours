@@ -4,6 +4,8 @@ A minimal CLI for tracking time.  Easily track the time you spend on personal ta
 
 All your data is yours and yours only - we never send any data to the cloud or a remote server.
 
+[![asciicast](https://asciinema.org/a/245508.svg)](https://asciinema.org/a/245508)
+
 ## Installation
 
 ### Prerequisites
