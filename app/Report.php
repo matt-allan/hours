@@ -105,9 +105,9 @@ class Report
                });
         })->unless($this->multipleTags(), function (Collection $frames) {
             return $frames
-        ->map(function (Collection $frame) {
-            return $frame->except('Tags');
-        });
+                ->map(function (Collection $frame) {
+                    return $frame->except('Tags');
+                });
         });
     }
 
