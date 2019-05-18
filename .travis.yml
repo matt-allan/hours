@@ -1,0 +1,29 @@
+language: php
+
+# Only run on master branch, PR must be activated on https://travis-ci.org/
+# See https://stackoverflow.com/a/31882307
+branches:
+  only: 
+    - master
+
+# Versions to test
+php:
+ - 7.1
+ - 7.2
+ - 7.3
+ 
+# Cache composer install
+cache:
+ directories:
+   - $HOME/.composer/cache/files
+ 
+# Update composer, install dependencies
+before_script:
+ - composer self-update
+ - composer install --prefer-source --no-interaction --dev
+  
+# Commands to run
+script:
+  - ./vendor/bin/php-cs-fixer fix --dry-run --diff
+  - ./vendor/bin/phpunit --testsuite 'Unit'
+  - ./vendor/bin/phpunit --testsuite 'Feature'
