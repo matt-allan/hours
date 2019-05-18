@@ -27,15 +27,20 @@ class AddCommand extends Command
      */
     protected $description = 'Add a frame that happened in the past to the given project.';
 
+    /**
+     * @var string
+     */
     protected $help = <<<'HELP'
-The start time of the frame must be specified with the --from option.  The start time may be any textual datetime
-format such as '2019-05-01 22:34:46' or a human readable difference such as '2 hours ago'.
+The start time of the frame must be specified with the --from option. The start
+time may be any textual datetime format such as '2019-05-01 22:34:46' or a human
+readable difference such as '2 hours ago'.
 
-You may specify an end time with the --to option.  The --to option accepts all of the same datetime formats as the
---from option.
+You may specify an end time with the --to option. The --to option accepts all of
+the same datetime formats as the --from option.
 
-If you would rather specify an interval than a specific end time you can use the --interval option.  The --interval
-option accepts intervals such as '3h 12m' (meaning 3 hours, 12 minutes in this example).
+If you would rather specify an interval than a specific end time you can use the
+--interval option. The --interval option accepts intervals such as '3h 12m'
+(meaning 3 hours, 12 minutes in this example).
 
 If neither the --to or --interval options are specified the frame will end at the current time.
 HELP;
