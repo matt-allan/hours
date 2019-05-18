@@ -11,12 +11,6 @@ php:
  - 7.1
  - 7.2
  - 7.3
- - nightly
- 
-# allow_failures: Allow this build to fail under the specified environments.
-matrix:
- allow_failures:
-   - php: nightly
  
 # Cache composer install
 cache:
