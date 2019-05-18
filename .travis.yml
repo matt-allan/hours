@@ -1,5 +1,11 @@
 language: php
 
+# Only run on master branch, PR must be activated on https://travis-ci.org/
+# See https://stackoverflow.com/a/31882307
+branches:
+  only: 
+    - master
+
 # Versions to test
 php:
  - 7.1
