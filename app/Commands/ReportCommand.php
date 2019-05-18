@@ -27,7 +27,6 @@ class ReportCommand extends Command
      */
     protected $description = 'Report the time spent on the given projects.';
 
-
     /**
      * @var string
      */

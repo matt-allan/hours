@@ -16,7 +16,7 @@ class SettingsEditCommand extends Command
     {key : The key to edit}
     {value : The value to set}';
 
-        /**
+    /**
      * @var string
      */
     protected $help = <<<'HELP'
