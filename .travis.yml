@@ -3,7 +3,7 @@ language: php
 # Only run on master branch, PR must be activated on https://travis-ci.org/
 # See https://stackoverflow.com/a/31882307
 branches:
-  only: 
+  only:
     - master
 
 # Versions to test
@@ -11,19 +11,30 @@ php:
  - 7.1
  - 7.2
  - 7.3
- 
+
 # Cache composer install
 cache:
  directories:
    - $HOME/.composer/cache/files
- 
+
 # Update composer, install dependencies
 before_script:
  - composer self-update
  - composer install --prefer-source --no-interaction --dev
-  
+
 # Commands to run
 script:
   - ./vendor/bin/php-cs-fixer fix --dry-run --diff
   - ./vendor/bin/phpunit --testsuite 'Unit'
   - ./vendor/bin/phpunit --testsuite 'Feature'
+
+jobs:
+    - stage: release
+      script: php hours app:build --no-interaction
+      deploy:
+        provider: releases
+        api_key: "nkLKPvFPGnLOpce40GEVqjjdvEO6OaYuSOsrOYSASVMuaBXhkaqzZtpPEvvwB79i2FOcWupzmOvytZThltxZXf6PE88U2hIkvMNHSuFOgjLD+sv8BLJa7Z/jcLryCMikiD/HxCokz2XjSedZp5Og6kBVkwcKj+jJAFPwTPovS6ndsTdpNFYqd9clp3qKnuuRMos+1e4q/SNPAgbYGIzBBQUURWv2JihERxV2wmkXNLBWrapeyguJNaGTPqcBupZFAqpsLM4avME49T5JE5SX0tWKn/iM68a7qCxRp6jEVqsOgDJw4MbXArqsV7Pf7H0KYk/+9K7yOACvv7yjLUkPVw4bgySKsFWT/aBlzZIoPCOTP1XuAP1+WoYV0C64YS2csrV89QlW853yvHfQGhkQUR9ndVgtXPdLX+42MNCo0AQpVBf/MmyDXHd+XfAX9nv7Djc9cjmT4yTMY67cFmRIx8q4cCW37PpiPhR0bS/phgWbx+iyUf6k+aAtnvSyT8hr5XaWJzl2QzmlqAZ/mLTgqpsFBsya3OToO/en4qEtlt9bVPK94pS9LczI+M7AWLkx3RkhdzzbUHuMfg2l7C9MEoQv2dJG9vBICidxGRuDJbsAJOMBRBTYIZMntZGIm2jiW2k1Zjls3vj7d6ZmHQyKByylt5M46EMdvq3QKQo2HmM="
+        file: ./builds/hours
+        skip_cleanup: true
+        on:
+          tags: true
