@@ -35,7 +35,8 @@ jobs:
       script: php hours app:build --no-interaction
       deploy:
         provider: releases
-        api_key: "nkLKPvFPGnLOpce40GEVqjjdvEO6OaYuSOsrOYSASVMuaBXhkaqzZtpPEvvwB79i2FOcWupzmOvytZThltxZXf6PE88U2hIkvMNHSuFOgjLD+sv8BLJa7Z/jcLryCMikiD/HxCokz2XjSedZp5Og6kBVkwcKj+jJAFPwTPovS6ndsTdpNFYqd9clp3qKnuuRMos+1e4q/SNPAgbYGIzBBQUURWv2JihERxV2wmkXNLBWrapeyguJNaGTPqcBupZFAqpsLM4avME49T5JE5SX0tWKn/iM68a7qCxRp6jEVqsOgDJw4MbXArqsV7Pf7H0KYk/+9K7yOACvv7yjLUkPVw4bgySKsFWT/aBlzZIoPCOTP1XuAP1+WoYV0C64YS2csrV89QlW853yvHfQGhkQUR9ndVgtXPdLX+42MNCo0AQpVBf/MmyDXHd+XfAX9nv7Djc9cjmT4yTMY67cFmRIx8q4cCW37PpiPhR0bS/phgWbx+iyUf6k+aAtnvSyT8hr5XaWJzl2QzmlqAZ/mLTgqpsFBsya3OToO/en4qEtlt9bVPK94pS9LczI+M7AWLkx3RkhdzzbUHuMfg2l7C9MEoQv2dJG9vBICidxGRuDJbsAJOMBRBTYIZMntZGIm2jiW2k1Zjls3vj7d6ZmHQyKByylt5M46EMdvq3QKQo2HmM="
+        api_key:
+          secure: "nkLKPvFPGnLOpce40GEVqjjdvEO6OaYuSOsrOYSASVMuaBXhkaqzZtpPEvvwB79i2FOcWupzmOvytZThltxZXf6PE88U2hIkvMNHSuFOgjLD+sv8BLJa7Z/jcLryCMikiD/HxCokz2XjSedZp5Og6kBVkwcKj+jJAFPwTPovS6ndsTdpNFYqd9clp3qKnuuRMos+1e4q/SNPAgbYGIzBBQUURWv2JihERxV2wmkXNLBWrapeyguJNaGTPqcBupZFAqpsLM4avME49T5JE5SX0tWKn/iM68a7qCxRp6jEVqsOgDJw4MbXArqsV7Pf7H0KYk/+9K7yOACvv7yjLUkPVw4bgySKsFWT/aBlzZIoPCOTP1XuAP1+WoYV0C64YS2csrV89QlW853yvHfQGhkQUR9ndVgtXPdLX+42MNCo0AQpVBf/MmyDXHd+XfAX9nv7Djc9cjmT4yTMY67cFmRIx8q4cCW37PpiPhR0bS/phgWbx+iyUf6k+aAtnvSyT8hr5XaWJzl2QzmlqAZ/mLTgqpsFBsya3OToO/en4qEtlt9bVPK94pS9LczI+M7AWLkx3RkhdzzbUHuMfg2l7C9MEoQv2dJG9vBICidxGRuDJbsAJOMBRBTYIZMntZGIm2jiW2k1Zjls3vj7d6ZmHQyKByylt5M46EMdvq3QKQo2HmM="
         file: ./builds/hours
         skip_cleanup: true
         on:
