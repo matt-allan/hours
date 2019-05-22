@@ -30,6 +30,7 @@ script:
   - ./vendor/bin/phpunit --testsuite 'Feature'
 
 jobs:
+  include:
     - stage: release
       script: php hours app:build --no-interaction
       deploy:
