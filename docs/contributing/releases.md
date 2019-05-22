@@ -11,11 +11,11 @@ Project maintainers need to create releases when a new version of Hours is relea
 
 ## Versioning
 
-The Hours CLI is versioned following the [Semantic Versioning 2.0.0](https://semver.org) specification. Version numbers do not include the `v` prefix. The leading 0 is included for pre 1.0 releases.
+The Hours CLI is versioned following the [Semantic Versioning 2.0.0](https://semver.org) specification. Version numbers include the `v` prefix. The leading 0 is included for pre 1.0 releases.
 
-- Bad: `v0.1.0`
-- Bad: `.1.0`
-- Good: `0.1.0`
+- Bad: `0.1.0`
+- Bad: `v.1.0`
+- Good: `v0.1.0`
 
 ## Release Process
 
