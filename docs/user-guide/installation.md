@@ -1,3 +1,10 @@
+---
+layout: default
+title: Installation
+parent: User Guide
+nav_order: 1
+---
+
 # Installation
 
 ## Prerequisites
@@ -42,4 +49,4 @@ Hours 0.1.0
 
 ## Development Installation
 
-If you are installing Hours for development you need to clone the repository instead.  See the [contributing guide](../contributing) for more info.
+If you are installing Hours for development you need to clone the repository instead.  See the [contributing guide](../../contributing) for more info.

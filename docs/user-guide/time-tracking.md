@@ -1,3 +1,10 @@
+---
+layout: default
+title: Time Tracking
+parent: User Guide
+nav_order: 2
+---
+
 # Time Tracking
 
 ## Starting
@@ -23,7 +30,7 @@ Starting frame for blog at 12:26 pm
 We can confirm that time tracking is active with the `status` command.
 
 ```
-$ hours status 
+$ hours status
 Time tracking for blog started 4 seconds ago.
 ```
 
@@ -33,7 +40,7 @@ Once you have finished your task you can stop tracking time with the `stop` comm
 
 
 ```
-$ hours stop                                                      
+$ hours stop
 Time tracking for blog stopped (started 1 hour ago).
 ```
 
@@ -42,7 +49,7 @@ Time tracking for blog stopped (started 1 hour ago).
 If you need to cancel the active frame you can use the `cancel` command. The `cancel` command deletes the active frame.
 
 ```
-# hours cancel    
+$ hours cancel
 Time tracking for blog cancelled (started 3 seconds ago).
 ```
 
@@ -69,7 +76,7 @@ Added frame for blog from May 1, 2019 2:00 pm to May 1, 2019 3:00 pm (1 hour).
 If you don't know the end time but you know how long you worked you can use the `--interval` option instead.
 
 ```
-hours add blog --from '2019-05-01 2:00 PM' --interval '2 hours'     
+hours add blog --from '2019-05-01 2:00 PM' --interval '2 hours'
 Added frame for blog from May 1, 2019 2:00 pm to May 1, 2019 4:00 pm (2 hours).
 ```
 

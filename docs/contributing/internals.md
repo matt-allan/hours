@@ -1,6 +1,13 @@
+---
+layout: default
+title: Internals
+parent: Contributing
+nav_order: 1
+---
+
 # Internals
 
-## Introduction
+## Overview
 
 Hours is written in PHP with the [Laravel Zero framework](https://laravel-zero.com).  The application uses many of the features of the full [Laravel framework](https://laravel.com), including the console, Eloquent ORM, filesystem, and service container.  You should review the documentation for both projects before diving in.
 
@@ -44,7 +51,7 @@ You can open the database using the `sqlite3` command for debugging purposes:
 $ sqlite3 ./database/database.sqlite
 SQLite version 3.28.0 2019-04-16 19:49:53
 Enter ".help" for usage hints.
-sqlite> 
+sqlite>
 ```
 
 To delete the database simply delete the file.

@@ -1,3 +1,10 @@
+---
+layout: default
+title: Projects
+parent: User Guide
+nav_order: 4
+---
+
 # Projects
 
 Projects are used to track time for different things.  A freelancer might have a project for every client they work on, while a student might have a project for each class they are taking.

@@ -1,3 +1,10 @@
+---
+layout: default
+title: Reporting
+parent: User Guide
+nav_order: 3
+---
+
 # Reporting
 
 ## Overview
