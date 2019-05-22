@@ -39,5 +39,6 @@ jobs:
           secure: "LAV2U4JZciC5HQk9oOVVKhIiKOzpgMM6/MQF2Rt1jbS/++56N7KpjD8bLgWJ6L8kE857jCSxJY11icIdEC2etCie2ZXeAsM3xSTloJdTRm9u61scLhCHwKnSZnnrAlSsg9hACrScmZY71cwKcnAx8JULeSlu7zA19l9l8NQn9Yd+Z8p2mHjFNV0M86roGaLmQnFjOmx5kSEknaKCgK76e2pdov8MO1IyFpG+7up02VbfLGbJxvvPbSHSbJGG0DixU0a0I/Bg0na0EBI8tQ/S88Ck+tdPU7pvI3XmG0vIHuMnCjg2RLJ/dMwBB6ZweE6jSh88zaSTgNJxYofekLq2pBpRTdhdN+X5/LUoNPpMbYPM+LsvEleAqhD301r38eYEerP99a0AnwEufbNhuiS8jqE7Jr3FUlu8pxoHY+c9mvPz/oDoJLGV15pCFlaKvas8CEPz32BFgNDSof4o4cCQbfYmnfVPiX6C4bTJQvIQu6C5rtu2Co6B45mMr9KNrDDH2K6+d08JAbIYkKSjiZ3wAbWux4XMRvo8Sgt+5PGLpU0yDifNuLba79leG2caAIBruqP5HFCa5O94IJbKAxZ8Q+TBwuM3CAQ2XHJbS7DvqzEeT1BymPK0mgUksnDUB3nGHEVor+GcPhoi6DmEkUrq6v5pJwyOAXqM0thIYoYvQc0="
         file: ./builds/hours
         skip_cleanup: true
-        on:
-          tags: true
+        draft: true
+        # on:
+        #   tags: true
