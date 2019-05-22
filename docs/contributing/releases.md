@@ -21,26 +21,26 @@ The Hours CLI is versioned following the [Semantic Versioning 2.0.0](https://sem
 
 1. Update [the changelog](https://github.com/matt-allan/hours/blob/master/CHANGELOG.md). The changelog should be updated when changes are merged into master. It's still a good idea to review the commits with `git log` and verify that all changes are documented.
 
-Afterwards change the `## Unreleased` header to the release number (i.e. `## 0.1.0`) and commit the change.  For example:
+Afterwards change the `## Unreleased` header to the release number (i.e. `## v0.1.0`) and commit the change.  For example:
 
 ```console
-$ sed -i '' 's/Unreleased/0.1.0/' CHANGELOG.md
+$ sed -i '' 's/Unreleased/v0.1.0/' CHANGELOG.md
 $ git add .
 $ git commit -m 'Pre-release changelog'
 $ git push
 ```
 
-2. Create a [git tag](https://git-scm.com/book/en/v2/Git-Basics-Tagging). Use an annotated tag with a simple commit message that states what the release is, i.e. '0.1.0 release'. For example:
+2. Create a [git tag](https://git-scm.com/book/en/v2/Git-Basics-Tagging). Use an annotated tag with a simple commit message that states what the release is, i.e. 'v0.1.0 release'. For example:
 
 ```console
-$ git tag -a -m '0.1.0 release' 0.1.0
+$ git tag -a -m 'v0.1.0 release' v0.1.0
 ```
 
 **Verify you are on master before tagging!**. New releases should only ever be tagged from the master branch.
 
 Verify the tag was created with `git tag -l`.
 
-After the tag is created push it to github: `git push origin <tagname>`, i.e. `git push origin 0.1.0`.
+After the tag is created push it to github: `git push origin <tagname>`, i.e. `git push origin v0.1.0`.
 
 ## Release Assets
 
