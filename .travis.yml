@@ -1,10 +1,11 @@
 language: php
 
-# Only run on master branch, PR must be activated on https://travis-ci.org/
+# Only run on master branch and tags. PR must be activated on https://travis-ci.org/
 # See https://stackoverflow.com/a/31882307
 branches:
   only:
     - master
+    - /^\d+\.\d+(\.\d+)?(-\S*)?$/
 
 # Versions to test
 php:
