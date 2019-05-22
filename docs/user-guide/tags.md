@@ -1,3 +1,10 @@
+---
+layout: default
+title: Tags
+parent: User Guide
+nav_order: 5
+---
+
 # Tags
 
 Tags are used to keep track of related tasks across projects. A freelancer might use a different project for each client but keep track of what kind of work they are doing with tags like billing, coding, design, etc.

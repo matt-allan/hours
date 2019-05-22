@@ -1,3 +1,11 @@
+---
+layout: default
+title: Contributing
+nav_order: 2
+has_children: true
+permalink: /contributing
+---
+
 # Contributing
 
 ## Introduction
@@ -33,9 +41,13 @@ php hours list
 
 ## Writing Code
 
-The [internals](./internals.md) documentation explains how everything works and what you need to know to get started writing code.
+The [internals](./internals) documentation explains how everything works and what you need to know to get started writing code.
 
-## Project Management 
+## Writing Docs
+
+We are always looking for contributors that would like to improve the documentation. The [documentation README](https://github.com/matt-allan/hours/blob/master/docs/README.md) covers everything you need to know about contributing to the docs.
+
+## Project Management
 
 All project management happens through our [Github Repo](https://github.com/matt-allan/hours). Collaboration happens through [projects](https://github.com/matt-allan/hours/projects), [issues](https://github.com/matt-allan/hours/issues), and [pull requests](https://github.com/matt-allan/hours/pulls).
 
@@ -43,7 +55,7 @@ If you are looking to get started have a look at our [starter issues](https://gi
 
 ## Pull Requests
 
-Make sure to read our [contributor guidelines](../../.github/CONTRIBUTING.md) before creating a pull request. The contributor guidelines cover everything you need to know about contributing code changes.
+Make sure to read our [contributor guidelines](https://github.com/matt-allan/hours/blob/master/.github/CONTRIBUTING.md) before creating a pull request. The contributor guidelines cover everything you need to know about contributing code changes.
 
 If something doesn't make sense don't worry — just open a pull request and we can walk you through it.
 
@@ -51,4 +63,4 @@ Feel free to open a pull request even if it's not ready to merge! Opening a pull
 
 ## Releases
 
-The release process is [documented](./releases.md) for maintainers.
+The release process is [documented](./releases) for maintainers.
