@@ -53,7 +53,7 @@ That should be enough information to get you started. To learn more check out th
 
 ## Contribute
 
-Are you interested in helping out with development? Check out our [contributor's guide](./docs/contributing) to get started.
+Are you interested in helping out with development? Check out our [contributor's guide](https://matt-allan.github.io/hours/contributing) to get started.
 
 ## License
 
