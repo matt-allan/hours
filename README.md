@@ -31,14 +31,14 @@ Starting frame for blog (writing) at 12:26 pm
 
 This will create a "frame". Once you have finished your task you can stop tracking time with the `stop` command.
 
-```console
+```
 $ hours stop                                                      
 Time tracking for blog stopped (started 1 hour ago).
 ```
 
 You can view all of your frames with the `report` command.
 
-```console
+```
 $ hours report                                      
 May 1, 2019 to May 7, 2019
 +---------+---------+-------------------------+-------------+----------+----------+---------+
