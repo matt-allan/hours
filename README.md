@@ -49,7 +49,7 @@ May 1, 2019 to May 7, 2019
 Total hours: 1:00
 ```
 
-That should be enough information to get you started. To learn more check out the [user guide](./docs/user-guide).
+That should be enough information to get you started. To learn more check out the [user guide](https://matt-allan.github.io/hours/user-guide).
 
 ## Contribute
 
