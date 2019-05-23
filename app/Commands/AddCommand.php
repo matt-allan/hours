@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace App\Commands;
 
+use App\Tag;
 use App\Frame;
+use App\Project;
 use Carbon\CarbonInterval;
 use Carbon\CarbonInterface;
 use LaravelZero\Framework\Commands\Command;
+use Stecman\Component\Symfony\Console\BashCompletion\CompletionContext;
+use Stecman\Component\Symfony\Console\BashCompletion\Completion\CompletionAwareInterface;
 
-class AddCommand extends Command
+class AddCommand extends Command implements CompletionAwareInterface
 {
     /**
      * @var string
@@ -81,5 +85,25 @@ HELP;
         return $this->dateOption('from')
             ->add(CarbonInterval::fromString($this->option('interval')))
             ->utc();
+    }
+
+    public function completeOptionValues($optionName, CompletionContext $context): array
+    {
+        switch ($optionName) {
+            case 'tag':
+                return Tag::all()->map->name->toArray();
+            default:
+                return [];
+        }
+    }
+
+    public function completeArgumentValues($argumentName, CompletionContext $context): array
+    {
+        switch ($argumentName) {
+            case 'project':
+                return Project::all()->map->name->toArray();
+            default:
+                return [];
+        }
     }
 }

@@ -6,8 +6,10 @@ namespace App\Commands;
 
 use App\Project;
 use LaravelZero\Framework\Commands\Command;
+use Stecman\Component\Symfony\Console\BashCompletion\CompletionContext;
+use Stecman\Component\Symfony\Console\BashCompletion\Completion\CompletionAwareInterface;
 
-class ProjectForgetCommand extends Command
+class ProjectForgetCommand extends Command implements CompletionAwareInterface
 {
     /**
      * @var string
@@ -26,5 +28,20 @@ class ProjectForgetCommand extends Command
             ->delete();
 
         $this->info('Projects deleted.');
+    }
+
+    public function completeOptionValues($optionName, CompletionContext $context): array
+    {
+        return [];
+    }
+
+    public function completeArgumentValues($argumentName, CompletionContext $context): array
+    {
+        switch ($argumentName) {
+            case 'project':
+                return Project::all()->map->name->toArray();
+            default:
+                return [];
+        }
     }
 }

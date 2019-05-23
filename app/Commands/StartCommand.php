@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace App\Commands;
 
+use App\Tag;
 use App\Frame;
+use App\Project;
 use Carbon\CarbonInterface;
 use LaravelZero\Framework\Commands\Command;
+use Stecman\Component\Symfony\Console\BashCompletion\CompletionContext;
+use Stecman\Component\Symfony\Console\BashCompletion\Completion\CompletionAwareInterface;
 
-class StartCommand extends Command
+class StartCommand extends Command implements CompletionAwareInterface
 {
     /**
      * @var string
@@ -69,5 +73,25 @@ HELP;
             ($frame->tags->isNotEmpty() ? "({$frame->tags->implode('name', ', ')}) " : '').
             "at {$frame->started_at->presentTime()}"
         );
+    }
+
+    public function completeOptionValues($optionName, CompletionContext $context): array
+    {
+        switch ($optionName) {
+            case 'tag':
+                return Tag::all()->map->name->toArray();
+            default:
+                return [];
+        }
+    }
+
+    public function completeArgumentValues($argumentName, CompletionContext $context): array
+    {
+        switch ($argumentName) {
+            case 'project':
+                return Project::all()->map->name->toArray();
+            default:
+                return [];
+        }
     }
 }

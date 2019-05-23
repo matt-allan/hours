@@ -63,6 +63,7 @@ return [
         Illuminate\Console\Scheduling\ScheduleRunCommand::class,
         Illuminate\Console\Scheduling\ScheduleFinishCommand::class,
         Illuminate\Foundation\Console\VendorPublishCommand::class,
+        \Stecman\Component\Symfony\Console\BashCompletion\CompletionCommand::class,
     ],
 
     /*
