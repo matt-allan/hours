@@ -19,9 +19,9 @@ cache:
    - $HOME/.composer/cache/files
 
 # Update composer, install dependencies
-before_script:
+install:
  - composer self-update
- - composer install --prefer-source --no-interaction --dev
+ - composer install --prefer-dist --no-interaction
 
 # Commands to run
 script:
@@ -32,6 +32,7 @@ script:
 jobs:
   include:
     - stage: release
+      if: tag IS present
       script: php hours app:build --no-interaction
       deploy:
         provider: releases
