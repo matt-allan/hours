@@ -6,8 +6,10 @@ namespace App\Commands;
 
 use App\Tag;
 use LaravelZero\Framework\Commands\Command;
+use Stecman\Component\Symfony\Console\BashCompletion\CompletionContext;
+use Stecman\Component\Symfony\Console\BashCompletion\Completion\CompletionAwareInterface;
 
-class TagRenameCommand extends Command
+class TagRenameCommand extends Command implements CompletionAwareInterface
 {
     /**
      * @var string
@@ -26,5 +28,21 @@ class TagRenameCommand extends Command
             ->update(['name' => $this->argument('to')]);
 
         $this->info('Tag renamed.');
+    }
+
+    public function completeOptionValues($optionName, CompletionContext $context): array
+    {
+        return [];
+    }
+
+    public function completeArgumentValues($argumentName, CompletionContext $context): array
+    {
+        switch ($argumentName) {
+            case 'from':
+            case 'to':
+                return Tag::all()->map->name->toArray();
+            default:
+                return [];
+        }
     }
 }

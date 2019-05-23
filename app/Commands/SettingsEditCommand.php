@@ -6,8 +6,10 @@ namespace App\Commands;
 
 use App\Settings\Repository;
 use LaravelZero\Framework\Commands\Command;
+use Stecman\Component\Symfony\Console\BashCompletion\CompletionContext;
+use Stecman\Component\Symfony\Console\BashCompletion\Completion\CompletionAwareInterface;
 
-class SettingsEditCommand extends Command
+class SettingsEditCommand extends Command implements CompletionAwareInterface
 {
     /**
      * @var string
@@ -56,5 +58,20 @@ HELP;
         $settings->set($this->argument('key'), $this->argument('value'));
 
         $this->info("Updated {$this->argument('key')} to {$this->argument('value')}");
+    }
+
+    public function completeOptionValues($optionName, CompletionContext $context): array
+    {
+        return [];
+    }
+
+    public function completeArgumentValues($argumentName, CompletionContext $context): array
+    {
+        switch ($argumentName) {
+            case 'key':
+                return ['timezone', 'date_format', 'time_format', 'interval_format'];
+            default:
+                return [];
+        }
     }
 }
