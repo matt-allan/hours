@@ -57,6 +57,10 @@ class ReportBuilder
         return $this;
     }
 
+    /**
+     * @param  string|string[] $projects
+     * @return self
+     */
     public function projects($projects): self
     {
         $this->projects = Arr::wrap($projects);
@@ -64,6 +68,10 @@ class ReportBuilder
         return $this;
     }
 
+    /**
+     * @param  string|string[] $tags
+     * @return self
+     */
     public function tags($tags)
     {
         $this->tags = Arr::wrap($tags);
@@ -82,6 +90,9 @@ class ReportBuilder
         );
     }
 
+    /**
+     * @return Collection|Frame[]
+     */
     private function getFrames(): Collection
     {
         return Frame::between($this->from, $this->to)

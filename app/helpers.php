@@ -10,7 +10,7 @@ use XdgBaseDir\Xdg;
  * @param  string $path
  * @return string
  */
-function home_data_path($path = '')
+function home_data_path($path = ''): string
 {
     return (new Xdg())->getHomeDataDir().
         DIRECTORY_SEPARATOR.config('app.name').
