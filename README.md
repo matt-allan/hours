@@ -1,4 +1,5 @@
 # Hours
+[![Build Status](https://secure.travis-ci.org/matt-allan/hours.png?branch=master)](https://travis-ci.org/matt-allan/hours)
 
 A minimal CLI for tracking time.  Easily track the time you spend on personal tasks or client projects.  Generate beautiful reports.
 
