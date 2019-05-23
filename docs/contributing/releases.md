@@ -42,6 +42,8 @@ Verify the tag was created with `git tag -l`.
 
 After the tag is created push it to github: `git push origin <tagname>`, i.e. `git push origin v0.1.0`.
 
+3. Finally the installation instructions should be updated to point to the latest release. The download URL needs to be updated in `README.md` and `docs/user-guide/installation.md`.
+
 ## Release Assets
 
 The hours CLI is distributed as a [Phar](https://www.php.net/manual/en/intro.phar.php) attached to the Github release. You do not need to create this manually. When a tag is pushed to Github the CI server will automatically build the phar and attach it to the release.
