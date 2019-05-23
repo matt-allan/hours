@@ -20,7 +20,8 @@
         "dnoegel/php-xdg-base-dir": "^0.1.0",
         "illuminate/database": "5.8.*",
         "intonate/tinker-zero": "^1.0",
-        "laravel-zero/framework": "5.8.*"
+        "laravel-zero/framework": "5.8.*",
+        "stecman/symfony-console-completion": "^0.10.1"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.4",
