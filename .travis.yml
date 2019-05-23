@@ -34,6 +34,9 @@ jobs:
     - stage: release
       if: tag IS present
       script: php hours app:build --no-interaction
+      install:
+        - composer self-update
+        - composer install --prefer-dist --no-interaction --no-dev -o
       deploy:
         provider: releases
         file: ./builds/hours
