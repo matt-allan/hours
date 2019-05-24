@@ -8,6 +8,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
+- [c0d9a39](https://github.com/matt-allan/hours/commit/c0d9a399e3fb831799e3545c779b2a94962dd610) Added shell completion.
+
 ### Deprecated
 
 ### Fixed
