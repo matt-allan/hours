@@ -15,9 +15,20 @@ class CarbonIntervalPresentMixin
     public function presentInterval(): \Closure
     {
         return function (): string {
-            return $this
+            $cascades = CarbonInterval::getCascadeFactors();
+
+            CarbonInterval::setCascadeFactors([
+                'minute' => [60, 'seconds'],
+                'hour' => [60, 'minutes'],
+            ]);
+
+            $interval = $this
                 ->cascade()
                 ->format(Settings::get('interval_format', '%h:%I'));
+
+            CarbonInterval::setCascadeFactors($cascades);
+
+            return $interval;
         };
     }
 }
