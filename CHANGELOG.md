@@ -14,6 +14,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Fixed
 
+- [8c5063c](https://github.com/matt-allan/hours/commit/8c5063c64f2240c65a7a0d93115e6d75956de50c) Limit interval cascades to hours and minutes. For example, this prevents the total from displaying as '0:00' if you worked a total of 24 hours.
+
 ### Removed
 
 ### Security
