@@ -34,7 +34,7 @@ If you see `sqlite3` listed in the output of `php -m` the extension is already i
 The hours CLI is distributed as a [PHP Archive (phar)](https://www.php.net/manual/en/intro.phar.php).  To install it you just need to download the phar and move it to the directory you normally keep executables. On Mac and Linux systems this is typically the `/usr/local/bin` directory.
 
 ```
-wget https://github.com/matt-allan/hours/releases/download/v0.1.0/hours -O hours
+wget https://github.com/matt-allan/hours/releases/latest/download/hours -O hours
 chmod a+x ./hours
 mv ./hours /usr/local/bin/hours
 ```

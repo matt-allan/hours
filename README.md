@@ -16,7 +16,7 @@ Hours is written in PHP. You will need a PHP version >= 7.1.3. You can check thi
 Once you have PHP installation you can easily download the executable from Github:
 
 ```
-wget https://github.com/matt-allan/hours/releases/download/v0.1.0/hours -O hours
+wget https://github.com/matt-allan/hours/releases/latest/download/hours -O hours
 chmod a+x ./hours
 mv ./hours /usr/local/bin/hours
 ```
