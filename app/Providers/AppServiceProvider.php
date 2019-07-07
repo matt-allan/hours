@@ -8,8 +8,10 @@ use App\Facades\Settings;
 use Carbon\CarbonInterval;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
+use Dotenv\Dotenv;
 use Illuminate\Console\Command;
 use App\Carbon\CarbonPresentMixin;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\DateFactory;
 use Illuminate\Support\Facades\Date;
@@ -66,5 +68,24 @@ class AppServiceProvider extends ServiceProvider
                 Settings::get('timezone')
             )->utc();
         });
+
+        Command::macro('projectArgument', function () {
+            /** @var Command $this */
+            $project = $this->argument('project');
+
+            if (!$project) {
+                $project = getenv('default_project');
+            }
+
+            if (!$project) {
+                $project = Settings::get('default_project');
+            }
+
+            return $project;
+        });
+
+        if (file_exists($localConfig = getcwd() . DIRECTORY_SEPARATOR . '.hours')) {
+            Dotenv::create(getcwd(), '.hours')->load();
+        }
     }
 }

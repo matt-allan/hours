@@ -39,6 +39,9 @@ PHP documentation for more info: https://www.php.net/manual/en/function.date.php
 
 interval_format: The format string to use for intervals.  Defaults to `%h:%I`.
 See the PHP documentation for more info: https://www.php.net/manual/en/dateinterval.format.php
+
+default_project: The project used when executing command without providing project argument.
+When this value is missing or null a project must be provided with each command that uses project argument.
 HELP;
 
     public function __construct()
@@ -69,7 +72,7 @@ HELP;
     {
         switch ($argumentName) {
             case 'key':
-                return ['timezone', 'date_format', 'time_format', 'interval_format'];
+                return ['timezone', 'date_format', 'time_format', 'interval_format', 'default_project'];
             default:
                 return [];
         }
