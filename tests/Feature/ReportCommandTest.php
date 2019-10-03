@@ -132,4 +132,47 @@ class ReportCommandTest extends TestCase
             ->assertExitCode(0)
             ->expectsOutput('January 1, 2019 to January 15, 2019');
     }
+
+    public function testReportWithOpenFrames()
+    {
+        $project = factory(Project::class)->create(['name' => 'blog']);
+
+        // not within the date range
+        factory(Frame::class)->create([
+            'project_id' => $project->id,
+            'started_at' => Date::parse('2019-05-03 12:00 PM', 'America/New_York')->utc(),
+            'stopped_at' => Date::parse('2019-05-03 12:30 PM', 'America/New_York')->utc(),
+        ]);
+
+        // 30 elapsed
+        factory(Frame::class)->create([
+            'project_id' => $project->id,
+            'started_at' => Date::parse('2019-05-04 12:00 PM', 'America/New_York')->utc(),
+            'stopped_at' => Date::parse('2019-05-04 12:30 PM', 'America/New_York')->utc(),
+        ]);
+
+        // 1:30 elapsed
+        factory(Frame::class)->create([
+            'project_id' => $project->id,
+            'started_at' => Date::parse('2019-05-05 12:00 PM', 'America/New_York')->utc(),
+            'stopped_at' => Date::parse('2019-05-05 1:30 PM', 'America/New_York')->utc(),
+        ]);
+
+
+        Date::setTestNow(
+            Date::create(2019, 5, 5, 15, 30, 0, 'America/New_York')->utc()
+        );
+        // 1:30 elapsed open frame
+        factory(Frame::class)->create([
+            'project_id' => $project->id,
+            'started_at' => Date::parse('2019-05-05 2:00 PM', 'America/New_York')->utc(),
+            'stopped_at' => null,
+        ]);
+
+        $this
+            ->artisan("report --from '2019-05-04' --to '2019-05-30' --with-open-frames")
+            ->assertExitCode(0)
+            ->expectsOutput('May 4, 2019 to May 30, 2019')
+            ->expectsOutput('Total hours: 3:30');
+   }
 }
