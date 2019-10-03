@@ -13,7 +13,8 @@ class StopCommand extends Command
     /**
      * @var string
      */
-    protected $signature = 'stop';
+    protected $signature = 'stop
+            {--a|at= : The time to stop the frame at (Defaults to the current time)}';
 
     /**
      * @var string
@@ -30,7 +31,7 @@ class StopCommand extends Command
             return;
         }
 
-        $frame->stop();
+        $frame->stop($this->dateOption('at'));
 
         $this->info("Time tracking for {$frame->project->name} stopped (started {$frame->elapsed->forHumans(CarbonInterface::DIFF_RELATIVE_TO_NOW)}).");
     }
