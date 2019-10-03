@@ -60,17 +60,17 @@ class ReportCommandTest extends TestCase
 
     public function testReportWithProjectFilter()
     {
-        $project = factory(project::class)->create(['name' => 'blog']);
+        $project = factory(Project::class)->create(['name' => 'blog']);
 
         // not within the date range
-        factory(frame::class)->create([
+        factory(Frame::class)->create([
             'project_id' => $project->id,
             'started_at' => date::parse('2019-05-03 12:00 pm', 'america/new_york')->utc(),
             'stopped_at' => date::parse('2019-05-03 12:30 pm', 'america/new_york')->utc(),
         ]);
 
         // other project
-        factory(frame::class)->create([
+        factory(Frame::class)->create([
             'started_at' => date::parse('2019-05-04 12:00 pm', 'america/new_york')->utc(),
             'stopped_at' => date::parse('2019-05-04 12:30 pm', 'america/new_york')->utc(),
         ]);
@@ -91,17 +91,17 @@ class ReportCommandTest extends TestCase
 
     public function testReportWithTagFilter()
     {
-        $project = factory(project::class)->create(['name' => 'blog']);
+        $project = factory(Project::class)->create(['name' => 'blog']);
 
         // not within the date range
-        factory(frame::class)->create([
+        factory(Frame::class)->create([
             'project_id' => $project->id,
             'started_at' => date::parse('2019-05-03 12:00 pm', 'america/new_york')->utc(),
             'stopped_at' => date::parse('2019-05-03 12:30 pm', 'america/new_york')->utc(),
         ]);
 
         // other tag
-        factory(frame::class)->create([
+        factory(Frame::class)->create([
             'project_id' => $project->id,
             'started_at' => date::parse('2019-05-04 12:00 pm', 'america/new_york')->utc(),
             'stopped_at' => date::parse('2019-05-04 12:30 pm', 'america/new_york')->utc(),
