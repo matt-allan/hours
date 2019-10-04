@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use Dotenv\Dotenv;
 use App\Facades\Settings;
 use Carbon\CarbonInterval;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
-use Dotenv\Dotenv;
 use Illuminate\Console\Command;
 use App\Carbon\CarbonPresentMixin;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\DateFactory;
 use Illuminate\Support\Facades\Date;
@@ -73,18 +72,18 @@ class AppServiceProvider extends ServiceProvider
             /** @var Command $this */
             $project = $this->argument('project');
 
-            if (!$project) {
+            if (! $project) {
                 $project = getenv('default_project');
             }
 
-            if (!$project) {
+            if (! $project) {
                 $project = Settings::get('default_project');
             }
 
             return $project;
         });
 
-        if (file_exists($localConfig = getcwd() . DIRECTORY_SEPARATOR . '.hours')) {
+        if (file_exists($localConfig = getcwd().DIRECTORY_SEPARATOR.'.hours')) {
             Dotenv::create(getcwd(), '.hours')->load();
         }
     }
