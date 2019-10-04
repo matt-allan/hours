@@ -158,7 +158,6 @@ class ReportCommandTest extends TestCase
             'stopped_at' => Date::parse('2019-05-05 1:30 PM', 'America/New_York')->utc(),
         ]);
 
-
         Date::setTestNow(
             Date::create(2019, 5, 5, 15, 30, 0, 'America/New_York')->utc()
         );
@@ -174,5 +173,5 @@ class ReportCommandTest extends TestCase
             ->assertExitCode(0)
             ->expectsOutput('May 4, 2019 to May 30, 2019')
             ->expectsOutput('Total hours: 3:30');
-   }
+    }
 }
