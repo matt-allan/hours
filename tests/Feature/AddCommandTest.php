@@ -51,4 +51,16 @@ class AddCommandTest extends TestCase
             ->expectsOutput('Added frame for blog (writing, editing) from May 1, 2019 5:34 am to May 1, 2019 6:34 am (1 hour).')
             ->assertExitCode(0);
     }
+
+    public function testAddUsesTodayWhenOnlyProvidinggTime()
+    {
+        Date::setTestNow(
+            Date::parse('2019-05-01 14:00:00', 'America/New_York')->setTimezone('UTC')
+        );
+
+        $this
+            ->artisan('add blog --from \'11:00 am\' --to \'1:00 pm\'')
+            ->expectsOutput('Added frame for blog from May 1, 2019 11:00 am to May 1, 2019 1:00 pm (2 hours).')
+            ->assertExitCode(0);
+    }
 }
