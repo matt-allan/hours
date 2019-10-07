@@ -27,6 +27,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property-read \App\Tag[]|Collection $tags
  * @method static Builder active()
  * @method static Builder between(CarbonInterface $start, CarbonInterface $end)
+ * @method static Builder activeBetween(CarbonInterface $start)
  * @method static Builder forProject($project)
  * @method static Builder latestClosed()
  */
@@ -84,6 +85,24 @@ class Frame extends Model
             ->whereDate('started_at', '>=', $start)
             ->whereDate('stopped_at', '<=', $end)
             ->whereNotNull('stopped_at');
+    }
+
+    /**
+     * Scope a query to only include frames started between the given dates.
+     *
+     * @param Builder         $query
+     * @param CarbonInterface $start
+     * @param CarbonInterface $end
+     *
+     * @return Builder
+     */
+    public function scopeActiveBetween(Builder $query, CarbonInterface $start, CarbonInterface $end): Builder
+    {
+        /* @noinspection PhpIncompatibleReturnTypeInspection */
+        return $query
+            ->whereDate('started_at', '>=', $start)
+            ->whereDate('started_at', '<=', $end)
+            ->whereNull('stopped_at');
     }
 
     /**

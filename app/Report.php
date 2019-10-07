@@ -95,7 +95,7 @@ class Report
                    Str::limit($frame->notes),
                    $frame->started_at->presentDate(),
                    $frame->started_at->presentTime(),
-                   $frame->stopped_at->presentTime(),
+                   optional($frame->stopped_at)->presentTime(),
                    $frame->elapsed->presentInterval(),
                ]);
         })->unless($this->multipleProjects(), function (Collection $frames) {
