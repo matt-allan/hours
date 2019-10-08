@@ -18,7 +18,7 @@ class StartCommand extends Command implements CompletionAwareInterface
      * @var string
      */
     protected $signature = 'start
-        {project : The name of the project to start tracking time for}
+        {project? : The name of the project to start tracking time for}
         {--a|at= : The time to start the frame at (Defaults to the current time)}
         {--t|tag=* : The tags to add to the frame}
         {--notes= : The notes to add to the frame}';
@@ -32,7 +32,7 @@ class StartCommand extends Command implements CompletionAwareInterface
      * @var string
      */
     protected $help = <<<'HELP'
-The only required argument is the project name.
+The project is required if no default project exists.
 
 You may specify the start time using the --at option. This is useful if you
 forgot to start time tracking. For example, `hours start blog --at '5 minutes ago'`
@@ -64,7 +64,13 @@ HELP;
             $this->call('stop');
         }
 
-        $frame = Frame::start($this->argument('project'), $this->dateOption('at'))
+        if (! $project = $this->projectArgument()) {
+            $this->error('No project has been configured, either provide a project or set a default');
+
+            return;
+        }
+
+        $frame = Frame::start($project, $this->dateOption('at'))
             ->addTags($this->option('tag'))
             ->addNotes($this->option('notes'));
 

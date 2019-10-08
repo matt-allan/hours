@@ -66,5 +66,20 @@ class AppServiceProvider extends ServiceProvider
                 Settings::get('timezone')
             )->utc();
         });
+
+        Command::macro('projectArgument', function () {
+            /** @var Command $this */
+            $project = $this->argument('project');
+
+            if (! $project) {
+                $project = getenv('default_project');
+            }
+
+            if (! $project) {
+                $project = Settings::get('default_project');
+            }
+
+            return $project;
+        });
     }
 }

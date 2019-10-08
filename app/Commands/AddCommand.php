@@ -19,7 +19,7 @@ class AddCommand extends Command implements CompletionAwareInterface
      * @var string
      */
     protected $signature = 'add
-        {project : The name of the project to add a frame to}
+        {project? : The name of the project to add a frame to}
         {--f|from= : The start time of the frame}
         {--t|to= : the end time of the frame}
         {--i|interval= : An interval for the length of the frame}
@@ -64,8 +64,14 @@ HELP;
             return;
         }
 
+        if (! $project = $this->projectArgument()) {
+            $this->error('No project has been configured, either provide a project or set a default');
+
+            return;
+        }
+
         $frame = Frame::add(
-            $this->argument('project'),
+            $this->projectArgument(),
             $this->dateOption('from'),
             $this->option('interval') ? $this->getInterval() : $this->dateOption('to')
         )->addTags($this->option('tag'))
