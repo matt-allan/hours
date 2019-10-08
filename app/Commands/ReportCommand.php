@@ -24,7 +24,8 @@ class ReportCommand extends Command implements CompletionAwareInterface
     {--t|to= : the end time of the report}
     {--i|interval= : An interval for the length of the report}
     {--format=text : The output format for the report.  Available options: text, csv, json}
-    {--tag=* : The tags to include on the report}';
+    {--tag=* : The tags to include on the report}
+    {--with-open-frames : Include open frames in the report}';
 
     /**
      * @var string
@@ -58,6 +59,9 @@ options.  If not specified frames for all tags and projects are included.
 
 The report is printed to STDOUT. You can pipe the output to create a file, i.e.
 `hours report --format csv > timesheet.csv`.
+
+The --with-open-frames flag with include any open frames. This flag is designed to get total time
+for the given period including the elapsed time of the current frame.
 HELP;
 
     public function __construct()
@@ -74,6 +78,7 @@ HELP;
             ->to($this->option('interval') ? $this->getInterval() : $this->dateOption('to'))
             ->projects($this->option('project'))
             ->tags($this->option('tag'))
+            ->withOpenFrames($this->hasOption('with-open-frames'))
             ->create()
             ->render($this->output, $this->option('format'));
     }
