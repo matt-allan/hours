@@ -11,7 +11,7 @@ All your data is yours and yours only - we never send any data to the cloud or a
 
 ## Installation
 
-Hours is written in PHP. You will need a PHP version >= 7.1.3. You can check this easily with the `php --version` command. If you don't have PHP installed follow the [full installation guide](https://matt-allan.github.io/hours/user-guide/installation/).
+Hours is written in PHP. You will need a PHP version >= 7.2. You can check this easily with the `php --version` command. If you don't have PHP installed follow the [full installation guide](https://matt-allan.github.io/hours/user-guide/installation/).
 
 Once you have PHP installation you can easily download the executable from Github:
 
