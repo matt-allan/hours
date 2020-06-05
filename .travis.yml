@@ -33,4 +33,4 @@ jobs:
       on:
         repo: matt-allan/hours
         tags: true
-      cleanup: 'true'
+      skip_cleanup: 'true'
