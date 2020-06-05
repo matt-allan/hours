@@ -40,3 +40,5 @@ Updated timezone to America/Denver
 - `time_format`: The time format setting determines the format used when displaying times. The format string must be one of PHP's accepted [time format strings](https://www.php.net/manual/en/function.date.php). The default value is `g:i a` which formats times like this: `2:46 pm`.
 
 - `interval_format`: The interval format setting determines the format used when displaying intervals. The format string must be one of PHP's accepted [interval format strings](https://www.php.net/manual/en/dateinterval.format.php). The default value is `%h:%I` which formats intervals like this: `2:00`.
+
+- `default_project`: The project to use by default if a project name is not specified.
