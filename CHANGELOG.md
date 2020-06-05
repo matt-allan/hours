@@ -9,14 +9,22 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Added
 
 - [c0d9a39](https://github.com/matt-allan/hours/commit/c0d9a399e3fb831799e3545c779b2a94962dd610) Added shell completion.
+- [e15cc2c](https://github.com/matt-allan/hours/commit/e15cc2c613fa0c2195057bde9a4d49027db2c853) Added support for the `--at` flag to the  `hours stop` command.
+- [a5a498f](https://github.com/matt-allan/hours/commit/a5a498fe6e4eda3e5132e5ee4a905f892b5c3dc6) Added the ability to include open frames on the report.
+- [3c58bf8](https://github.com/matt-allan/hours/commit/3c58bf8ec7feca3a6ea147fa4b44a59309e10895) Added support for default projects using a 
+- [809724c](https://github.com/matt-allan/hours/commit/809724c07ff74329d39fa7ae0643833e279d5640) Added a `frame:list` command.
+- [67ed725](https://github.com/matt-allan/hours/commit/67ed7257787a54940f566106aca3a18aa50541c8) Added a `frame:forget` command.
 
 ### Deprecated
 
 ### Fixed
 
 - [8c5063c](https://github.com/matt-allan/hours/commit/8c5063c64f2240c65a7a0d93115e6d75956de50c) Limit interval cascades to hours and minutes. For example, this prevents the total from displaying as '0:00' if you worked a total of 24 hours.
+- [9f67488](https://github.com/matt-allan/hours/commit/9f674885ac237b304ec11b410dc14fe0a094aa7f) Resolved an error that would occur if the `hours` directory did not exist in the XDG data directory.
 
 ### Removed
+
+- [9f67488](https://github.com/matt-allan/hours/commit/9f674885ac237b304ec11b410dc14fe0a094aa7f) Dropped support for PHP 7.1.
 
 ### Security
 
