@@ -72,7 +72,7 @@ class AppServiceProvider extends ServiceProvider
             $project = $this->argument('project');
 
             if (! $project) {
-                $project = getenv('default_project');
+                $project = getenv('HOURS_PROJECT');
             }
 
             if (! $project) {
