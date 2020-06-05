@@ -8,6 +8,18 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
+### Deprecated
+
+### Fixed
+
+### Removed
+
+### Security
+
+## v0.2.0 - 2020-06-05
+
+### Added
+
 - [c0d9a39](https://github.com/matt-allan/hours/commit/c0d9a399e3fb831799e3545c779b2a94962dd610) Added shell completion.
 - [e15cc2c](https://github.com/matt-allan/hours/commit/e15cc2c613fa0c2195057bde9a4d49027db2c853) Added support for the `--at` flag to the  `hours stop` command.
 - [a5a498f](https://github.com/matt-allan/hours/commit/a5a498fe6e4eda3e5132e5ee4a905f892b5c3dc6) Added the ability to include open frames on the report.
