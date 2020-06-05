@@ -1,47 +1,36 @@
 language: php
-
-# Only run on master branch and tags. PR must be activated on https://travis-ci.org/
-# See https://stackoverflow.com/a/31882307
 branches:
   only:
-    - master
-    - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
-
-# Versions to test
+  - master
+  - "/^v\\d+\\.\\d+(\\.\\d+)?(-\\S*)?$/"
 php:
- - 7.2
- - 7.3
- - 7.4
-
-# Cache composer install
+- 7.2
+- 7.3
+- 7.4
 cache:
- directories:
-   - $HOME/.composer/cache/files
-
-# Update composer, install dependencies
+  directories:
+  - "$HOME/.composer/cache/files"
 install:
- - composer self-update
- - composer install --prefer-dist --no-interaction
-
-# Commands to run
+- composer self-update
+- composer install --prefer-dist --no-interaction
 script:
-  - ./vendor/bin/php-cs-fixer fix --dry-run --diff
-  - ./vendor/bin/phpunit --testsuite 'Unit'
-  - ./vendor/bin/phpunit --testsuite 'Feature'
-
+- "./vendor/bin/php-cs-fixer fix --dry-run --diff"
+- "./vendor/bin/phpunit --testsuite 'Unit'"
+- "./vendor/bin/phpunit --testsuite 'Feature'"
 jobs:
   include:
-    - stage: release
-      if: tag IS present
-      script: php hours app:build --no-interaction
-      install:
-        - composer self-update
-        - composer install --prefer-dist --no-interaction --no-dev -o
-      deploy:
-        provider: releases
-        file: ./builds/hours
-        api_key:
-          secure: j43h6qwUz1AoG+FtdZrj1yMwEN7/R6HwnsFlheED/0gIqg56U6GfeApb6cAsSiYKnfbl8KXii9OGCaQqmzos32J4aKWG+YuhONhPZMu4ax7ZsGVxIG5Ov10Lpuz0zrPZlUM89la0pC6who2T/wn3kzvnN/y3W6/q2hVr8+pQ7Qz4NbBYvViaJO4vj5MUmpAyDR4C2S3OhN8KkKaAWykHwavsn+nqUHeCOcXP2kCq8vALH1R7MXwSTkhezoTT4pfr4vkpXXhnIX7+r67yMfl9Vxx6hv6aiMtAZIVEmKPOX4LQ6N89NwIs7U6pTwf6KiUXKEh7NPoFpmB1/Y4cR/nRMfJzLXKevGWZ4TlNwvZNk2NcjjkJ0wru18m4QcCTXUeWNlgPoy1xdmzCFtxgnPo3n4/jeID52V9d6F0+wF0h6VJrz9e9BoZ+zXQHUy33taLg5JPj6fOcpqX4zl+UPe1sLHFllbXQi0wbcDZu7VBmK1yR81C6YTD54nnG006rALGRtpXrqcc2OOOPynff0ig06R7q9IQBK+tVpxszIGlfdZYLFu3KYQ7owe86dyuDcNIYLqeLw05yq9v5+bKbnrsFNaGwACSdwWJeCFixMs1/AIwzU0hc0IZayfeMk9WulwOaIHOto6kD+G8cjGs8ocv0FYwgGBSHXBBmDMB19Hb/Ngg=
-        skip_cleanup: true
-        on:
-          tags: true
+  - stage: release
+    if: tag IS present
+    script: php hours app:build --no-interaction
+    install:
+    - composer self-update
+    - composer install --prefer-dist --no-interaction --no-dev -o
+    deploy:
+      provider: releases
+      api_key:
+        secure: g3Cw/z+pufxD6SRIp0O2THjGyNDFFegbQhFKtOTTJ7kX+8gd0uSOHNAwyzE9cV18Rovy1nrJ8vOVZmH+hyGNahOsQMC0Nl7XOgfDgX4rbvnLufNxnfxLm4gK/0CtgXuRvyGps+BbxG0YqhDvph7Rnvn+70usalM1gSLt3rpKUxQgbnEHsvz8WqGOjT4t3vtUTuH5xNfDWq6sIvCcYrHiT5K3umsHspNslWaD03hyWSqOkTO8pgCz1HXmeOAYoQK1NQwxvnMpqHxfRXLYLpfkMVKeNBD7exJvr/aWXUhad20pRN/boiX8AJznUu3uRDoDJNL1pUUMV1wB42QjNspPKuU4/wxWTQSXATCG71adnmequfd7PwjdL1ImGmnwq5V7NOYP9mNTLwpufReYKBbQsCfAykDHHV71096Ic/WETBrZ+dzCSJtUcl1kj/s6UhfWwECPsaLs0baEZEaI5MH4x++6FPRkgl8BUfrjXx4zsVkwqrpqJ09uY0dQ03xtgEmy2LJmp5o4BFDXVOxhJl9ERRJMA/MdSM+hG/uKYTKMbPHsw3rwvflCQe/aMqTKYrLymiwIPmHd3FgNtJj5AOnBuvsWWsICsMxwRDxYJ1d3QsNafj4KQxDas4zp9+ib4JtMJfmyyGvjWoZMerVmRRNXk7+DPEsZ7jdGkOCQJBVLb5s=
+      file: "./builds/hours"
+      on:
+        repo: matt-allan/hours
+        tags: true
+      cleanup: 'true'
