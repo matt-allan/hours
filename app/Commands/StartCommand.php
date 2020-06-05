@@ -65,7 +65,7 @@ HELP;
         }
 
         if (! $project = $this->projectArgument()) {
-            $this->error('No project has been configured, either provide a project or set a default');
+            $this->error('No project has been configured; either provide a project or set a default.');
 
             return;
         }
