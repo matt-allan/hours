@@ -23,7 +23,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - [c0d9a39](https://github.com/matt-allan/hours/commit/c0d9a399e3fb831799e3545c779b2a94962dd610) Added shell completion.
 - [e15cc2c](https://github.com/matt-allan/hours/commit/e15cc2c613fa0c2195057bde9a4d49027db2c853) Added support for the `--at` flag to the  `hours stop` command.
 - [a5a498f](https://github.com/matt-allan/hours/commit/a5a498fe6e4eda3e5132e5ee4a905f892b5c3dc6) Added the ability to include open frames on the report.
-- [3c58bf8](https://github.com/matt-allan/hours/commit/3c58bf8ec7feca3a6ea147fa4b44a59309e10895) Added support for default projects using a 
+- [3c58bf8](https://github.com/matt-allan/hours/commit/3c58bf8ec7feca3a6ea147fa4b44a59309e10895) Added support for default projects using the `HOURS_PROJECT` environment variable or `default_project` setting. This commit also adds support for loading environment variables from a `.hours` file.
 - [809724c](https://github.com/matt-allan/hours/commit/809724c07ff74329d39fa7ae0643833e279d5640) Added a `frame:list` command.
 - [67ed725](https://github.com/matt-allan/hours/commit/67ed7257787a54940f566106aca3a18aa50541c8) Added a `frame:forget` command.
 
