@@ -19,6 +19,6 @@ class LoadDotHoursFile
             return;
         }
 
-        Dotenv::create($file)->load();
+        Dotenv::createImmutable($file)->load();
     }
 }
