@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Bootstrap;
+namespace App\Events;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Migrations\Migrator;

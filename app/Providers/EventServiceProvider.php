@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Events\LoadDotHoursFile;
 use App\Events\ConfigureTimezone;
-use App\Bootstrap\LoadDotHoursFile;
-use App\Bootstrap\InitializeDatabase;
+use App\Events\InitializeDatabase;
 use Illuminate\Console\Events\ArtisanStarting;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
