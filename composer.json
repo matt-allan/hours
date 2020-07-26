@@ -18,14 +18,14 @@
     "require": {
         "php": "^7.2",
         "dnoegel/php-xdg-base-dir": "^0.1.0",
-        "illuminate/database": "6.13.*",
-        "intonate/tinker-zero": "^1.0",
-        "laravel-zero/framework": "6.*",
-        "stecman/symfony-console-completion": "^0.10.1"
+        "illuminate/database": "^7.0",
+        "intonate/tinker-zero": "^1.1",
+        "laravel-zero/framework": "7.*",
+        "stecman/symfony-console-completion": "^0.11.0"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.4",
-        "matt-allan/laravel-code-style": "^0.4.0",
+        "matt-allan/laravel-code-style": "^0.5.1",
         "mockery/mockery": "^1.0",
         "phpunit/phpunit": "^7.5"
     },
