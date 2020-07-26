@@ -6,8 +6,8 @@ namespace App\Commands;
 
 use App\Settings\Repository;
 use LaravelZero\Framework\Commands\Command;
-use Stecman\Component\Symfony\Console\BashCompletion\CompletionContext;
 use Stecman\Component\Symfony\Console\BashCompletion\Completion\CompletionAwareInterface;
+use Stecman\Component\Symfony\Console\BashCompletion\CompletionContext;
 
 class SettingsEditCommand extends Command implements CompletionAwareInterface
 {

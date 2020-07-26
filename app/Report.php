@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App;
 
-use Carbon\CarbonInterval;
-use Carbon\CarbonInterface;
-use Illuminate\Support\Str;
 use App\Report\RendererFactory;
+use Carbon\CarbonInterface;
+use Carbon\CarbonInterval;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class Report

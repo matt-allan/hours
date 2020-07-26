@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Carbon\CarbonIntervalPresentMixin;
+use App\Carbon\CarbonPresentMixin;
 use App\Facades\Settings;
-use Carbon\CarbonInterval;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
+use Carbon\CarbonInterval;
 use Illuminate\Console\Command;
-use App\Carbon\CarbonPresentMixin;
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\DateFactory;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\ServiceProvider;
-use App\Carbon\CarbonIntervalPresentMixin;
-use Illuminate\Contracts\Support\Arrayable;
 
 class AppServiceProvider extends ServiceProvider
 {

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use Illuminate\Support\Facades\Date;
+use Tests\TestCase;
 
 class CancelCommandTest extends TestCase
 {

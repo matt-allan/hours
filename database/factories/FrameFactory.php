@@ -5,8 +5,8 @@ declare(strict_types=1);
 use App\Frame;
 use App\Project;
 use Faker\Generator as Faker;
-use Illuminate\Support\Facades\Date;
 use Illuminate\Database\Eloquent\Factory;
+use Illuminate\Support\Facades\Date;
 
 /* @var Factory $factory */
 
