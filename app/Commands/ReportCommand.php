@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Commands;
 
-use App\Tag;
-use App\Report;
 use App\Project;
-use Carbon\CarbonInterval;
+use App\Report;
+use App\Tag;
 use Carbon\CarbonInterface;
+use Carbon\CarbonInterval;
 use LaravelZero\Framework\Commands\Command;
-use Stecman\Component\Symfony\Console\BashCompletion\CompletionContext;
 use Stecman\Component\Symfony\Console\BashCompletion\Completion\CompletionAwareInterface;
+use Stecman\Component\Symfony\Console\BashCompletion\CompletionContext;
 
 class ReportCommand extends Command implements CompletionAwareInterface
 {

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Events;
 
-use Illuminate\Support\Facades\File;
 use Illuminate\Database\Migrations\Migrator;
+use Illuminate\Support\Facades\File;
 
 /**
  * Creates the database if it doesn't exist and migrates it when the app starts.

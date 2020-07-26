@@ -6,10 +6,10 @@ namespace App\Events;
 
 use App\Facades\Settings;
 use Carbon\CarbonTimeZone;
-use Illuminate\Console\OutputStyle;
-use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Console\Events\ArtisanStarting;
 use Illuminate\Console\Events\CommandStarting;
+use Illuminate\Console\OutputStyle;
+use Illuminate\Contracts\Events\Dispatcher;
 use Symfony\Component\Console\Question\Question;
 
 /**

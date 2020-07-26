@@ -6,10 +6,10 @@ namespace App;
 
 use App\Facades\Settings;
 use Carbon\CarbonInterface;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Date;
-use Illuminate\Database\Eloquent\Builder;
 
 class ReportBuilder
 {

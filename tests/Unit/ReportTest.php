@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Tests\Unit;
 
 use App\Frame;
-use App\Report;
 use App\Project;
-use Tests\TestCase;
+use App\Report;
 use Illuminate\Support\Facades\Date;
+use Tests\TestCase;
 
 class ReportTest extends TestCase
 {

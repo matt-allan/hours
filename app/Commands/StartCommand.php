@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Commands;
 
-use App\Tag;
 use App\Frame;
 use App\Project;
+use App\Tag;
 use Carbon\CarbonInterface;
 use LaravelZero\Framework\Commands\Command;
-use Stecman\Component\Symfony\Console\BashCompletion\CompletionContext;
 use Stecman\Component\Symfony\Console\BashCompletion\Completion\CompletionAwareInterface;
+use Stecman\Component\Symfony\Console\BashCompletion\CompletionContext;
 
 class StartCommand extends Command implements CompletionAwareInterface
 {

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use App\Frame;
-use Tests\TestCase;
 use Illuminate\Support\Facades\Date;
+use Tests\TestCase;
 
 class RestartCommandTest extends TestCase
 {
