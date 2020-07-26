@@ -8,9 +8,14 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
+- [df296de](https://github.com/matt-allan/hours/commit/df296de3fdf0e9266a776265de8c7626945c0788) Upgraded to Laravel Zero 7.0.
+
 ### Deprecated
 
 ### Fixed
+
+- [686ab35](https://github.com/matt-allan/hours/commit/686ab35d470fd21dfc3cfd6b67ac69fce135cb13) Hid `db:seed`, `db:wipe`, and `make:migration commands. Moved migration commands from 'removed' to 'hidden'.
+- [8376afa](https://github.com/matt-allan/hours/commit/8376afa0e08f9c932816235f2a0f44c17570c891) Fixed incorrect namespaces that prevented event listeners from running.
 
 ### Removed
 
