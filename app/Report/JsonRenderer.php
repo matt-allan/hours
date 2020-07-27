@@ -6,6 +6,7 @@ namespace App\Report;
 
 use App\Report;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class JsonRenderer implements Renderer
@@ -27,9 +28,13 @@ class JsonRenderer implements Renderer
 
     private function frames(Report $report): Collection
     {
+        $headers = $report->headers()->map(function (string $header) {
+            return Str::lower($header);
+        });
+
         return collect($report->data())
-            ->map(function (Collection $row) use ($report) {
-                return $report->headers()->combine($row);
+            ->map(function (Collection $row) use ($headers) {
+                return $headers->combine($row);
             });
     }
 }
