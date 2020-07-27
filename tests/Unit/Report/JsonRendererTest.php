@@ -8,6 +8,7 @@ use App\Facades\Settings;
 use App\Frame;
 use App\Project;
 use App\Report;
+use Carbon\CarbonInterval;
 use Illuminate\Support\Facades\Date;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Tests\TestCase;
@@ -25,6 +26,7 @@ class JsonRendererTest extends TestCase
             'notes' => 'Starting work on the new theme',
             'started_at' => Date::parse('2019-05-04 12:00 PM', 'America/New_York')->utc(),
             'stopped_at' => Date::parse('2019-05-04 12:30 PM', 'America/New_York')->utc(),
+            'estimate' => CarbonInterval::create(0)->add('minutes', 30),
         ]);
 
         factory(Frame::class)->create([
@@ -32,6 +34,7 @@ class JsonRendererTest extends TestCase
             'notes' => 'Adding the mailing list signup component',
             'started_at' => Date::parse('2019-05-05 12:00 PM', 'America/New_York')->utc(),
             'stopped_at' => Date::parse('2019-05-05 1:30 PM', 'America/New_York')->utc(),
+            'estimate' => CarbonInterval::create(0)->add('minutes', 30),
         ]);
 
         $output = new BufferedOutput();
@@ -57,6 +60,8 @@ class JsonRendererTest extends TestCase
                     'Start' => '12:00 pm',
                     'End' => '12:30 pm',
                     'Elapsed' => '0:30',
+                    'Estimate' => '0:30',
+                    'Velocity' => 1,
                 ],
                 [
                     'Project' => 'blog',
@@ -66,6 +71,8 @@ class JsonRendererTest extends TestCase
                     'Start' => '12:00 pm',
                     'End' => '1:30 pm',
                     'Elapsed' => '1:30',
+                    'Estimate' => '0:30',
+                    'Velocity' => 0.3,
                 ],
             ],
         ];

@@ -67,6 +67,15 @@ class AppServiceProvider extends ServiceProvider
             )->utc();
         });
 
+        Command::macro('intervalOption', function (string $key): ?CarbonInterval {
+            /** @var Command $this */
+            if (! $this->option($key)) {
+                return null;
+            }
+
+            return CarbonInterval::fromString($this->option($key));
+        });
+
         Command::macro('projectArgument', function () {
             /** @var Command $this */
             $project = $this->argument('project');

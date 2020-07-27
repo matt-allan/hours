@@ -21,7 +21,8 @@ class StartCommand extends Command implements CompletionAwareInterface
         {project? : The name of the project to start tracking time for}
         {--a|at= : The time to start the frame at (Defaults to the current time)}
         {--t|tag=* : The tags to add to the frame}
-        {--notes= : The notes to add to the frame}';
+        {--notes= : The notes to add to the frame}
+        {--estimate= : The estimated time for the frame}';
 
     /**
      * @var string
@@ -71,8 +72,12 @@ HELP;
         }
 
         $frame = Frame::start($project, $this->dateOption('at'))
-            ->addTags($this->option('tag'))
-            ->addNotes($this->option('notes'));
+            ->addTags($this->option('tag'));
+
+        $frame->fill([
+            'notes' => $this->option('notes'),
+            'estimate' => $this->intervalOption('estimate'),
+        ])->save();
 
         $this->info(
             "Starting frame for {$frame->project->name} ".

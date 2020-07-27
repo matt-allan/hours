@@ -24,7 +24,8 @@ class AddCommand extends Command implements CompletionAwareInterface
         {--t|to= : the end time of the frame}
         {--i|interval= : An interval for the length of the frame}
         {--tag=* : The tags to add to the frame}
-        {--notes= : The notes to add to the frame}';
+        {--notes= : The notes to add to the frame}
+        {--estimate= : The estimated time for the frame}';
 
     /**
      * @var string
@@ -74,8 +75,12 @@ HELP;
             $this->projectArgument(),
             $this->dateOption('from'),
             $this->option('interval') ? $this->getInterval() : $this->dateOption('to')
-        )->addTags($this->option('tag'))
-            ->addNotes($this->option('notes'));
+        )->addTags($this->option('tag'));
+
+        $frame->fill([
+            'notes' => $this->option('notes'),
+            'estimate' => $this->intervalOption('estimate'),
+        ])->save();
 
         $this->info(
             "Added frame for {$frame->project->name} ".

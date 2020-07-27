@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Date;
  * @property CarbonInterface|null       $stopped_at
  * @property int                        $project_id
  * @property string                     $notes
+ * @property CarbonInterval             $estimate
  * @property-read CarbonInterval        $elapsed
  * @property CarbonInterface|null       $created_at
  * @property CarbonInterface|null       $updated_at
@@ -38,11 +39,16 @@ class Frame extends Model
         'stopped_at',
         'project_id',
         'notes',
+        'estimate',
     ];
 
     protected $dates = [
         'started_at',
         'stopped_at',
+    ];
+
+    protected $casts = [
+        'estimate' => Casts\CarbonInterval::class,
     ];
 
     public function project(): BelongsTo
@@ -272,5 +278,18 @@ class Frame extends Model
     public function getElapsedAttribute(): CarbonInterval
     {
         return $this->started_at->diffAsCarbonInterval($this->stopped_at);
+    }
+
+    /**
+     * Calculates the velocity for the given frame.
+     *
+     * @return float
+     */
+    public function getVelocityAttribute(): float
+    {
+        return round(
+            $this->estimate->totalMicroseconds / $this->elapsed->totalMicroseconds,
+            1
+        );
     }
 }

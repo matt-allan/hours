@@ -26,6 +26,7 @@ namespace Carbon {
 namespace Illuminate\Console {
     class Command {
         public function dateOption(string $key): ?\Carbon\CarbonInterface{}
+        public function intervalOption(string $key): ?\Carbon\CarbonInterval{}
     }
 }
 

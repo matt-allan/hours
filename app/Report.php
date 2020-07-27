@@ -90,14 +90,16 @@ class Report
         return $this->frames->map(function (Frame $frame) {
             return collect($this->defaultHeaders())
                 ->combine([
-                   $frame->project->name,
-                   $frame->tags->implode('name', ', '),
-                   Str::limit($frame->notes),
-                   $frame->started_at->presentDate(),
-                   $frame->started_at->presentTime(),
-                   optional($frame->stopped_at)->presentTime(),
-                   $frame->elapsed->presentInterval(),
-               ]);
+                    $frame->project->name,
+                    $frame->tags->implode('name', ', '),
+                    Str::limit($frame->notes),
+                    $frame->started_at->presentDate(),
+                    $frame->started_at->presentTime(),
+                    optional($frame->stopped_at)->presentTime(),
+                    $frame->elapsed->presentInterval(),
+                    $frame->estimate->presentInterval(),
+                    $frame->velocity,
+                ]);
         })->unless($this->multipleProjects(), function (Collection $frames) {
             return $frames
                ->map(function (Collection $frame) {
@@ -127,7 +129,10 @@ class Report
 
     private function defaultHeaders(): array
     {
-        return ['Project', 'Tags', 'Notes', 'Date', 'Start', 'End', 'Elapsed'];
+        return [
+            'Project', 'Tags', 'Notes', 'Date', 'Start', 'End', 'Elapsed',
+            'Estimate', 'Velocity',
+        ];
     }
 
     private function multipleProjects(): bool
