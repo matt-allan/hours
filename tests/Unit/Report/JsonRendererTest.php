@@ -50,7 +50,6 @@ class JsonRendererTest extends TestCase
                 'from' => 'May 2, 2019 8:00 pm',
                 'to' => 'May 4, 2019 8:00 pm',
             ],
-            'total' => '2:00',
             'frames' => [
                 [
                     'Project' => 'blog',
@@ -74,6 +73,11 @@ class JsonRendererTest extends TestCase
                     'Estimate' => '0:30',
                     'Velocity' => 0.3,
                 ],
+            ],
+            'totals' => [
+                'Elapsed' => '2:00',
+                'Estimate' => '1:00',
+                'Velocity' => 0.85,
             ],
         ];
 

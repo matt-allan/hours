@@ -18,8 +18,8 @@ class JsonRenderer implements Renderer
                     'from' => $report->from()->presentDateTime(),
                     'to' => $report->to()->presentDateTime(),
                 ],
-                'total' => $report->total()->presentInterval(),
                 'frames' => $this->frames($report),
+                'totals' => $report->aggregations()->filter(),
             ])
             ->toJSON(JSON_PRETTY_PRINT)
         );

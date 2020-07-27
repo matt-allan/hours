@@ -113,6 +113,15 @@ class Report
         });
     }
 
+    public function aggregations(): Collection
+    {
+        return collect([
+            'Elapsed' => $this->total()->presentInterval(),
+            'Estimate' => $this->estimate()->presentInterval(),
+            'Velocity' => $this->velocity(),
+        ]);
+    }
+
     public function total(): CarbonInterval
     {
         return $this->frames
@@ -120,6 +129,20 @@ class Report
             ->reduce(function (CarbonInterval $carry, CarbonInterval $item): CarbonInterval {
                 return $item->add($carry);
             }, new CarbonInterval(null));
+    }
+
+    public function estimate(): CarbonInterval
+    {
+        return $this->frames
+            ->pluck('estimate')
+            ->reduce(function (CarbonInterval $carry, CarbonInterval $item): CarbonInterval {
+                return $item->add($carry);
+            }, new CarbonInterval(null));
+    }
+
+    public function velocity(): float
+    {
+        return $this->frames->pluck('velocity')->avg() ?? 0.0;
     }
 
     public function render(OutputInterface $output, string $format): void
