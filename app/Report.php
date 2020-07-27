@@ -39,6 +39,16 @@ class Report
     private $tags;
 
     /**
+     * @var Collection|null
+     */
+    private $headers;
+
+    /**
+     * @var Collection|null
+     */
+    private $data;
+
+    /**
      * @param Collection|Frame[] $frames
      * @param CarbonInterface    $from
      * @param CarbonInterface    $to
@@ -82,12 +92,21 @@ class Report
 
     public function headers(): Collection
     {
-        return $this->data()->isNotEmpty() ? $this->data()->first()->keys() : collect($this->defaultHeaders());
+        if ($this->headers) {
+            return $this->headers;
+        }
+
+        return $this->headers = $this->data()->isNotEmpty() ?
+            $this->data()->first()->keys() : collect($this->defaultHeaders());
     }
 
     public function data(): Collection
     {
-        return $this->frames->map(function (Frame $frame) {
+        if ($this->data) {
+            return $this->data;
+        }
+
+        return $this->data = $this->frames->map(function (Frame $frame) {
             return collect($this->defaultHeaders())
                 ->combine([
                    $frame->project->name,
