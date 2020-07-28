@@ -10,6 +10,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - [df296de](https://github.com/matt-allan/hours/commit/df296de3fdf0e9266a776265de8c7626945c0788) Upgraded to Laravel Zero 7.0.
 
+### Changed
+
+- [93adbf6](https://github.com/matt-allan/hours/commit/93adbf638daf407f314129177e8cd2eae622ab23) Lowercased all keys for JSON report
+
 ### Deprecated
 
 ### Fixed
